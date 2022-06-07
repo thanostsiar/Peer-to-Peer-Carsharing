@@ -12,12 +12,13 @@
         protected int user_id;
         protected string password;
 
-        public User(string first_name, string last_name, string email, string phone, int age, string password)
+        public User(string first_name, string last_name, string email, string phone, string image, int age, string password)
         {
             this.first_name = first_name;
             this.last_name = last_name;
             this.email = email;
             this.phone = phone;
+            this.image = image;
             this.age = age;
             this.password = password;
         }
