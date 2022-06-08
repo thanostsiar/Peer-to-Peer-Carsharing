@@ -1,18 +1,62 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+.bg {
+    background-color: var(--p-color);
+    padding: 0.7em;
+    border-radius: 0.5em;
+}
+
+.search-btn {
+    background-color: var(--s-color);
+    border-radius: 0.5em;
+    padding: 0.3em 2em;
+}
+
+
+.searchbar-sizing input {
+    padding: 1em 1.3em;
+}
+
+.searchbar > div + div {
+    padding-top: 1.2em;
+}
+
+.insides div + div {
+    padding-left: .5em;
+}
+
+/* Small devices */
+@media (min-width: 576px) {
+}
+
+
+/* Large devices */
+@media (min-width: 992px) {
+    .searchbar-lg div + div {
+        padding-left: 2em;
+        padding-top: 0;
+    }
+}
+
+
+
+
+/* Nice colors to use */
+/* #AAC4AA  #BD5958    #00333D   #0D2C32 #068D9D */
