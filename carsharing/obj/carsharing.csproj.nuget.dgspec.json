@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thana\\Documents\\GitHub\\Peer-to-Peer-Carsharing\\carsharing\\carsharing.csproj": {}
+    "C:\\Users\\winon\\Documents\\University\\6o\\Software Technology\\Peer-to-Peer-Carsharing\\carsharing\\carsharing.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thana\\Documents\\GitHub\\Peer-to-Peer-Carsharing\\carsharing\\carsharing.csproj": {
+    "C:\\Users\\winon\\Documents\\University\\6o\\Software Technology\\Peer-to-Peer-Carsharing\\carsharing\\carsharing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thana\\Documents\\GitHub\\Peer-to-Peer-Carsharing\\carsharing\\carsharing.csproj",
+        "projectUniqueName": "C:\\Users\\winon\\Documents\\University\\6o\\Software Technology\\Peer-to-Peer-Carsharing\\carsharing\\carsharing.csproj",
         "projectName": "carsharing",
-        "projectPath": "C:\\Users\\thana\\Documents\\GitHub\\Peer-to-Peer-Carsharing\\carsharing\\carsharing.csproj",
-        "packagesPath": "C:\\Users\\thana\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thana\\Documents\\GitHub\\Peer-to-Peer-Carsharing\\carsharing\\obj\\",
+        "projectPath": "C:\\Users\\winon\\Documents\\University\\6o\\Software Technology\\Peer-to-Peer-Carsharing\\carsharing\\carsharing.csproj",
+        "packagesPath": "C:\\Users\\winon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\winon\\Documents\\University\\6o\\Software Technology\\Peer-to-Peer-Carsharing\\carsharing\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\thana\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\winon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
