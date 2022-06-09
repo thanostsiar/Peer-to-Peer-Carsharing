@@ -2,11 +2,12 @@
 
 namespace carsharing.Controllers
 {
-    public class AccountController : Controller
+    public class SignUpController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
+        
     }
 }

@@ -1,8 +1,8 @@
-﻿namespace carsharing
+﻿namespace carsharing.Models
 {
     public class User
     {
-        protected string first_name;
+        protected string first_name { get; }
         protected string last_name;
         protected string email;
         protected string phone;

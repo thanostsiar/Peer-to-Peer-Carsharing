@@ -1,4 +1,4 @@
-﻿namespace carsharing
+﻿namespace carsharing.Models
 {
     public class Renter : User
     {
