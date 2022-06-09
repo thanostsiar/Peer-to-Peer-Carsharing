@@ -2,13 +2,13 @@
 {
     public class Vehicle
     {
-        public string vehicle_img;
-        public string vehicle_manuf;
-        public string vehicle_model;
-        public int vehicle_cc;
-        public int vehicle_yor;
-        public string vehicle_location;
-        public bool vehicle_availability;
+        public string vehicle_img { get; set; }
+        public string vehicle_manuf { get; set; }
+        public string? vehicle_model { get; set; }
+        public int vehicle_cc { get; set; }
+        public int vehicle_yor { get; set; }
+        public string vehicle_location { get; set; }
+        public bool vehicle_availability { get; set; }
 
         public Vehicle(string vehicle_img, string vehicle_manuf, string vehicle_model, int vehicle_cc, int vehicle_yor, string vehicle_location, bool vehicle_availability)
         {
