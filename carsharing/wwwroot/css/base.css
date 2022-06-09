@@ -1,4 +1,9 @@
 ﻿:root {
     --p-color: black;
     --s-color: white;
+    --signup-color: black;
+}
+
+a {
+    text-decoration: none;
 }
