@@ -4,6 +4,14 @@
 @{
     ViewData["Title"] = "Sign Up";
 }
+<style>
+body { 
+  background-image: url('/img/sign-up-image.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  overflow-x:hidden;
+}
+</style>
 
 @* Sign Up forms *@
 <div class="container">
@@ -12,24 +20,24 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend><center><h2><b>Registration Form</b></h2></center></legend><br>
+<legend style = "position:relative; left:390px;"><center><h2><b>Registration Form</b></h2></center></legend><br>
 
 <!-- First Name-->
-<div class="form-group margin-top-1-5" style = "position:relative; left:500px;">
+<div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
   <label class="col-md-4 control-label">First Name</label>  
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
-  <input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+  <input  name="first_name" placeholder="First Name" class="form-control"  type="text" required>
     </div>
   </div>
 </div>
 
 <!-- Last Name-->
-<div class="form-group margin-top-1-5" style = "position:relative; left:500px;">
+<div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
   <label class="col-md-4 control-label" >Last Name</label> 
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
-  <input name="last_name" placeholder="Last Name" class="form-control"  type="text">
+  <input name="last_name" placeholder="Last Name" class="form-control"  type="text" required>
     </div>
   </div>
 </div>
@@ -37,43 +45,43 @@
   
 <!-- Age-->
 
-<div class="form-group margin-top-1-5" style = "position:relative; left:500px;">
+<div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
   <label class="col-md-4 control-label">Age</label>  
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
-  <input  name="age" placeholder="Age" class="form-control"  type="text">
+  <input  name="age" placeholder="Age" class="form-control"  type="number" min="18" required>
     </div>
   </div>
 </div>
 
 <!-- Password-->
 
-<div class="form-group margin-top-1-5" style = "position:relative; left:500px;">
+<div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
   <label class="col-md-4 control-label" >Password</label> 
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
-  <input name="user_password" placeholder="Password" class="form-control"  type="password">
+  <input name="user_password" placeholder="Password" class="form-control"  type="password" required>
     </div>
   </div>
 </div>
 
 <!-- Confirm Password-->
 
-<div class="form-group margin-top-1-5" style = "position:relative; left:500px;">
+<div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
   <label class="col-md-4 control-label" >Confirm Password</label> 
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
-  <input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password">
+  <input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password" required>
     </div>
   </div>
 </div>
 
 <!-- Email-->
-<div class="form-group margin-top-1-5" style = "position:relative; left:500px;">
+<div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
   <label class="col-md-4 control-label">E-Mail</label>  
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
-  <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+  <input name="email" placeholder="E-Mail Address" class="form-control"  type="text" required>
     </div>
   </div>
 </div>
@@ -81,20 +89,20 @@
 
 <!-- Phone-->
        
-<div class="form-group margin-top-1-5" style = "position:relative; left:500px;">
+<div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
   <label class="col-md-4 control-label">Phone</label>  
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
-  <input name="phone" placeholder="Phone" class="form-control" type="text">
+  <input name="phone" placeholder="Phone" class="form-control" type="tel" pattern="[0-9]{10}" required>
     </div>
   </div>
 </div>
 
 <!-- Button -->
-<div class="form-group" style = "position:relative; left:675px;">
+<div class="form-group" style = "position:relative; left:975px;">
   <label class="col-md-4 control-label"></label>
   <div class="col-md-4"><br>
-        <button type="submit" class="btn btn-primary" >SUBMIT</button>
+        <button type="submit" class="btn btn-primary" >Submit</button>
   </div>
 </div>
 
@@ -102,3 +110,4 @@
 </form>
 </div>
 <!-- /.container -->
+
