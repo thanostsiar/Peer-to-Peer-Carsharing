@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model carsharing.Models.SignIn
 @{
     ViewData["Title"] = "Sign In";
 }
@@ -11,17 +9,17 @@
         <div class="d-none d-lg-block flex-grow-1">
             <img src="/img/sign-in-image.png" alt="guy with orange hat driving a blue car with his window open" />
         </div>
-        <form class="m-5 m-lg-0 flex-fill">
+        <form class="m-5 m-lg-0 flex-fill" asp-action="SignIn" asp-controller="SignIn" method="post">
             <div class="d-flex align-items-center">
                 <h4>Sign In</h4>
             </div>
             <div class="mb-3 margin-top-1-5">
-                <label for="SignInEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="SignInEmail" aria-describedby="emailHelp">
+                <label class="form-label" asp-for="Email">Email</label>
+                <input type="email" class="form-control" aria-describedby="emailHelp" asp-for="Email">
             </div>
             <div class="mb-3">
-                <label for="SignInPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="SignInPassword">
+                <label class="form-label" asp-for="Password">Password</label>
+                <input type="password" class="form-control" asp-for="Password">
             </div>
 
             <div class="d-flex justify-content-between">
@@ -30,6 +28,10 @@
                     <label class="form-check-label" for="rememberMe">Remember me</label>
                 </div>
                 <button type="submit" class="btn btn-p">Sign in</button>
+            </div>
+            <div asp-validation-summary="All"></div>
+            <div>
+                <p>@ViewBag.Message</p>
             </div>
         </form>
     </div>
