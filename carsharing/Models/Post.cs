@@ -1,39 +1,19 @@
-﻿namespace carsharing.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace carsharing.Models
 {
-    public class Post
+    public partial class Post
     {
-        public DateTime date;
-        public Vehicle vehicle;
-        public Owner owner;
-        public string vehicle_description;
-        public string vehicle_comments;
-        public float vehicle_rating;
-        public string title;
+        public int PostId { get; set; }
+        public int OwnerId { get; set; }
+        public int VehicleId { get; set; }
+        public string Title { get; set; } = null!;
+        public string Body { get; set; } = null!;
+        public double Rating { get; set; }
+        public DateOnly Created { get; set; }
 
-        public Post(DateTime date, Vehicle vehicle, Owner owner, string vehicle_description, string vehicle_comments, float vehicle_rating, string title)
-        {
-            this.date = date;
-            this.vehicle = vehicle;
-            this.owner = owner;
-            this.vehicle_description = vehicle_description;
-            this.vehicle_comments = vehicle_comments;
-            this.vehicle_rating = vehicle_rating;
-            this.title = title;
-        }
-
-        public void Create()
-        {
-
-        }
-
-        public void Edit()
-        {
-
-        }
-
-        public void Delete()
-        {
-
-        }
+        public virtual Owner Owner { get; set; } = null!;
+        public virtual Vehicle Vehicle { get; set; } = null!;
     }
 }

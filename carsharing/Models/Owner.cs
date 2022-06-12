@@ -1,14 +1,26 @@
-﻿namespace carsharing.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace carsharing.Models
 {
-    public class Owner : User
+    public partial class Owner
     {
-        public Owner(string first_name, string last_name, string email, string phone, string image, int age, string password) : base(first_name, last_name, email, phone, image, age, password)
+        public Owner()
         {
+            Posts = new HashSet<Post>();
+            Vehicles = new HashSet<Vehicle>();
         }
 
-        /*public Post CreatePost()
-        {
-            
-        }*/
+        public int OwnerId { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string Phone { get; set; } = null!;
+        public int Age { get; set; }
+        public string ProfilePicture { get; set; } = null!;
+        public string Password { get; set; } = null!;
+
+        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }
