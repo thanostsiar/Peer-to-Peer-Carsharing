@@ -1,23 +1,34 @@
 ﻿:root {
-    --p-color: black;
+    --p-color: #F5A472;
     --s-color: white;
-    --signup-color: black;
+    --btn-color: #098486;
+    --signup-color: #098486;
+    /* #F5A472 #098486 */
 }
 
 a {
     text-decoration: none;
 }
 
-.btn-p{
+.btn-p {
     background-color: var(--p-color);
     color: var(--s-color);
+}
+
+.btn-color {
+    background-color: var(--btn-color);
+    color: var(--s-color);
+}
+
+.FAQ-colors {
+    color: var(--btn-color);
 }
 
 .margin-0-5 {
     margin: 0.5em;
 }
 
-.margin-1{
+.margin-1 {
     margin: 1em;
 }
 
@@ -152,7 +163,7 @@ a {
 
     .margin-top-sm-2 {
         margin-top: 2em;
-    }
+    }s
 
     .margin-top-sm-2-5 {
         margin-top: 2.5em;
