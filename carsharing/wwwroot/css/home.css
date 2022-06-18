@@ -1,0 +1,6 @@
+﻿
+/* TODO: make them responsive instead of using fixed dimensions */
+.card-imgs img {
+    width: 31.25em;
+    height: 17em;
+}
