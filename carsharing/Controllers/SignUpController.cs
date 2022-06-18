@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-<<<<<<< Updated upstream
 using carsharing.Models;
 using Microsoft.EntityFrameworkCore;
-=======
-using Npgsql;
->>>>>>> Stashed changes
+
 
 namespace carsharing.Controllers
 {
