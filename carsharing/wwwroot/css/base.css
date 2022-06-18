@@ -1,4 +1,180 @@
 ﻿:root {
     --p-color: black;
     --s-color: white;
+    --signup-color: black;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-p{
+    background-color: var(--p-color);
+    color: var(--s-color);
+}
+
+.margin-0-5 {
+    margin: 0.5em;
+}
+
+.margin-1{
+    margin: 1em;
+}
+
+.margin-1-5 {
+    margin: 1.5em;
+}
+
+.margin-2 {
+    margin: 2em;
+}
+
+.margin-2-5 {
+    margin: 2.5em;
+}
+
+.margin-3 {
+    margin: 3em;
+}
+
+.margin-3-5 {
+    margin: 3.5em;
+}
+
+.margin-4 {
+    margin: 4em;
+}
+
+.margin-4-5 {
+    margin: 4.5em;
+}
+
+.margin-5 {
+    margin: 5em;
+}
+
+/* Margin top only */
+.margin-top-0-5 {
+    margin-top: 0.5em;
+}
+
+.margin-top-1 {
+    margin-top: 1em;
+}
+
+.margin-top-1-5 {
+    margin-top: 1.5em;
+}
+
+.margin-top-2 {
+    margin-top: 2em;
+}
+
+.margin-top-2-5 {
+    margin-top: 2.5em;
+}
+
+.margin-top-3 {
+    margin-top: 3em;
+}
+
+.margin-top-3-5 {
+    margin-top: 3.5em;
+}
+
+.margin-top-4 {
+    margin-top: 4em;
+}
+
+.margin-top-4-5 {
+    margin-top: 4.5em;
+}
+
+.margin-top-5 {
+    margin-top: 5em;
+}
+
+
+
+@media (min-width: 576px) {
+    .margin-sm-0-5 {
+        margin: 0.5em;
+    }
+
+    .margin-sm-1 {
+        margin: 1em;
+    }
+
+    .margin-sm-1-5 {
+        margin: 1.5em;
+    }
+
+    .margin-sm-2 {
+        margin: 2em;
+    }
+
+    .margin-sm-2-5 {
+        margin: 2.5em;
+    }
+
+    .margin-sm-3 {
+        margin-top: 3em;
+    }
+
+    .margin-sm-3-5 {
+        margin: 3.5em;
+    }
+
+    .margin-sm-4 {
+        margin-top: 4em;
+    }
+
+    .margin-4-5 {
+        margin: 4.5em;
+    }
+
+    .margin-5 {
+        margin: 5em;
+    }
+
+    /* Margin top only */
+    .margin-top-sm-0-5 {
+        margin-top: 0.5em;
+    }
+
+    .margin-top-sm-1 {
+        margin-top: 1em;
+    }
+
+    .margin-top-sm-1-5 {
+        margin-top: 1.5em;
+    }
+
+    .margin-top-sm-2 {
+        margin-top: 2em;
+    }
+
+    .margin-top-sm-2-5 {
+        margin-top: 2.5em;
+    }
+
+    .margin-top-sm-3 {
+        margin-top: 3em;
+    }
+
+    .margin-top-sm-3-5 {
+        margin-top: 3.5em;
+    }
+
+    .margin-top-sm-4 {
+        margin-top: 4em;
+    }
+
+    .margin-top-sm-4-5 {
+        margin-top: 4.5em;
+    }
+
+    .margin-top-sm-5 {
+        margin-top: 5em;
+    }
 }

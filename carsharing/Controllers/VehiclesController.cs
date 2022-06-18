@@ -2,7 +2,7 @@
 
 namespace carsharing.Controllers
 {
-    public class AccountController : Controller
+    public class VehiclesController : Controller
     {
         public IActionResult Index()
         {
