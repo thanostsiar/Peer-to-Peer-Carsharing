@@ -10,6 +10,16 @@ a {
     text-decoration: none;
 }
 
+.bg-img {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) , url("../img/pexels-alfonso-escalante-2533090.jpg");
+    /* Full height */
+    height: 50%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .btn-p {
     background-color: var(--p-color);
     color: var(--s-color);
@@ -105,7 +115,17 @@ a {
     margin-top: 5em;
 }
 
+.margin-top-8 {
+    margin-top: 8em;
+}
 
+.margin-bottom-5 {
+    margin-bottom: 5em;
+}
+
+.margin-bottom-8 {
+    margin-bottom: 8em;
+}
 
 @media (min-width: 576px) {
     .margin-sm-0-5 {
@@ -163,7 +183,7 @@ a {
 
     .margin-top-sm-2 {
         margin-top: 2em;
-    }s
+    }
 
     .margin-top-sm-2-5 {
         margin-top: 2.5em;
