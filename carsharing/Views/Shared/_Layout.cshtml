@@ -4,11 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Unipi Cars</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/carsharing.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -20,18 +18,16 @@
                 </div>
                 <div>
                     <div class="d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1 gap-3">
-                            <a class= asp-area="" asp-controller="SignIn" asp-action="Index">Sign in</a>
-                            <a class="sign-up-btn" asp-area="" asp-controller="SignUp" asp-action="Index">Sign up</a>
+                        <ul class="navbar-nav flex-grow-1">
+                            Login
                         </ul>
-
                     </div>
                 </div>
 
             </div>
         </nav>
     </header>
-    <div>
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

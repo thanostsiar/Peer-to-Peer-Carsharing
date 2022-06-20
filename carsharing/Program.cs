@@ -1,16 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore;
-using carsharing.Models;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddDbContext<unipicarsContext>(options =>
-            options.UseNpgsql(builder.Configuration["ConnectionStrings:unipi-cars-connection"]));
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
 
