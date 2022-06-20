@@ -35,8 +35,6 @@ namespace carsharing.Controllers
             {
                 if (signIn.Email == renter.Email && signIn.Password == renter.Password)
                 {
-                    // TODO: change the routing to direct you to Profile or index
-                    // redirect to SignIn/SignIn but render the Temp view
                     return View("Temp", renter);
                 }
                 else

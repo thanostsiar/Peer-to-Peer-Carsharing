@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using carsharing.Models;
 using Microsoft.EntityFrameworkCore;
-
+using System.Linq;
 
 namespace carsharing.Controllers
 {
@@ -66,6 +66,7 @@ namespace carsharing.Controllers
             return View();
 
         }
+
 
         private bool RenterExists(int id)
         {
