@@ -1,3 +1,4 @@
 .vs/
 .git/
 carsharing/obj/*
+carsharing/bin/*
