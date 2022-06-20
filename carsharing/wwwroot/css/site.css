@@ -30,6 +30,8 @@ body {
 }
 
 
+
+
 .searchbar-sizing input {
     padding: 1em 1.3em;
 }
@@ -55,8 +57,15 @@ body {
     }
 }
 
+.sign-up-btn {
+    background-color: var(--signup-color);
+    color: var(--s-color);
+    padding: 0.1em 0.7em;
+    border-radius: 0.5em;
+}
 
-
-
+.section-gap {
+    margin-top: 4em; 
+}
 /* Nice colors to use */
 /* #AAC4AA  #BD5958    #00333D   #0D2C32 #068D9D */
