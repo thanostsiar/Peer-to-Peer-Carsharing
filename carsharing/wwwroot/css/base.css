@@ -1,23 +1,44 @@
 ﻿:root {
-    --p-color: black;
+    --p-color: #F5A472;
     --s-color: white;
-    --signup-color: black;
+    --btn-color: #098486;
+    --signup-color: #098486;
+    /* #F5A472 #098486 */
 }
 
 a {
     text-decoration: none;
 }
 
-.btn-p{
+.bg-img {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) , url("../img/pexels-alfonso-escalante-2533090.jpg");
+    /* Full height */
+    height: 50%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn-p {
     background-color: var(--p-color);
     color: var(--s-color);
+}
+
+.btn-color {
+    background-color: var(--btn-color);
+    color: var(--s-color);
+}
+
+.FAQ-colors {
+    color: var(--btn-color);
 }
 
 .margin-0-5 {
     margin: 0.5em;
 }
 
-.margin-1{
+.margin-1 {
     margin: 1em;
 }
 
@@ -94,7 +115,17 @@ a {
     margin-top: 5em;
 }
 
+.margin-top-8 {
+    margin-top: 8em;
+}
 
+.margin-bottom-5 {
+    margin-bottom: 5em;
+}
+
+.margin-bottom-8 {
+    margin-bottom: 8em;
+}
 
 @media (min-width: 576px) {
     .margin-sm-0-5 {

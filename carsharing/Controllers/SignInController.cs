@@ -22,7 +22,7 @@ namespace carsharing.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(SignIn singIn)
+        public async Task<IActionResult> SignIn(SignIn signIn)
         {
             if (!ModelState.IsValid)
             {
@@ -33,7 +33,7 @@ namespace carsharing.Controllers
 
             foreach (var renter in listOfRenters)
             {
-                if (singIn.Email == renter.Email && singIn.Password == renter.Password)
+                if (signIn.Email == renter.Email && signIn.Password == renter.Password)
                 {
                     // TODO: change the routing to direct you to Profile or index
                     // redirect to SignIn/SignIn but render the Temp view
