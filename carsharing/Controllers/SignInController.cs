@@ -39,8 +39,14 @@ namespace carsharing.Controllers
                     // redirect to SignIn/SignIn but render the Temp view
                     return View("Temp", renter);
                 }
+                else
+                {
+                    TempData["msg"] = "<script>alert('The Email or Password is incorrect, please try again.');</script>";
+                }
+                
+
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         private bool RenterExists(int id)
