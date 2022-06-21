@@ -1,0 +1,30 @@
+﻿@model IEnumerable<carsharing.Models.Post>
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+@* Add the search functionality here too *@
+
+@* Results section *@
+<section>
+    <div class="container">
+        <div class="row">
+
+            @foreach(var post in Model)
+            {
+                <div class="col mt-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="post.Image">
+                         <div class="card-body">
+                            <h5 class="card-title">@post.Title</h5>
+                            <p class="card-text">Description</p>
+                            <a href="#" class="btn btn-color">View more</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</section>
