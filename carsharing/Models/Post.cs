@@ -1,10 +1,17 @@
-﻿using System;
+﻿using carsharing.Models;
+using System;
 using System.Collections.Generic;
 
 namespace carsharing.Models
 {
     public partial class Post
     {
+        public Post()
+        {
+            PostComments = new HashSet<PostComment>();
+            PostImages = new HashSet<PostImage>();
+        }
+
         public int PostId { get; set; }
         public int OwnerId { get; set; }
         public int VehicleId { get; set; }
@@ -15,5 +22,8 @@ namespace carsharing.Models
 
         public virtual Owner Owner { get; set; } = null!;
         public virtual Vehicle Vehicle { get; set; } = null!;
+        public virtual PostThumbnail PostThumbnail { get; set; } = null!;
+        public virtual ICollection<PostComment> PostComments { get; set; }
+        public virtual ICollection<PostImage> PostImages { get; set; }
     }
 }
