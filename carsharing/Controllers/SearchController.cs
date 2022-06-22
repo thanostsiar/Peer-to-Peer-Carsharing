@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using carsharing.Models;
+using carsharing.ViewModels;
 
 
 namespace carsharing.Controllers
@@ -20,9 +21,19 @@ namespace carsharing.Controllers
         [HttpPost]
         public async Task<IActionResult> Results(SearchBar searchBar)
         {
-            var listOfPosts = await _context.Posts.ToListAsync();
+            var owners = _context.Owners.AsQueryable();
+            var vehicles = _context.Vehicles.AsQueryable();
+            var posts = _context.Posts.AsQueryable();
 
-            return View(listOfPosts);
+            foreach (var post in posts.ToList())
+            {
+                var owner = owners.Where(ow => ow.OwnerId == post.OwnerId).First();
+                post.Owner = owner;
+            }
+
+            var resultsViewModel = new ResultsViewModel(vehicles, posts);
+
+            return View(resultsViewModel);
 
         }
     }
