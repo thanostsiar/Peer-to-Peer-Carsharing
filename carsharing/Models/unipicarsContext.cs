@@ -24,14 +24,6 @@ namespace carsharing.Models
         public virtual DbSet<Renter> Renters { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql("Host=127.0.0.1;Database=unipi-cars;Username=unipi;Password=0x2fa;");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Owner>(entity =>
