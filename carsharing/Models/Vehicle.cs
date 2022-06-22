@@ -9,6 +9,7 @@ namespace carsharing.Models
         public int OwnerId { get; set; }
         public string Manufacturer { get; set; } = null!;
         public string Model { get; set; } = null!;
+        public string Type { get; set; } = null!;
         public string Color { get; set; } = null!;
         public int Year { get; set; }
 

@@ -1,5 +1,4 @@
-﻿using carsharing.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace carsharing.Models
@@ -18,11 +17,12 @@ namespace carsharing.Models
         public string Title { get; set; } = null!;
         public string Body { get; set; } = null!;
         public double Rating { get; set; }
+        public string ThumbnailUrl { get; set; } = null!;
         public DateOnly Created { get; set; }
+        public int MaxDaysOfRent { get; set; }
 
         public virtual Owner Owner { get; set; } = null!;
         public virtual Vehicle Vehicle { get; set; } = null!;
-        public virtual PostThumbnail PostThumbnail { get; set; } = null!;
         public virtual ICollection<PostComment> PostComments { get; set; }
         public virtual ICollection<PostImage> PostImages { get; set; }
     }
