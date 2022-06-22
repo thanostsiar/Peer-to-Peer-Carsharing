@@ -12,3 +12,122 @@
     border-radius: 0.5em;
     color: black;
 }
+
+    a:hover {
+        color: #455A64;
+    }
+
+.rating-box {
+    width: 10em;
+    height: 8em;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: var(--btn-color);
+    color: var(--s-color);
+}
+
+.rating-label {
+    font-weight: bold;
+}
+
+/* Rating bar width */
+.rating-bar {
+    width: 25em;
+    padding: 0.6em;
+}
+
+/* The bar container */
+.bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    border-radius: 2em;
+    cursor: pointer;
+}
+
+/* Individual bars */
+.bar-5 {
+    width: 70%;
+    height: 0.9em;
+    background-color: var(--p-color);
+    border-radius: 2em;
+}
+
+.bar-4 {
+    width: 30%;
+    height: 0.9em;
+    background-color: var(--p-color);
+    border-radius: 2em;
+}
+
+.bar-3 {
+    width: 20%;
+    height: 0.9em;
+    background-color: var(--p-color);
+    border-radius: 2em;
+}
+
+.bar-2 {
+    width: 10%;
+    height: 0.9em;
+    background-color: var(--p-color);
+    border-radius: 2em;
+}
+
+.bar-1 {
+    width: 0%;
+    height: 0.9em;
+    background-color: var(--p-color);
+    border-radius: 2em;
+}
+
+
+.star-active {
+    color: black;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.star-active:hover {
+    color: var(--p-color);
+    cursor: pointer;
+}
+
+.star-comment {
+    color: var(--p-color);
+}
+
+.star-inactive-comment {
+    color: #CFD8DC;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.star-inactive {
+    color: #CFD8DC;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.star-inactive:hover {
+    color: var(--p-color);
+    cursor: pointer;
+}
+
+.blue-text {
+    color: var(--btn-color);
+}
+.content {
+    font-size: 1.4em;
+}
+
+
+.pic {
+    width: 10em;
+    height: 8em;
+    margin-right: 1em ;
+}
+
+.vote {
+    cursor: pointer;
+}
