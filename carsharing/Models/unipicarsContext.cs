@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using carsharing.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -21,7 +20,6 @@ namespace carsharing.Models
         public virtual DbSet<Post> Posts { get; set; } = null!;
         public virtual DbSet<PostComment> PostComments { get; set; } = null!;
         public virtual DbSet<PostImage> PostImages { get; set; } = null!;
-        public virtual DbSet<PostThumbnail> PostThumbnails { get; set; } = null!;
         public virtual DbSet<RentedVehicle> RentedVehicles { get; set; } = null!;
         public virtual DbSet<Renter> Renters { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
@@ -30,6 +28,7 @@ namespace carsharing.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseNpgsql("Host=127.0.0.1;Database=unipi-cars;Username=unipi;Password=0x2fa;");
             }
         }
@@ -77,9 +76,13 @@ namespace carsharing.Models
 
                 entity.Property(e => e.Created).HasColumnName("created");
 
+                entity.Property(e => e.MaxDaysOfRent).HasColumnName("max_days_of_rent");
+
                 entity.Property(e => e.OwnerId).HasColumnName("owner_id");
 
                 entity.Property(e => e.Rating).HasColumnName("rating");
+
+                entity.Property(e => e.ThumbnailUrl).HasColumnName("thumbnail_url");
 
                 entity.Property(e => e.Title).HasColumnName("title");
 
@@ -150,26 +153,6 @@ namespace carsharing.Models
                     .HasForeignKey(d => d.PostId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("post-images_post_id_fkey");
-            });
-
-            modelBuilder.Entity<PostThumbnail>(entity =>
-            {
-                entity.HasKey(e => e.PostId)
-                    .HasName("post-thumbnail_pkey");
-
-                entity.ToTable("post-thumbnail");
-
-                entity.Property(e => e.PostId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("post_id");
-
-                entity.Property(e => e.ThumbnailUrl).HasColumnName("thumbnail_url");
-
-                entity.HasOne(d => d.Post)
-                    .WithOne(p => p.PostThumbnail)
-                    .HasForeignKey<PostThumbnail>(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("post-thumbnail_post_id_fkey");
             });
 
             modelBuilder.Entity<RentedVehicle>(entity =>
@@ -249,6 +232,8 @@ namespace carsharing.Models
                 entity.Property(e => e.Model).HasColumnName("model");
 
                 entity.Property(e => e.OwnerId).HasColumnName("owner_id");
+
+                entity.Property(e => e.Type).HasColumnName("type");
 
                 entity.Property(e => e.Year).HasColumnName("year");
 
