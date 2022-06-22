@@ -1,4 +1,4 @@
-﻿@model IEnumerable<carsharing.Models.Post>
+﻿@model carsharing.ViewModels.ResultsViewModel;
 @{
     ViewData["Title"] = "Search Results";
 }
@@ -10,14 +10,15 @@
     <div class="container">
         <div class="row">
 
-            @foreach(var post in Model)
+            @foreach(var post in Model.Posts.ToList())
             {
                 <div class="col mt-4">
                     <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="post.Image">
+                        <img src="@post.ThumbnailUrl" class="card-img-top" alt="image">
                          <div class="card-body">
                             <h5 class="card-title">@post.Title</h5>
                             <p class="card-text">Description</p>
+                            <p class="card-text">@post.Owner.FirstName @post.Owner.LastName</p>
                             <a href="#" class="btn btn-color">View more</a>
                         </div>
                     </div>
