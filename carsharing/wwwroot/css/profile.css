@@ -13,6 +13,17 @@
     color: black;
 }
 
+
+.btn-n {
+    background-color: var(--p-color);
+    color: var(--s-color);
+    width: 14em;
+    height: 3.2em;
+    text-align: center;
+    border-radius: 0.5em;
+    color: black;
+}
+
     a:hover {
         color: #455A64;
     }
