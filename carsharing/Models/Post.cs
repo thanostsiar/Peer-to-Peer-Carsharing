@@ -16,9 +16,11 @@ namespace carsharing.Models
         public int VehicleId { get; set; }
         public string Title { get; set; } = null!;
         public string Body { get; set; } = null!;
+        public string City { get; set; } = null!;
         public double Rating { get; set; }
         public string ThumbnailUrl { get; set; } = null!;
         public DateOnly Created { get; set; }
+        public decimal CostPerDay { get; set; }
         public int MaxDaysOfRent { get; set; }
 
         public virtual Owner Owner { get; set; } = null!;
