@@ -5,26 +5,41 @@
 
 @* Add the search functionality here too *@
 
+
 @* Results section *@
 <section>
     <div class="container">
-        <div class="row">
-
-            @foreach(var post in Model.Posts.ToList())
+        <div class="d-flex flex-column">
+            @if (@Model.ErrorMessage.Equals(""))
             {
-                <div class="col mt-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="@post.ThumbnailUrl" class="card-img-top" alt="image">
-                         <div class="card-body">
+                @foreach (var post in Model.Posts.ToList())
+                {
+                    <div class="card mb-3" style="max-width: 720px;">
+                        <div class="row no-gutters">
+                        <div class="col-md-4">
+                          <img src="@post.ThumbnailUrl" class="card-img" alt="alt text">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
                             <h5 class="card-title">@post.Title</h5>
                             <p class="card-text">Description</p>
-                            <p class="card-text">@post.Owner.FirstName @post.Owner.LastName</p>
-                            <a href="#" class="btn btn-color">View more</a>
+                            <p class="card-text">@post.City</p>
+                            <p class="card-text"><small class="text-muted">@post.Owner.FirstName @post.Owner.LastName</small></p>
+                          </div>
                         </div>
+                      </div>
                     </div>
+                }
+            }
+            else
+            {
+                <div class="d-flex justify-content-center">
+                    
+                    <h2>
+                        @Model.ErrorMessage
+                    </h2>
                 </div>
             }
-
         </div>
     </div>
 
