@@ -8,15 +8,19 @@ namespace carsharing.Controllers
 {
     public class SearchController : Controller
     {
+        public String ErrorMessage;
+
         // get the database context
         private readonly unipicarsContext _context;
+        
+        private IQueryable<Post> resultPosts;
 
         public SearchController(unipicarsContext context)
         {
             _context = context;
+            resultPosts = Enumerable.Empty<Post>().AsQueryable();
+            this.ErrorMessage = "";
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> Results(SearchBar searchBar)
@@ -24,17 +28,38 @@ namespace carsharing.Controllers
             var owners = _context.Owners.AsQueryable();
             var vehicles = _context.Vehicles.AsQueryable();
             var posts = _context.Posts.AsQueryable();
+            
+            var today = DateTime.Now;
 
-            foreach (var post in posts.ToList())
+            var dateFrom = Convert.ToDateTime(searchBar.DateFrom);
+            var dateTo = Convert.ToDateTime(searchBar.DateTo);
+            
+            var numberOfDays = (dateTo - dateFrom).TotalDays;
+            var message = "No car was found";
+
+            foreach (var post in await posts.ToListAsync())
             {
-                var owner = owners.Where(ow => ow.OwnerId == post.OwnerId).First();
-                post.Owner = owner;
+
+                if(searchBar.SearchField.Equals(post.City))
+                {
+                    var owner = owners.Where(ow => ow.OwnerId == post.OwnerId).First();
+                    post.Owner = owner;
+
+                    if(numberOfDays > 0 && numberOfDays < post.MaxDaysOfRent)
+                    {
+                        resultPosts = resultPosts.Append(post);
+                    }
+                }
             }
 
-            var resultsViewModel = new ResultsViewModel(vehicles, posts);
+            if(!resultPosts.Any())
+            {
+                this.ErrorMessage = message;
+            }
+
+            var resultsViewModel = new ResultsViewModel(vehicles, resultPosts, ErrorMessage);
 
             return View(resultsViewModel);
-
         }
     }
 }
