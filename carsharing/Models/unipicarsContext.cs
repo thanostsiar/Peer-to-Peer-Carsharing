@@ -24,15 +24,6 @@ namespace carsharing.Models
         public virtual DbSet<Renter> Renters { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=127.0.0.1;Database=unipi-cars;Username=unipi;Password=0x2fa;");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Owner>(entity =>
@@ -73,6 +64,12 @@ namespace carsharing.Models
                     .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Body).HasColumnName("body");
+
+                entity.Property(e => e.City).HasColumnName("city");
+
+                entity.Property(e => e.CostPerDay)
+                    .HasColumnType("money")
+                    .HasColumnName("cost_per_day");
 
                 entity.Property(e => e.Created).HasColumnName("created");
 
