@@ -65,6 +65,12 @@ namespace carsharing.Models
 
                 entity.Property(e => e.Body).HasColumnName("body");
 
+                entity.Property(e => e.City).HasColumnName("city");
+
+                entity.Property(e => e.CostPerDay)
+                    .HasColumnType("money")
+                    .HasColumnName("cost_per_day");
+
                 entity.Property(e => e.Created).HasColumnName("created");
 
                 entity.Property(e => e.MaxDaysOfRent).HasColumnName("max_days_of_rent");
