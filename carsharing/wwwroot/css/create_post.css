@@ -10,7 +10,7 @@ textarea {
 
 .btn-create {
     background-color: var(--p-color);
-    color: var(--s-color);
+    color: white;
     text-align: center;
     border-radius: 0.5em;
     color: black;
