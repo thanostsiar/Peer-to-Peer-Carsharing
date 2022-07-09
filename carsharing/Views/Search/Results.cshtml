@@ -4,20 +4,67 @@
 }
 
 @* Add the search functionality here too *@
+<section>
+    <div class="d-flex flex-column align-items-center mt-2 margin-bottom-8">
+        <form asp-controller="Search" asp-action="Results" method="get">
+            <div class="d-inline-flex flex-column align-items-center flex-lg-row bg searchbar-sizing searchbar searchbar-lg p-color">
 
+        
+                <div class="align-self-center"> 
+                    <input asp-for="SearchBar.SearchField" type="text" class="form-control" placeholder="🔍Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                </div> 
+        
+                <div class="d-flex insides">
+                    <div>
+                        <input asp-for="SearchBar.DateFrom" type="date" class="form-control" aria-describedby="basic-addon2">
+                    </div> 
+                    <div class="d-flex">
+                        @*<label for="cars">Time from:</label>*@
+                        <select asp-for="SearchBar.TimeFrom" asp-items="Model.SearchBar.SelectTimeFrom">
+                        </select> 
+
+                     </div>
+
+
+                </div>
+
+                <div class="d-flex insides">
+
+                    <div>
+                        <input asp-for="SearchBar.DateTo" type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    </div> 
+                    <div class="d-flex">
+                        @*<label for="cars">Time from:</label>*@
+                        <select  asp-for="SearchBar.TimeTo" asp-items="Model.SearchBar.SelectTimeTo">
+                        </select> 
+
+                     </div>
+
+
+                </div>
+
+        
+                <div class="align-self-center">
+                    <button class="search-btn">Search</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>
 
 @* Results section *@
 <section>
     <div class="container">
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column align-items-center">
             @if (@Model.ErrorMessage.Equals(""))
             {
                 @foreach (var post in Model.Posts.ToList())
                 {
-                    <div class="card mb-3" style="max-width: 720px;">
+                    <div class="card card-size mb-3" style="max-width: 800px;">
                         <div class="row no-gutters">
                         <div class="col-md-4">
-                          <img src="@post.ThumbnailUrl" class="card-img" alt="alt text">
+                          <img src="@post.ThumbnailUrl" class="result-card-images" alt="alt text">
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
