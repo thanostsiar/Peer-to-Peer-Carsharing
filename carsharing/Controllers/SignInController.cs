@@ -35,14 +35,14 @@ namespace carsharing.Controllers
             {
                 if (signIn.Email == renter.Email && signIn.Password == renter.Password)
                 {
-                    return View("Temp", renter);
-                }
-                else
-                {
-                    TempData["msg"] = "<script>alert('The Email or Password is incorrect, please try again.');</script>";
-                }
-                
+                    TempData["FirstName"] = renter.FirstName;
+                    TempData["LastName"] = renter.LastName;
+                    TempData["Age"] = renter.Age;
+                    TempData["Email"] = renter.Email;
+                    TempData["Phone"] = renter.Phone;
 
+                    return RedirectToAction("Index", "Profile");
+                }
             }
             return RedirectToAction("Index");
         }
