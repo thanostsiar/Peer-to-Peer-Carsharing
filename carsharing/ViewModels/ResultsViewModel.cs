@@ -2,9 +2,10 @@
 
 namespace carsharing.ViewModels
 {
-
     public class ResultsViewModel
     {
+        public SearchBar SearchBar;
+
         public String ErrorMessage;
 
         public IQueryable<Vehicle> Vehicles { get; set; } = null!;
@@ -13,6 +14,7 @@ namespace carsharing.ViewModels
 
         public ResultsViewModel(IQueryable<Vehicle> vehicles, IQueryable<Post> post, String errorMessage = "")
         {
+            this.SearchBar = new SearchBar();
             this.Vehicles = vehicles;
             this.Posts = post;
             this.ErrorMessage = errorMessage;

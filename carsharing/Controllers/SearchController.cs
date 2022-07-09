@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using carsharing.Models;
 using carsharing.ViewModels;
-
+using System.Globalization;
 
 namespace carsharing.Controllers
 {
@@ -22,7 +22,6 @@ namespace carsharing.Controllers
             this.ErrorMessage = "";
         }
 
-        [HttpPost]
         public async Task<IActionResult> Results(SearchBar searchBar)
         {
             var owners = _context.Owners.AsQueryable();
@@ -31,11 +30,13 @@ namespace carsharing.Controllers
             
             var today = DateTime.Now;
 
-            var dateFrom = Convert.ToDateTime(searchBar.DateFrom);
-            var dateTo = Convert.ToDateTime(searchBar.DateTo);
-            
-            var numberOfDays = (dateTo - dateFrom).TotalDays;
+            var dateFrom = DateTime.ParseExact(searchBar.DateFrom, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var dateTo = DateTime.ParseExact(searchBar.DateTo, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var numberOfDays = (dateTo.Date - dateFrom.Date).TotalDays;
             var message = "No car was found";
+
+            System.Diagnostics.Debug.WriteLine("dateFrom: ", dateFrom);
+            System.Diagnostics.Debug.WriteLine("dateTo: ", dateTo);
 
             foreach (var post in await posts.ToListAsync())
             {
@@ -45,8 +46,10 @@ namespace carsharing.Controllers
                     var owner = owners.Where(ow => ow.OwnerId == post.OwnerId).First();
                     post.Owner = owner;
 
-                    if(numberOfDays > 0 && numberOfDays < post.MaxDaysOfRent)
+                    if(numberOfDays > 0 && numberOfDays <= post.MaxDaysOfRent)
                     {
+                        System.Diagnostics.Debug.WriteLine("numberOfDays: ", numberOfDays);
+
                         resultPosts = resultPosts.Append(post);
                     }
                 }
