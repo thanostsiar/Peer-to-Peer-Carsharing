@@ -18,7 +18,7 @@ namespace carsharing.Controllers
 
         [HttpGet]
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 
@@ -26,7 +26,6 @@ namespace carsharing.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SignUp(SignUp signUp)
         {
-
             if (!ModelState.IsValid)
             {
                 return View("Index");
@@ -50,21 +49,25 @@ namespace carsharing.Controllers
                 renter.FirstName = signUp.FirstName;
                 renter.LastName = signUp.LastName;
                 renter.Age = signUp.Age;
-                renter.ProfilePicture = "Skata.png";
+                renter.ProfilePicture = "~/wwwroot/img/timmy.jpg";
                 renter.Experience = 1.2;
                 renter.Password = signUp.Password;
                 renter.Email = signUp.Email;
                 renter.Phone = signUp.Phone;
 
                 _context.Add(renter);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                TempData["FirstName"] = renter.FirstName;
+                TempData["LastName"] = renter.LastName;
+                TempData["Age"] = renter.Age;
+                TempData["Email"] = renter.Email;
+                TempData["Phone"] = renter.Phone;
+                TempData["ProfilePicture"] = renter.ProfilePicture;
+
+                return RedirectToAction("Index", "Profile");
             }
-              
-
             return View();
-
         }
 
 
