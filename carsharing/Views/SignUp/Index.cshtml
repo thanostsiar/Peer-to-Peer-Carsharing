@@ -95,7 +95,7 @@ body {
                 <label class="col-md-4 control-label" asp-for="ConfirmPassword">Confirm Password</label> 
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="ConfirmPassword" type="password">
+                        <input class="form-control" asp-for="ConfirmPassword" type="password" id="pass">
                     </div>
                     <div class="error-message">
                         @Html.ValidationMessageFor(m => m.ConfirmPassword)
@@ -131,6 +131,11 @@ body {
                 </div>
             </div>
 
+            <div class="mb-3 form-check " style = "position:relative; left:800px;">
+                    <input type="checkbox" class="form-check-input" onclick="showPassword()" id="showPass">
+                    <label class="form-check-label" for="showPass">Show Password</label>
+            </div>
+
         <!-- Button -->
 
         <div class="form-group" style = "position:relative; left:975px;">
@@ -145,4 +150,18 @@ body {
     </form>
 </div>
 <!-- /.container -->
+
+<script>
+function showPassword() {
+  var x = document.getElementById("passw");
+  var y = document.getElementById("pass");
+  if (x.type === "password" || y.type === "password") {
+    x.type = "text";
+    y.type = "text";
+  } else {
+    x.type = "password";
+    y.type = "password";
+  }
+}
+</script>
 

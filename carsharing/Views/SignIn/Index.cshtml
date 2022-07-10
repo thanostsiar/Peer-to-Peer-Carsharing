@@ -40,7 +40,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" asp-for="Password">Password</label>
-                <input type="password" class="form-control" asp-for="Password">
+                <input type="password" class="form-control" asp-for="Password" id="pass">
                 <div class="error-message">
                     @Html.ValidationMessageFor(m => m.Password)
                 </div>
@@ -49,10 +49,24 @@
             <div class="d-flex justify-content-between">
                 <div class="mb-3 form-check ">
                     <input type="checkbox" class="form-check-input" id="rememberMe">
-                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                    <label class="form-check-label" for="rememberMe">Remember me</label><br>
+                    <input type="checkbox" class="form-check-input" onclick="showPassword()" id="showPass">
+                    <label class="form-check-label" for="showPass">Show Password</label>
                 </div>
-                <button type="submit" class="btn btn-p">Sign in</button>
+                
             </div>
+            <button type="submit" class="btn btn-p">Sign in</button>
         </form>
     </div>
 </section>
+
+<script>
+function showPassword() {
+  var x = document.getElementById("pass");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
