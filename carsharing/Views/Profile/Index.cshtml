@@ -1,5 +1,17 @@
-﻿@{
+﻿@model carsharing.Models.Renter
+@{
     ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout_SignedIn.cshtml";
+}
+
+@{
+    var FirstName = TempData["FirstName"];
+    var LastName = TempData["LastName"];
+    var Age = TempData["Age"];
+    var Email = TempData["Email"];
+    var Phone = TempData["Phone"];
+    var ProfilePic = TempData["ProfilePicture"];
+    TempData.Keep();
 }
 
 <section class="container">
@@ -9,11 +21,11 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://th.bing.com/th/id/OIP.viXFO-aR3A01shUUTAeeIgHaHZ?pid=ImgDet&rs=1" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
-            <h5 class="my-3">John Harrison</h5>
+            <img src="@Model.ProfilePicture" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 9em;">
+            <h5 class="my-3">@Model.FirstName</h5>
             <p class="text-muted mb-1">♦️Owner</p>
-            <p class="text-muted mb-4">✩352 Reviews</p>
+            <p class="text-muted mb-4">✩159 Reviews</p>
             <button type="button" class="btn-c text-center btn-outline-dark mb-2" data-mdb-ripple-color="dark">
                 Edit profile
             </button>
@@ -22,7 +34,7 @@
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body text-center">
-            <h5 class="my-3">John is confirmed!</h5>
+            <h5 class="my-3">@Model.FirstName is confirmed!</h5>
             <h6 class="my-3">✓Identity</h6>
             <h6 class="my-3">✓E-mail address</h6>
             <h6 class="my-3">✓Phone number</h6>
@@ -45,7 +57,7 @@
       @*Rght part of page*@
       <div class="col-lg-8">
         <div class="card-body">
-            <h3>Hi, I'm John!</h3>
+            <h3>Hi, I'm @Model.FirstName!</h3>
             <p class="text-muted mb-1">Joined since 2016</p>
         </div>
 
@@ -59,7 +71,7 @@
                     <p class="mb-0">Full Name</p>
                   </div>    
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">Johnathan Harrison</p>
+                    <p class="text-muted mb-0">@Model.FirstName @Model.LastName</p>
                   </div>
                 </div>
                 <hr>
@@ -69,7 +81,7 @@
                     <p class="mb-0">Email</p>
                   </div>
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">john.harrison@gmail.com</p>
+                    <p class="text-muted mb-0">@Model.Email</p>
                   </div>
                 </div>
                 <hr>
@@ -79,17 +91,7 @@
                     <p class="mb-0">Mobile</p>
                   </div>
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">+30 6987623491</p>
-                  </div>
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <span class="material-icons" style='float:left;'>home</span>
-                    <p class="mb-0">Address</p>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">Peristeri, Athens, Greece</p>
+                    <p class="text-muted mb-0">+30 @Model.Phone</p>
                   </div>
                 </div>
               </div>
@@ -97,7 +99,7 @@
         </section>
         
         <div class="card-body">
-            <h5>🔸John's Listings:</h5>
+            <h5>🔸@Model.FirstName's Listings:</h5>
         </div>
 
         @*User's listings*@
@@ -183,10 +185,135 @@
                         </div>
                     </div>
                 </div>
+                <div class="text-center mt-4">
+                    <a asp-area="" asp-controller="CreatePost" asp-action="Index" class="btn btn-n btn-outline-dark mb-2" data-mdb-ripple-color="dark">
+                        <h4>+ Create new post</h4> 
+                    </a>
+                </div>  
             </div>
         </div>
         </section>
       </div>
+      
+        @*Reviews and Comments*@
+        <section>
+           <div class="container text-center mt-5">
+                <div class="card">
+                    <div class="card body">
+                        <div class="row  d-flex mt-5 mb-4">
+					        <div class="col-md-4 d-flex flex-column">
+						        <div class="rating-box">
+							        <h1 class="pt-4">4.0</h1>
+							        <p class="">out of 5</p>
+						        </div>
+						        <div>
+							        <span class="material-icons star-active mx-1">star_rate</span>
+							        <span class="material-icons star-active mx-1">star_rate</span>
+							        <span class="material-icons star-active mx-1">star_rate</span>
+							        <span class="material-icons star-active mx-1">star_rate</span>
+                                    <span class="material-icons star-inactive mx-1">star_rate</span>
+						        </div>
+					        </div>
+					        <div class="col-md-8">
+						        <div class="container">
+							        <table class="mx-auto">
+								        <tr>
+									        <td class="rating-label">Excellent</td>
+									        <td class="rating-bar">
+										        <div class="bar-container">
+									              <div class="bar-5"></div>
+									            </div>
+									        </td>
+									        <td class="text-right">123</td>
+								        </tr>
+								        <tr>
+									        <td class="rating-label">Good</td>
+									        <td class="rating-bar">
+										        <div class="bar-container">
+									              <div class="bar-4"></div>
+									            </div>
+									        </td>
+									        <td class="text-right">23</td>
+								        </tr>
+								        <tr>
+									        <td class="rating-label">Average</td>
+									        <td class="rating-bar">
+										        <div class="bar-container">
+									              <div class="bar-3"></div>
+									            </div>
+									        </td>
+									        <td class="text-right">10</td>
+								        </tr>
+								        <tr>
+									        <td class="rating-label">Poor</td>
+									        <td class="rating-bar">
+										        <div class="bar-container">
+									              <div class="bar-2"></div>
+									            </div>
+									        </td>
+									        <td class="text-right">3</td>
+								        </tr>
+								        <tr>
+									        <td class="rating-label">Terrible</td>
+									        <td class="rating-bar">
+										        <div class="bar-container">
+									              <div class="bar-1"></div>
+									            </div>
+									        </td>
+									        <td class="text-right">0</td>
+								        </tr>
+							        </table>
+						        </div>
+					        </div>
+				        </div>
+                     </div>
+                </div>
+                <div class="card mt-5">
+
+				        <div class="row  d-flex mt-5 mb-4">
+                            <div class="col-md-3 d-flex flex-column">
+						        <div class="pic-mes">
+						            <img src="https://th.bing.com/th/id/R.475763781e490786c021f2f8f57bc87a?rik=SEPvooeqfgw0kA&riu=http%3a%2f%2fimages.unsplash.com%2fphoto-1535713875002-d1d0cf377fde%3fcrop%3dentropy%26cs%3dtinysrgb%26fit%3dmax%26fm%3djpg%26ixid%3dMnwxMjA3fDB8MXxzZWFyY2h8NHx8bWFsZSUyMHByb2ZpbGV8fDB8fHx8MTYyNTY2NzI4OQ%26ixlib%3drb-1.2.1%26q%3d80%26w%3d1080&ehk=Gww3MHYoEwaudln4mR6ssDjrAMbAvyoXYMsyKg5p0Ac%3d&risl=&pid=ImgRaw&r=0" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 9em;">
+					            </div>
+					        </div>
+					        
+					        <div class="col-md-2 mt-4">
+						        <h3 class="mb-0 text-left">Bill Hajy</h3>
+						        <div>
+							        <span class="material-icons star-comment mx-1">star_rate</span>
+							        <span class="material-icons star-comment mx-1">star_rate</span>
+							        <span class="material-icons star-comment mx-1">star_rate</span>
+							        <span class="material-icons star-inactive-comment mx-1">star_rate</span>
+                                    <span class="material-icons star-inactive-comment mx-1">star_rate</span>
+						        </div>
+					        </div>
+					        <div class="col-md-7">
+						        <p class="text-muted">10 Sept</p>
+					        </div>
+				        </div>
+				        <div>
+					        <h3 class="blue-text mt-1">"Very good experience"</h3>
+					        <p class="content">The owner was very kind and helpful, the car's condition was okay  .</p>
+				        </div>
+				        <div class="text-center mb-5">
+					        <img class="pic" src="https://th.bing.com/th/id/R.10435d4310e4942847951df2325fc52d?rik=RKRLHl7mUIrZTA&riu=http%3a%2f%2fwww.johnecarsltd.co.uk%2fclientpics%2fDSCF1414.JPG&ehk=oYCInkU50kIXxcNTqkXttKTQowEYqMA28RgLogA8Rxg%3d&risl=&pid=ImgRaw&r=0">
+					        <img class="pic" src="https://img2.stcrm.it/images/21927717/HOR_STD/x600/opel-astra-2019-14.jpg">
+					        <img class="pic" src="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/G2cAAOSwcBleXxZJ/$_86.JPG">
+				        </div>
+				       @* <div class="row text-center mt-4 mb-4">
+					        <div class="like mr-3 vote">
+						        <img src="https://i.imgur.com/mHSQOaX.png"><span class="blue-text pl-2">20</span>
+					        </div>
+					        <div class="unlike vote">
+						        <img src="https://i.imgur.com/bFBO3J7.png"><span class="text-muted pl-2">4</span>
+					        </div>
+				        </div>*@
+			    </div>
+
+           </div>
+
+        </section>
     </div>
   </div>
 </section>

@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/create_post.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/search_results.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navbar.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/carsharing.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -24,8 +23,13 @@
                 <div>
                     <div class="d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1 gap-3">
-                            <a class= asp-area="" asp-controller="SignIn" asp-action="Index">Sign in</a>
-                            <a class="sign-up-btn" asp-area="" asp-controller="SignUp" asp-action="Index">Sign up</a>
+                            <div class="dropdown">
+                                <a class="drop-btn">Profile</a>
+                                <div class="dropdown-content">
+                                    <a asp-area="" asp-controller="Profile" asp-action="Index">My Profile</a>
+                                    <a asp-area="" asp-controller="" asp-action="">Sign Out</a>
+                                </div>
+                            </div>      
                         </ul>
 
                     </div>
@@ -53,3 +57,4 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
