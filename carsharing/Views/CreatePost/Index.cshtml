@@ -21,7 +21,7 @@
             <label class="col-md-4 mt-3 control-label" asp-for="Body">Description:</label>
                     <div class="inputGroupContainer mb-4">
                         <div class="input-group">
-                            <textarea rows="13" class="form-control" asp-for="Body"></textarea>
+                            <textarea rows="16" class="form-control" asp-for="Body"></textarea>
                         </div>
                         <div class="error-message">
                              @Html.ValidationMessageFor(m => m.Body)
@@ -92,10 +92,30 @@
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="MaxDaysOfRent">Max days of rent:</label>
+                        <label class="col-md-4 control-label" asp-for="City">City:</label>  
+                        <div class="col-md-6 inputGroupContainer mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="City" type="text">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.Title)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="MaxDaysOfRent">MaxDaysOfRent:</label>
                         <div class="col-md-6 inputGroupContainer mb-4">
                             <div class="input-group">
                                 <input class="form-control" asp-for="MaxDaysOfRent" type="number">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.MaxDaysOfRent)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="CostPerDay">Cost per day:</label>
+                        <div class="col-md-6 inputGroupContainer mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="CostPerDay" type="number">
                             </div>
                             <div class="error-message">
                                     @Html.ValidationMessageFor(m => m.MaxDaysOfRent)

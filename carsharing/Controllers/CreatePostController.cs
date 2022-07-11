@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using carsharing.Models;
+using System.Globalization;
 
 namespace carsharing.Controllers
 {
@@ -30,6 +31,14 @@ namespace carsharing.Controllers
             }
 
             Post post = new Post();
+            Vehicle vehicle = new Vehicle();
+            var owners = _context.Owners.AsQueryable();
+            var owner = owners.Where(o => o.OwnerId == post.OwnerId).First();
+            vehicle.OwnerId = owner.OwnerId;
+            post.Owner = owner;
+            vehicle.Owner = owner;
+            post.OwnerId = owner.OwnerId;
+            post.Vehicle = vehicle;
             post.Title = createPost.Title;
             post.Vehicle.Manufacturer = createPost.Manufacturer;
             post.Vehicle.Model = createPost.Model;
@@ -38,7 +47,17 @@ namespace carsharing.Controllers
             post.Vehicle.Color = createPost.Color;
             post.MaxDaysOfRent = createPost.MaxDaysOfRent;
             post.Body = createPost.Body;
+            post.City = createPost.City;
+            post.CostPerDay = createPost.CostPerDay;/*
+            post.ThumbnailUrl = createPost.ThumbnailUrl;*/
+            DateTime date = DateTime.Now;
+            DateTime dateOnly = date.Date;
+            DateTime today = DateTime.ParseExact(dateOnly.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            post.Created = DateOnly.FromDateTime(today);
 
+            _context.Add(vehicle);
+            _context.Add(post);
+            _context.SaveChanges();
 
             TempData["Title"] = post.Title;
             TempData["Manufacturer"] = post.Vehicle.Manufacturer;
@@ -48,6 +67,10 @@ namespace carsharing.Controllers
             TempData["Color"] = post.Vehicle.Color;
             TempData["MaxDaysOfRent"] = post.MaxDaysOfRent;
             TempData["Body"] = post.Body;
+            TempData["CostPerDay"] = post.CostPerDay;
+            TempData["City"] = post.City;/*
+            TempData["ThumbnailUrl"] = post.ThumbnailUrl;*/
+            TempData["Created"] = post.Created;
 
             return View("Index");
         }
