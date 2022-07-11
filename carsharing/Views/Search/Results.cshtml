@@ -1,0 +1,154 @@
+﻿@model carsharing.ViewModels.ResultsViewModel;
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+@* Add the search functionality here too *@
+<section>
+    <div class="d-flex flex-column align-items-center mt-2 margin-bottom-8">
+        <form asp-controller="Search" asp-action="Results" method="get">
+            <div class="d-inline-flex flex-column align-items-center flex-lg-row bg searchbar-sizing searchbar searchbar-lg p-color">
+
+                <div class="align-self-center"> 
+                    <input asp-for="SearchBar.SearchField" type="text" class="form-control" placeholder="🔍Search" aria-label="Recipient's username" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a city')" oninput="setCustomValidity('')">
+                </div> 
+        
+                <div class="d-flex insides">
+                    <div>
+                        @{
+                            var today = DateTime.Now.ToString("yyyy-MM-dd");
+                        }
+                        <input asp-for="SearchBar.DateFrom" type="date" min="@today" class="form-control" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a date')" oninput="setCustomValidity('')">
+                    </div> 
+                    <div class="d-flex">
+                        <select asp-for="SearchBar.TimeFrom" asp-items="Model.SearchBar.SelectTimeFrom">
+                        </select> 
+
+                     </div>
+                </div>
+
+                <div class="d-flex insides">
+
+                    <div>
+                        <input asp-for="SearchBar.DateTo" type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a date')" oninput="setCustomValidity('')">
+                    </div> 
+                    <div class="d-flex">
+                        <select  asp-for="SearchBar.TimeTo" asp-items="Model.SearchBar.SelectTimeTo">
+                        </select>
+                     </div>
+
+
+                </div>
+
+        
+                <div class="align-self-center">
+                    <button class="search-btn">Search</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>
+
+@* Results and filters section *@
+<section>
+    <div class="container">
+        <div class="d-flex flex-lg-row flex-column flex-md-space-between">
+
+            @* Filters *@
+            <div class="align-self-lg-start align-self-center sticky-filters-top sticky-filters-lg-top filters me-lg-3 mb-4">
+                <h2>Filters</h2>
+                <form class="d-flex flex-column filters-spacing" asp-controller="Search" asp-action="Results" method="get">
+                    <div class="d-flex insides">
+                        <div class="d-flex">
+                            <label class="me-2" asp-for="FilterPost.CarColor">Car color:</label>
+                            <select asp-for="FilterPost.CarColor" asp-items="Model.FilterPost.SelectCarColor">
+                            </select>
+                         </div>
+                    </div>
+
+                    <div class="d-flex insides">
+                        <div class="d-flex">
+                            <label class="me-2" asp-for="FilterPost.CreatedAt">Post date:</label>
+                            <select asp-for="FilterPost.CreatedAt" asp-items="Model.FilterPost.SelectCreatedAt">
+                            </select> 
+                         </div>
+                    </div>
+                    
+                    <div class="d-flex insides">
+                        <div class="d-flex">
+                            <label class="me-2" asp-for="FilterPost.CarManufacturer">Car manufacturer:</label>
+                            <select asp-for="FilterPost.CarManufacturer" asp-items="Model.FilterPost.SelectCarManufacturer">
+                            </select> 
+                         </div>
+                    </div>
+
+                    <div class="d-flex insides">
+                        <div class="d-flex">
+                            <label class="me-2" asp-for="FilterPost.CarType">Car type:</label>
+                            <select asp-for="FilterPost.CarType" asp-items="Model.FilterPost.SelectCarType">
+                            </select> 
+                         </div>
+                    </div>
+                    <div class="align-self-center">
+                        <button class="search-btn">Apply</button>
+                    </div>
+                </form>
+            </div>
+
+            @* Post Results *@
+            <div class="d-flex flex-column align-items-center m-auto">
+                @if (@Model.ErrorMessage.Equals(""))
+                {
+                    @foreach (var post in Model.Posts.ToList())
+                    {
+                        <div class="card card-size mb-3" style="max-width: 800px;">
+                            <div class="row no-gutters">
+                            <div class="col-md-4">
+                              <img src="@post.ThumbnailUrl" class="result-card-images" alt="alt text">
+                            </div>
+                            <div class="col-md-6">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-title">@post.Title</h5>
+                                    <span> <small class="class="text-muted"">@post.Created</small></span>
+                                </div>
+                                <p class="card-text limit-chars">@post.Body...</p>
+                                <p class="card-text">@post.City</p>
+                                <p class="card-text"><small class="text-muted">@post.Owner.FirstName @post.Owner.LastName</small></p>
+                            </div>
+                            </div>
+                            <div class="col-md-2 border-left-price">
+                                <div class="border-sm-top-price py-3 py-md-0">
+                                    <div>
+                                        <span class="">
+                                            Total price
+                                        </span>
+                                        <span>
+                                            @{
+                                                var price = @post.CostPerDay * (decimal)@Model.NumberOfDays;
+                                            }
+                                            @price &euro;
+                                        </span>
+                                    </div>
+                                    <button class="mt-2">View more</button>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="d-flex justify-content-center">
+                    
+                        <h2>
+                            @Model.ErrorMessage
+                        </h2>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</section>

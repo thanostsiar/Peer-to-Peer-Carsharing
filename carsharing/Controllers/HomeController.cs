@@ -15,7 +15,8 @@ namespace carsharing.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var search = new SearchBar();
+            return View(search);
         }
 
         public IActionResult Privacy()
