@@ -6,19 +6,24 @@ namespace carsharing.ViewModels
     {
         public SearchBar SearchBar;
 
+        public FilterPost FilterPost;
+
         public String ErrorMessage;
 
-        public IQueryable<Vehicle> Vehicles { get; set; } = null!;
+        public double NumberOfDays;
 
         public IQueryable<Post> Posts { get; set; } = null!;
 
-        public ResultsViewModel(IQueryable<Vehicle> vehicles, IQueryable<Post> post, String errorMessage = "")
+        public ResultsViewModel(IQueryable<Post> post, double numberOfDays, String errorMessage = "")
         {
             this.SearchBar = new SearchBar();
-            this.Vehicles = vehicles;
+            this.FilterPost = new FilterPost();
             this.Posts = post;
+            this.NumberOfDays = numberOfDays;
             this.ErrorMessage = errorMessage;
         }
+
+
     }
 
 }
