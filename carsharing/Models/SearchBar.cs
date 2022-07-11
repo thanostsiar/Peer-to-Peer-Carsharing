@@ -6,17 +6,11 @@ namespace carsharing.Models
 {
     public class SearchBar
     {
-        [Required(ErrorMessage = "Please enter ")]
         public string SearchField { get; set; } = null!;
 
-
-        // TODO: need to check if DateFrom is less than Date.Today
-        // if that's true, then don't accept the request
-        [Required(ErrorMessage = "Please enter ")]
         public string DateFrom { get; set; } = null!;
 
         public string TimeFrom { get; set; } = null!;
-
 
         public List<SelectListItem> SelectTimeFrom { get; private set; } = new List<SelectListItem>
         {
@@ -70,13 +64,8 @@ namespace carsharing.Models
             new SelectListItem { Value = "23:30", Text = "23:30"}
         };
 
-        [Required(ErrorMessage = "Please enter ")]
         public string DateTo { get; set; } = null!;
 
-
-        [Required(ErrorMessage = "Please enter ")]
-        // TODO: need to check if TimeFrom is less than Time.Now
-        // if that's true, then don't accept the request
         public string TimeTo { get; set; } = null!;
 
         public List<SelectListItem> SelectTimeTo { get; private set; } = new List<SelectListItem>
