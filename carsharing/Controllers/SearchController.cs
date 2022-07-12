@@ -102,8 +102,8 @@ namespace carsharing.Controllers
 
                 if (!filterred.Any()) 
                 {
-                    message = "No car was found";
-                    
+                    message = "Oops! Seems like there are no cars found!";
+
                     this.ErrorMessage = message;
                 }
 
@@ -149,7 +149,7 @@ namespace carsharing.Controllers
 
             if (!this.resultPosts.Any())
             {
-                message = "No car was found";
+                message = "Oops! Seems like there are no cars found!";
 
                 this.ErrorMessage = message;
             }

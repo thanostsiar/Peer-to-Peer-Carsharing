@@ -5,7 +5,7 @@
 
 @* Add the search functionality here too *@
 <section>
-    <div class="d-flex flex-column align-items-center mt-2 margin-bottom-8">
+    <div class="d-flex flex-column align-items-center mt-5 mb-5">
         <form asp-controller="Search" asp-action="Results" method="get">
             <div class="d-inline-flex flex-column align-items-center flex-lg-row bg searchbar-sizing searchbar searchbar-lg p-color">
 
@@ -53,23 +53,29 @@
 @* Results and filters section *@
 <section>
     <div class="container">
+        <div class="text-center mb-5 blue-text">
+            <h2> These are the results we could find according to your search...</h2>
+        </div>
+        
         <div class="d-flex flex-lg-row flex-column flex-md-space-between">
 
             @* Filters *@
             <div class="align-self-lg-start align-self-center sticky-filters-top sticky-filters-lg-top filters me-lg-3 mb-4">
-                <h2>Filters</h2>
+                <h2 class="text-center mb-3">Filters</h2>
+                <p class="text-muted text-center mb-2">✦Find easily the car you want </p>
+                <p class="text-muted text-center mb-4">by applying the following preferences!</p>
                 <form class="d-flex flex-column filters-spacing" asp-controller="Search" asp-action="Results" method="get">
                     <div class="d-flex insides">
-                        <div class="d-flex">
-                            <label class="me-2" asp-for="FilterPost.CarColor">Car color:</label>
+                        <div class="d-flex mt-2 mb-">
+                            <label class="me-2" asp-for="FilterPost.CarColor">🔸Car color:</label>
                             <select asp-for="FilterPost.CarColor" asp-items="Model.FilterPost.SelectCarColor">
                             </select>
                          </div>
                     </div>
 
                     <div class="d-flex insides">
-                        <div class="d-flex">
-                            <label class="me-2" asp-for="FilterPost.CreatedAt">Post date:</label>
+                        <div class="d-flex mb-">
+                            <label class="me-2" asp-for="FilterPost.CreatedAt">🔸Post date:</label>
                             <select asp-for="FilterPost.CreatedAt" asp-items="Model.FilterPost.SelectCreatedAt">
                             </select> 
                          </div>
@@ -77,7 +83,7 @@
                     
                     <div class="d-flex insides">
                         <div class="d-flex">
-                            <label class="me-2" asp-for="FilterPost.CarManufacturer">Car manufacturer:</label>
+                            <label class="me-2" asp-for="FilterPost.CarManufacturer">🔸Car manufacturer:</label>
                             <select asp-for="FilterPost.CarManufacturer" asp-items="Model.FilterPost.SelectCarManufacturer">
                             </select> 
                          </div>
@@ -85,24 +91,25 @@
 
                     <div class="d-flex insides">
                         <div class="d-flex">
-                            <label class="me-2" asp-for="FilterPost.CarType">Car type:</label>
+                            <label class="me-2" asp-for="FilterPost.CarType">🔸Car type:</label>
                             <select asp-for="FilterPost.CarType" asp-items="Model.FilterPost.SelectCarType">
                             </select> 
                          </div>
                     </div>
                     <div class="align-self-center">
-                        <button class="search-btn">Apply</button>
+                        <button class="btn-create mt-3 mb-3 btn-outline-dark">Apply </button>
                     </div>
                 </form>
             </div>
 
             @* Post Results *@
+            
             <div class="d-flex flex-column align-items-center m-auto">
                 @if (@Model.ErrorMessage.Equals(""))
                 {
                     @foreach (var post in Model.Posts.ToList())
                     {
-                        <div class="card card-size mb-3" style="max-width: 800px;">
+                        <div class="card card-size mb-3 filters" style="max-width: 800px;">
                             <div class="row no-gutters">
                             <div class="col-md-4">
                               <img src="@post.ThumbnailUrl" class="result-card-images" alt="alt text">
@@ -121,17 +128,17 @@
                             <div class="col-md-2 border-left-price">
                                 <div class="border-sm-top-price py-3 py-md-0">
                                     <div>
-                                        <span class="">
+                                        <span class="ms-3 ">
                                             Total price
                                         </span>
-                                        <span>
+                                        <span class="ms-4">
                                             @{
                                                 var price = @post.CostPerDay * (decimal)@Model.NumberOfDays;
                                             }
                                             @price &euro;
                                         </span>
                                     </div>
-                                    <button class="mt-2">View more</button>
+                                    <button class="btn-create btn-outline-dark ms-1 mt-2">View more</button>
                                 </div>
                             </div>
                           </div>

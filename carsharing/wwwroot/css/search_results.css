@@ -8,12 +8,22 @@
 }
 
 .filters {
-    border: .2em solid #e4e4e4;
+    border: .2em solid #F5A472;
     padding: 1.3em;
     background-color: white;
 }
 
-.filters-spacing div + div{
+.btn-create {
+    background-color: var(--btn-color);
+    text-align: center;
+    border-radius: 0.5em;
+    color: var(--s-color);
+    width: 6.3em;
+    height: 2.5em;
+}
+
+
+.filters-spacing div + div {
     margin-top: .8em;
 }
 
