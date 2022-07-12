@@ -111,7 +111,11 @@ namespace carsharing.Models
 
                 entity.Property(e => e.Body).HasColumnName("body");
 
+                entity.Property(e => e.Created).HasColumnName("created");
+
                 entity.Property(e => e.PostId).HasColumnName("post_id");
+
+                entity.Property(e => e.Rating).HasColumnName("rating");
 
                 entity.Property(e => e.RenterId).HasColumnName("renter_id");
 
