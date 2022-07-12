@@ -1,4 +1,5 @@
-﻿@{
+@model carsharing.Models.CreatePost;
+@{
     ViewData["Title"] = "CreatePost";
     Layout = "_Layout_Renter";
 }
@@ -13,84 +14,135 @@
 }
 
 <section class="container">
-    <div class="row justify-content-between">
-      @*Left part of page*@
-      <div class="col-lg-6 text-blue">
-          <h2 class="mt-4 blue-text">Create a new post!</h2>
-        <div class="card mb-4 mt-3">
-          <div class="card-body text-center">
-            <button class="add-a-photo mt-5 mb-2"> <span class="material-icons"  alt="avatar">add_a_photo</span> </button>
-            <h4 class="my-3 mb-5">Add a photo!</h4>
-          </div>
+    <form asp-action="Index" asp-controller="CreatePost" method="post">
+        <div class="row justify-content-between">
+
+          @*Left part of page*@
+          <div class="col-lg-6 text-blue">
+              <h2 class="mt-4 blue-text">Create a new post!</h2>
+            <div class="card mb-4 mt-3">
+              <div class="card-body text-center">
+                <button class="add-a-photo mt-5 mb-2"> <span class="material-icons"  alt="avatar">add_a_photo</span> </button>
+                <h4 class="my-3 mb-5">Add a photo!</h4>
+              </div>
           
-        </div>
-
-        <h5 class="col-md-4 mt-3 control-label">Description:</h5>
-                <div class="inputGroupContainer mb-4">
-                    <div class="input-group">
-                        <textarea rows="13" class="form-control"></textarea>
-                    </div>
-                </div>
-        
-      </div>
-
-      @*Right part of page*@
-      <div class="col-lg-6 mt-5">
-            <div class="container">
-                <h5 class="col-md-4 control-label">Title:</h5>  
-                <div class="col-md-6 inputGroupContainer mb-4">
-                    <div class="input-group">
-                        <input class="form-control" type="text">
-                    </div>
-                </div>
-                <h5 class="col-md-4 control-label">Manufacturer:</h5>  
-                <div class="col-md-6 inputGroupContainer  mb-4">
-                    <div class="input-group">
-                        <input class="form-control" type="text">
-                    </div>
-                </div>
-                <h5 class="col-md-4 control-label">Model:</h5>  
-                <div class="col-md-6 inputGroupContainer  mb-4">
-                    <div class="input-group">
-                        <input class="form-control" type="text">
-                    </div>
-                </div>
-                <h5 class="col-md-4 control-label">Year:</h5>  
-                <div class="col-md-6 inputGroupContainer mb-4">
-                    <div class="input-group">
-                        <input class="form-control" type="number" min="1950" max="2022">
-                    </div>
-                </div>
-                <h5 class="col-md-4 control-label">Type:</h5>  
-                <div class="col-md-6 inputGroupContainer  mb-4">
-                    <div class="input-group">
-                        <input class="form-control" type="text">
-                    </div>
-                </div>
-                <h5 class="col-md-4 control-label">Color:</h5>  
-                <div class="col-md-6 inputGroupContainer  mb-4">
-                    <div class="input-group">
-                        <input class="form-control" type="text">
-                    </div>
-                </div>
-                <h5 class="col-md-4 control-label">Max days of rent:</h5>
-                <div class="col-md-6 inputGroupContainer mb-4">
-                    <div class="input-group">
-                        <input class="form-control" type="number">
-                    </div>
-                </div>
-                  @*button*@
-                  <div class="col-md-4">
-                    <button type="button" class="btn-create btn-outline-dark mt-3 mb-2" data-mdb-ripple-color="dark">
-                        <h4 class="mt-1">Create post</h4>
-                    </button>
-        
-                  </div>
             </div>
 
+            <label class="col-md-4 mt-3 control-label" asp-for="Body">Description:</label>
+                    <div class="inputGroupContainer mb-4">
+                        <div class="input-group">
+                            <textarea rows="16" class="form-control" asp-for="Body"></textarea>
+                        </div>
+                        <div class="error-message">
+                             @Html.ValidationMessageFor(m => m.Body)
+                        </div>
+                    </div>
+          </div>
 
-      </div>
-     
+          @*Right part of page*@
+              <div class="col-lg-6 mt-5">
+                    <div class="container">
+                        <label class="col-md-4 control-label" asp-for="Title">Title:</label>  
+                        <div class="col-md-6 inputGroupContainer mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="Title" type="text">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.Title)
+                            </div>
+                        </div>
 
-    </div>
+                        <label class="col-md-4 control-label" asp-for="Manufacturer">Manufacturer:</label>  
+                        <div class="col-md-6 inputGroupContainer  mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="Manufacturer" type="text">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.Manufacturer)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="Model">Model:</label>  
+                        <div class="col-md-6 inputGroupContainer  mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="Model" type="text">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.Model)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="Year">Year:</label>  
+                        <div class="col-md-6 inputGroupContainer mb-4">
+                            <div class="input-group">
+                                <input class="form-control"asp-for="Year"  type="number" min="1950" max="2022">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.Year)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="Type">Type:</label>  
+                        <div class="col-md-6 inputGroupContainer  mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="Type" type="text">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.Type)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="Color">Color:</label>  
+                        <div class="col-md-6 inputGroupContainer  mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="Color" type="text">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.Color)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="City">City:</label>  
+                        <div class="col-md-6 inputGroupContainer mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="City" type="text">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.Title)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="MaxDaysOfRent">MaxDaysOfRent:</label>
+                        <div class="col-md-6 inputGroupContainer mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="MaxDaysOfRent" type="number">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.MaxDaysOfRent)
+                            </div>
+                        </div>
+
+                        <label class="col-md-4 control-label" asp-for="CostPerDay">Cost per day:</label>
+                        <div class="col-md-6 inputGroupContainer mb-4">
+                            <div class="input-group">
+                                <input class="form-control" asp-for="CostPerDay" type="number">
+                            </div>
+                            <div class="error-message">
+                                    @Html.ValidationMessageFor(m => m.MaxDaysOfRent)
+                            </div>
+                        </div>
+
+                          @*button*@
+                          <div class="col-md-4">
+                            <button type="submit" class="btn-create btn-outline-dark mt-3 mb-2" data-mdb-ripple-color="dark">
+                                <h4 class="mt-1">Create post</h4>
+                            </button>
+        
+                          </div>
+                    </div>
+
+
+              </div>
+        </div>
+    </form>
 </section>

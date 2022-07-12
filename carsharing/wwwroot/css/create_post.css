@@ -10,10 +10,9 @@ textarea {
 
 .btn-create {
     background-color: var(--p-color);
-    color: white;
     text-align: center;
     border-radius: 0.5em;
-    color: black;
+    color: var(--b-color);
     width: 18.5em;
     height: 3em;
 }
