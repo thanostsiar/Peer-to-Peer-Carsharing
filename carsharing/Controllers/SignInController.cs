@@ -41,10 +41,10 @@ namespace carsharing.Controllers
                     TempData["Email"] = renter.Email;
                     TempData["Phone"] = renter.Phone;
 
-                    return RedirectToAction("Index", "Profile");
+                    return RedirectToAction("Online", "Home");
                 }
             }
-            return RedirectToAction("Index");
+            return View("Index");
         }
 
         private bool RenterExists(int id)

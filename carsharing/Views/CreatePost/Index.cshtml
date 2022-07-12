@@ -1,6 +1,16 @@
-﻿@model carsharing.Models.CreatePost;
+@model carsharing.Models.CreatePost;
 @{
-    ViewData["Title"] = "Create Post";
+    ViewData["Title"] = "CreatePost";
+    Layout = "_Layout_Renter";
+}
+
+@{
+    var FirstName = TempData["FirstName"];
+    var LastName = TempData["LastName"];
+    var Age = TempData["Age"];
+    var Email = TempData["Email"];
+    var Phone = TempData["Phone"];
+    TempData.Keep();
 }
 
 <section class="container">

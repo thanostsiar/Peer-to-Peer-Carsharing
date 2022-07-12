@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using carsharing.Models;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
@@ -80,7 +80,6 @@ namespace carsharing.Controllers
             TempData["City"] = post.City;/*
             TempData["ThumbnailUrl"] = post.ThumbnailUrl;*/
             TempData["Created"] = post.Created;
-
             return View("Index");
         }
     }
