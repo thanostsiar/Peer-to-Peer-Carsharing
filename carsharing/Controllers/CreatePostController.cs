@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using carsharing.Models;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 
 namespace carsharing.Controllers
 {
@@ -23,17 +24,25 @@ namespace carsharing.Controllers
 
 
         [HttpPost]
-        public IActionResult Index(CreatePost createPost)
+        public async Task <IActionResult> Index(CreatePost createPost)
         {
             if (!ModelState.IsValid)
             {
                 return View("Index");
             }
 
+            string email = null;
+            var listOfOwners = await _context.Owners.ToListAsync();
+
+            if (TempData.ContainsKey("Email"))
+            {
+                email = TempData["Email"].ToString();
+            }
+
             Post post = new Post();
             Vehicle vehicle = new Vehicle();
             var owners = _context.Owners.AsQueryable();
-            var owner = owners.Where(o => o.OwnerId == post.OwnerId).First();
+            var owner = listOfOwners.Where(o => o.Email == email).First();
             vehicle.OwnerId = owner.OwnerId;
             post.Owner = owner;
             vehicle.Owner = owner;
