@@ -5,20 +5,18 @@
 
 .btn-c {
     background-color: var(--p-color);
-    color: var(--s-color);
+    color: var(--b-color);
     width: 6em;
     height: 2.5em;
     text-align: center;
     border-radius: 0.5em;
-    color: black;
 }
 
 .btn-n {
     background-color: var(--p-color);
-    color: var(--s-color);
+    color: var(--b-color);
     text-align: center;
     border-radius: 0.5em;
-    color: black;
 }
 
     a:hover {
