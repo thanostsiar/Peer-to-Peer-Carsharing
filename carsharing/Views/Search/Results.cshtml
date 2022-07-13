@@ -128,7 +128,7 @@
                             <div class="col-md-2 border-left-price">
                                 <div class="border-sm-top-price py-3 py-md-0">
                                     <div>
-                                        <span class="ms-3 ">
+                                        <span>
                                             Total price
                                         </span>
                                         <span class="ms-4">
@@ -138,7 +138,7 @@
                                             @price &euro;
                                         </span>
                                     </div>
-                                    <button class="btn-create btn-outline-dark ms-1 mt-2">View more</button>
+                                    @Html.ActionLink("View more", "Index", "Post", Model, new { @class = "btn-create view-more-btn ms-1 mt-4" })
                                 </div>
                             </div>
                           </div>
