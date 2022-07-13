@@ -22,6 +22,21 @@
     height: 2.5em;
 }
 
+.view-more-btn {
+    display: inline-block !important;
+    margin-top: 1em !important;
+    padding: .4em;
+    border: solid .15em black;
+}
+
+.view-more-btn:hover {
+    display: inline-block !important;
+    margin-top: 1em !important;
+    padding: .4em;
+    border: solid .15em black;
+    background-color: #212529;
+    color: white;
+}
 
 .filters-spacing div + div {
     margin-top: .8em;
