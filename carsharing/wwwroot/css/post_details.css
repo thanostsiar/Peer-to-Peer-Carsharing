@@ -1,0 +1,27 @@
+﻿.left-part {
+    border: .2em solid #F5A472;
+    padding: 1.3em;
+    background-color: white;
+
+}
+.comment-part {
+    border: .2em solid #098486;
+    padding: 1.3em;
+    background-color: white;
+}
+.orange-text {
+    color: var(--p-color);
+}
+.left-part-image {
+    max-width: 33.75em;
+    max-height: 37.5em;
+}
+
+.btn-cr {
+    background-color: var(--btn-color);
+    text-align: center;
+    border-radius: 0.5em;
+    color: var(--s-color);
+    width: 12em;
+    height: 2.5em;
+}
