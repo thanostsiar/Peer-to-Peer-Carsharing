@@ -65,5 +65,54 @@
 
 
             </div>
+
+            @* Comment section *@
+            <div>
+                <h2 class="mb-3">Comment Section</h2>
+                @if(Model.PostComments.Any())
+                {
+                    @foreach(var comment in Model.PostComments.ToList())
+                    {
+                        <div class="card card-size mb-3" style="max-width: 800px;">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="@*@comment.Renter.ProfilePicture*@" class="result-card-images" alt="renter profile picture">
+                                </div>
+                                    <div class="col-md-6">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="card-title">@comment.Rating/5</h5>
+                                            </div>
+                                            <p class="card-text">@comment.Body</p>
+                                            <p class="card-text"><small class="text-muted">@comment.Renter.FirstName @comment.Renter.LastName</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span><small class="text-muted">@comment.Created</small></span>
+                                    </div>
+@*                                <div class="col-md-2 border-left-price">
+                                    <div class="border-sm-top-price py-3 py-md-0">
+                                        <div>
+                                            <span class="">
+                                                Total price
+                                            </span>
+                                            <span>
+                                                Nothing
+                                            </span>
+                                        </div>
+                                        <button class="mt-2">View more</button>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>
+                        There are no comments on this post  
+                    </div>
+                }
+            </div>
         </section>
 }
