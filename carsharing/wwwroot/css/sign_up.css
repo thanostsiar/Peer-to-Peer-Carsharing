@@ -1,0 +1,18 @@
+﻿
+.error-message {
+    display: inline-block;
+    width: 100%;
+    color: #ba3939;
+    background: #ffe0e0;
+}
+
+.signup-bg {
+    background-image: url("../img/sign-up-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    overflow-x: hidden;
+}
+
+
+
