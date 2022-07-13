@@ -34,12 +34,19 @@ namespace carsharing.Controllers
         {
             var owners = _context.Owners.AsQueryable();
             var vehicles = _context.Vehicles.AsQueryable();
+            var postComments = _context.PostComments.AsQueryable();
             var posts = _context.Posts.AsQueryable();
 
             foreach(var post in posts.ToList())
             {
                 var owner = owners.Where(ow => ow.OwnerId == post.OwnerId).First();
                 var vehicle = vehicles.Where(vh => vh.VehicleId == post.VehicleId).First();
+                var comments = postComments.Where(pc => pc.PostId == post.PostId);
+
+                foreach(var comment in comments)
+                {
+                    post.PostComments.Add(comment);
+                }
 
                 post.Owner = owner;
                 post.Vehicle = vehicle;
@@ -68,6 +75,8 @@ namespace carsharing.Controllers
             {
                 // start by having all the posts stored
                 var filterred = FetchPosts();
+
+                this.numberOfDays = CalculateNumberOfDays(PreviousDateFrom, PreviousDateTo);
 
 
                 if (filterPost.CarColor != null)
