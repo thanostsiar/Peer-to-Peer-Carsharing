@@ -33,6 +33,7 @@ namespace carsharing.Controllers
         private IQueryable<Post> FetchPosts()
         {
             var owners = _context.Owners.AsQueryable();
+            var renters = _context.Renters.AsQueryable();
             var vehicles = _context.Vehicles.AsQueryable();
             var postComments = _context.PostComments.AsQueryable();
             var posts = _context.Posts.AsQueryable();
@@ -43,8 +44,11 @@ namespace carsharing.Controllers
                 var vehicle = vehicles.Where(vh => vh.VehicleId == post.VehicleId).First();
                 var comments = postComments.Where(pc => pc.PostId == post.PostId);
 
-                foreach(var comment in comments)
+                foreach(var comment in comments.ToList())
                 {
+                    var renter = renters.Where(r => r.RenterId == comment.RenterId).First();
+                    comment.Renter = renter;
+
                     post.PostComments.Add(comment);
                 }
 
