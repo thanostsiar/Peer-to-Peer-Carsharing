@@ -10,9 +10,9 @@
                 @*Left part of page*@
                 <div class="col-lg-6 text-blue">
                     <h2 class="mt-4 blue-text">This is a post!</h2>
-                    <div class="card mb-4 mt-3">
-                        <div class="card-body text-center">
-                            <img src="@Url.Content(Model.ThumbnailUrl)" alt="avatar" style="height:300px;width:550px;" />
+                    <div class="mb-4 mt-3">
+                        <div class="text-center">
+                            <img src="@Url.Content(Model.ThumbnailUrl)" alt="avatar" style="height:550px;width:650px;" />
                         </div>
 
                     </div>
@@ -50,7 +50,7 @@
                         <h5 class="col-md-4 control-label">Max days of rent:</h5>
                         <div class="col-md-6  mb-4">
                             <h6 class="col-md-4 ">@Model.MaxDaysOfRent</h6>
-                        </div>
+                        </div><br><br><br>
                         @*button*@
                         <div class="col-md-4">
                             <button type="button" class="btn-create btn-outline-dark mt-3 mb-2" data-mdb-ripple-color="dark">
