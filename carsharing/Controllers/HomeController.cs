@@ -41,7 +41,8 @@ namespace carsharing.Controllers
                     return View(renter);
                 }
             }
-            return View();
+            var search = new SearchBar();
+            return View(search);
         }
 
         public IActionResult Privacy()
