@@ -23,11 +23,35 @@
               <h2 class="mt-4 blue-text">Create a new post!</h2>
             <div class="card mb-4 mt-3">
               <div class="card-body text-center">
-                <button class="add-a-photo mt-5 mb-2"> <span class="material-icons"  alt="avatar">add_a_photo</span> </button>
+                <button class="add-a-photo mt-5 mb-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"> <span class="material-icons"  alt="avatar">add_a_photo</span> </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title blue-text text-center" id="exampleModalLabel">Please insert bellow a thumbnail image link</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <input class="form-control" asp-for="@Model.CreatePost.ThumbnailUrl" type="text">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn-modal btn-outline-dark" data-bs-dismiss="modal">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <h4 class="my-3 mb-5">Add a photo!</h4>
+                <div class="error-message">
+                    @Html.ValidationMessageFor(m => m.CreatePost.ThumbnailUrl)
+
+                </div>
               </div>
           
             </div>
+
+            
 
             <label class="col-md-4 mt-3 control-label" asp-for="@Model.CreatePost.Body">Description:</label>
                     <div class="inputGroupContainer mb-4">
@@ -44,7 +68,7 @@
               <div class="col-lg-6 mt-5">
                     <div class="container">
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Title">Title:</label>  
-                        <div class="col-md-6 inputGroupContainer mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control" asp-for="@Model.CreatePost.Title" type="text">
                             </div>
@@ -54,7 +78,7 @@
                         </div>
 
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Manufacturer">Manufacturer:</label>  
-                        <div class="col-md-6 inputGroupContainer  mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control" asp-for="@Model.CreatePost.Manufacturer" type="text">
                             </div>
@@ -64,7 +88,7 @@
                         </div>
 
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Model">Model:</label>  
-                        <div class="col-md-6 inputGroupContainer  mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control" asp-for="@Model.CreatePost.Model" type="text">
                             </div>
@@ -74,7 +98,7 @@
                         </div>
 
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Year">Year:</label>  
-                        <div class="col-md-6 inputGroupContainer mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control"asp-for="@Model.CreatePost.Year"  type="number" min="1950" max="2022">
                             </div>
@@ -84,7 +108,7 @@
                         </div>
 
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Type">Type:</label>  
-                        <div class="col-md-6 inputGroupContainer  mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control" asp-for="@Model.CreatePost.Type" type="text">
                             </div>
@@ -94,7 +118,7 @@
                         </div>
 
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Color">Color:</label>  
-                        <div class="col-md-6 inputGroupContainer  mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control" asp-for="@Model.CreatePost.Color" type="text">
                             </div>
@@ -104,7 +128,7 @@
                         </div>
 
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.City">City:</label>  
-                        <div class="col-md-6 inputGroupContainer mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control" asp-for="@Model.CreatePost.City" type="text">
                             </div>
@@ -114,7 +138,7 @@
                         </div>
 
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.MaxDaysOfRent">MaxDaysOfRent:</label>
-                        <div class="col-md-6 inputGroupContainer mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control" asp-for="@Model.CreatePost.MaxDaysOfRent" type="number">
                             </div>
@@ -124,7 +148,7 @@
                         </div>
 
                         <label class="col-md-4 control-label" asp-for="@Model.CreatePost.CostPerDay">Cost per day:</label>
-                        <div class="col-md-6 inputGroupContainer mb-4">
+                        <div class="col-md-6 inputGroupContainer">
                             <div class="input-group">
                                 <input class="form-control" asp-for="@Model.CreatePost.CostPerDay" type="number">
                             </div>
