@@ -13,7 +13,8 @@ namespace carsharing.Models
         public decimal CostPerDay { get; set; }
         [Required(ErrorMessage = "Please enter any extra information that needs to be mantioned about the car!")]
         public string Body { get; set; }
-        /*public string ThumbnailUrl { get; set; }*/
+        [Required(ErrorMessage = "Please insert the thumbnail image of your post!")]
+        public string ThumbnailUrl { get; set; }
         [Required(ErrorMessage = "Please enter the manufacturer of the car!")]
         public string Manufacturer { get; set; }
         [Required(ErrorMessage = "Please enter the model of the car!")]

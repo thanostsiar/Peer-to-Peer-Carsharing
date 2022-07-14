@@ -91,6 +91,7 @@ namespace carsharing.Controllers
             var owner = listOfOwners.Where(o => o.Email == email).First();
             vehicle.OwnerId = owner.OwnerId;
             post.Owner = owner;
+
             vehicle.Owner = owner;
             post.OwnerId = owner.OwnerId;
             post.Vehicle = vehicle;
@@ -103,8 +104,9 @@ namespace carsharing.Controllers
             post.MaxDaysOfRent = createPost.MaxDaysOfRent;
             post.Body = createPost.Body;
             post.City = createPost.City;
-            post.CostPerDay = createPost.CostPerDay;/*
-            post.ThumbnailUrl = createPost.ThumbnailUrl;*/
+            post.CostPerDay = createPost.CostPerDay;
+            post.ThumbnailUrl = createPost.ThumbnailUrl;
+
             DateTime date = DateTime.Now;
             DateTime dateOnly = date.Date;
             DateTime today = DateTime.ParseExact(dateOnly.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -114,27 +116,7 @@ namespace carsharing.Controllers
             _context.Add(post);
             _context.SaveChanges();
 
-            TempData["Title"] = post.Title;
-            TempData["Manufacturer"] = post.Vehicle.Manufacturer;
-            TempData["Model"] = post.Vehicle.Model;
-            TempData["Year"] = post.Vehicle.Year;
-            TempData["Type"] = post.Vehicle.Type;
-            TempData["Color"] = post.Vehicle.Color;
-            TempData["MaxDaysOfRent"] = post.MaxDaysOfRent;
-            TempData["Body"] = post.Body;
-            TempData["CostPerDay"] = post.CostPerDay;
-            TempData["City"] = post.City;/*
-            TempData["ThumbnailUrl"] = post.ThumbnailUrl;*/
-            TempData["Created"] = post.Created;
-
-            /*var CreatePost = new HomeViewModel
-            {
-                Renter = r,
-                Post = post,
-                Owner = owner
-            };*/
-
-            return View("Index");
+            return RedirectToAction("Index","Profile");
         }
     }
 }
