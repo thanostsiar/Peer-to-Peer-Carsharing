@@ -1,5 +1,6 @@
-﻿    @model carsharing.Models.Renter
-@{
+@model carsharing.ViewModels.HomeViewModel
+
+@{    
     ViewData["Title"] = "Profile";
     Layout = "_Layout_Renter";
 }
@@ -11,6 +12,7 @@
     var Email = TempData["Email"];
     var Phone = TempData["Phone"];
     var ProfilePic = TempData["ProfilePicture"];
+    var Role = TempData["Role"];
     TempData.Keep();
 }
 
@@ -21,10 +23,10 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="@Model.ProfilePicture" alt="avatar"
+            <img src="ProfilePic" alt="avatar"
               class="rounded-circle img-fluid" style="width: 9em;">
-            <h5 class="my-3">@Model.FirstName</h5>
-            <p class="text-muted mb-1">♦️Owner</p>
+            <h5 class="my-3"></h5>
+            <p class="text-muted mb-1">♦️@Role</p>
             <p class="text-muted mb-4">✩159 Reviews</p>
             <button type="button" class="btn-c text-center btn-outline-dark mb-2" data-mdb-ripple-color="dark">
                 Edit profile
@@ -34,7 +36,7 @@
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body text-center">
-            <h5 class="my-3">@Model.FirstName is confirmed!</h5>
+            <h5 class="my-3">@FirstName is confirmed!</h5>
             <h6 class="my-3">✓Identity</h6>
             <h6 class="my-3">✓E-mail address</h6>
             <h6 class="my-3">✓Phone number</h6>
@@ -57,7 +59,7 @@
       @*Rght part of page*@
       <div class="col-lg-8">
         <div class="card-body">
-            <h3>Hi, I'm @Model.FirstName!</h3>
+            <h3>Hi, I'm @FirstName!</h3>
             <p class="text-muted mb-1">Joined since 2016</p>
         </div>
 
@@ -71,7 +73,7 @@
                     <p class="mb-0">Full Name</p>
                   </div>    
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">@Model.FirstName @Model.LastName</p>
+                    <p class="text-muted mb-0">@FirstName @LastName</p>
                   </div>
                 </div>
                 <hr>
@@ -81,7 +83,7 @@
                     <p class="mb-0">Email</p>
                   </div>
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">@Model.Email</p>
+                    <p class="text-muted mb-0">@Email</p>
                   </div>
                 </div>
                 <hr>
@@ -91,7 +93,7 @@
                     <p class="mb-0">Mobile</p>
                   </div>
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">+30 @Model.Phone</p>
+                    <p class="text-muted mb-0">+30 @Phone</p>
                   </div>
                 </div>
               </div>
@@ -99,7 +101,7 @@
         </section>
         
         <div class="card-body">
-            <h5>🔸@Model.FirstName's Listings:</h5>
+            <h5>🔸@FirstName's Listings:</h5>
         </div>
 
         @*User's listings*@

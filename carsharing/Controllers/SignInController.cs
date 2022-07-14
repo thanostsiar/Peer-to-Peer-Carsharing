@@ -29,19 +29,53 @@ namespace carsharing.Controllers
                 return View("Index");
             }
 
+            bool isOwner = false;
+            Owner o = new Owner();
+
             var listOfRenters = await _context.Renters.ToListAsync();
+            var listOfOwners = await _context.Owners.ToListAsync();
 
-            foreach (var renter in listOfRenters)
+            foreach (var owner in listOfOwners)
             {
-                if (signIn.Email == renter.Email && signIn.Password == renter.Password)
+                if (signIn.Email == owner.Email && signIn.Password == owner.Password)
                 {
-                    TempData["FirstName"] = renter.FirstName;
-                    TempData["LastName"] = renter.LastName;
-                    TempData["Age"] = renter.Age;
-                    TempData["Email"] = renter.Email;
-                    TempData["Phone"] = renter.Phone;
+                    isOwner = true;
+                    o.FirstName = owner.FirstName;
+                    o.LastName = owner.LastName;
+                    o.Email = owner.Email;
+                    o.Age = owner.Age;
+                    o.Phone = owner.Phone;
+                    o.ProfilePicture = owner.ProfilePicture;
+                    break;
+                }  
+            }
 
-                    return RedirectToAction("Online", "Home");
+            if (isOwner == true)
+            {
+                TempData["FirstName"] = o.FirstName;
+                TempData["LastName"] = o.LastName;
+                TempData["Age"] = o.Age;
+                TempData["Email"] =o.Email;
+                TempData["Phone"] = o.Phone;
+                TempData["Role"] = "Owner";
+
+                return RedirectToAction("Index", "Profile");
+            }
+            else
+            {
+                foreach (var renter in listOfRenters)
+                {
+                    if (signIn.Email == renter.Email && signIn.Password == renter.Password)
+                    {
+                        TempData["FirstName"] = renter.FirstName;
+                        TempData["LastName"] = renter.LastName;
+                        TempData["Age"] = renter.Age;
+                        TempData["Email"] = renter.Email;
+                        TempData["Phone"] = renter.Phone;
+                        TempData["Role"] = "Renter";
+
+                        return RedirectToAction("Index", "Profile");
+                    }
                 }
             }
             return View("Index");

@@ -1,4 +1,5 @@
-@model carsharing.Models.CreatePost;
+@model carsharing.ViewModels.HomeViewModel;
+
 @{
     ViewData["Title"] = "CreatePost";
     Layout = "_Layout_Renter";
@@ -28,13 +29,13 @@
           
             </div>
 
-            <label class="col-md-4 mt-3 control-label" asp-for="Body">Description:</label>
+            <label class="col-md-4 mt-3 control-label" asp-for="@Model.CreatePost.Body">Description:</label>
                     <div class="inputGroupContainer mb-4">
                         <div class="input-group">
-                            <textarea rows="16" class="form-control" asp-for="Body"></textarea>
+                            <textarea rows="16" class="form-control" asp-for="@Model.CreatePost.Body"></textarea>
                         </div>
                         <div class="error-message">
-                             @Html.ValidationMessageFor(m => m.Body)
+                             @Html.ValidationMessageFor(m => m.CreatePost.Body)
                         </div>
                     </div>
           </div>
@@ -42,93 +43,93 @@
           @*Right part of page*@
               <div class="col-lg-6 mt-5">
                     <div class="container">
-                        <label class="col-md-4 control-label" asp-for="Title">Title:</label>  
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Title">Title:</label>  
                         <div class="col-md-6 inputGroupContainer mb-4">
                             <div class="input-group">
-                                <input class="form-control" asp-for="Title" type="text">
+                                <input class="form-control" asp-for="@Model.CreatePost.Title" type="text">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.Title)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.Title)
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="Manufacturer">Manufacturer:</label>  
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Manufacturer">Manufacturer:</label>  
                         <div class="col-md-6 inputGroupContainer  mb-4">
                             <div class="input-group">
-                                <input class="form-control" asp-for="Manufacturer" type="text">
+                                <input class="form-control" asp-for="@Model.CreatePost.Manufacturer" type="text">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.Manufacturer)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.Manufacturer)
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="Model">Model:</label>  
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Model">Model:</label>  
                         <div class="col-md-6 inputGroupContainer  mb-4">
                             <div class="input-group">
-                                <input class="form-control" asp-for="Model" type="text">
+                                <input class="form-control" asp-for="@Model.CreatePost.Model" type="text">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.Model)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.Model)
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="Year">Year:</label>  
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Year">Year:</label>  
                         <div class="col-md-6 inputGroupContainer mb-4">
                             <div class="input-group">
-                                <input class="form-control"asp-for="Year"  type="number" min="1950" max="2022">
+                                <input class="form-control"asp-for="@Model.CreatePost.Year"  type="number" min="1950" max="2022">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.Year)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.Year)
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="Type">Type:</label>  
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Type">Type:</label>  
                         <div class="col-md-6 inputGroupContainer  mb-4">
                             <div class="input-group">
-                                <input class="form-control" asp-for="Type" type="text">
+                                <input class="form-control" asp-for="@Model.CreatePost.Type" type="text">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.Type)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.Type)
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="Color">Color:</label>  
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.Color">Color:</label>  
                         <div class="col-md-6 inputGroupContainer  mb-4">
                             <div class="input-group">
-                                <input class="form-control" asp-for="Color" type="text">
+                                <input class="form-control" asp-for="@Model.CreatePost.Color" type="text">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.Color)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.Color)
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="City">City:</label>  
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.City">City:</label>  
                         <div class="col-md-6 inputGroupContainer mb-4">
                             <div class="input-group">
-                                <input class="form-control" asp-for="City" type="text">
+                                <input class="form-control" asp-for="@Model.CreatePost.City" type="text">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.Title)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.City)
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="MaxDaysOfRent">MaxDaysOfRent:</label>
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.MaxDaysOfRent">MaxDaysOfRent:</label>
                         <div class="col-md-6 inputGroupContainer mb-4">
                             <div class="input-group">
-                                <input class="form-control" asp-for="MaxDaysOfRent" type="number">
+                                <input class="form-control" asp-for="@Model.CreatePost.MaxDaysOfRent" type="number">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.MaxDaysOfRent)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.MaxDaysOfRent)
                             </div>
                         </div>
 
-                        <label class="col-md-4 control-label" asp-for="CostPerDay">Cost per day:</label>
+                        <label class="col-md-4 control-label" asp-for="@Model.CreatePost.CostPerDay">Cost per day:</label>
                         <div class="col-md-6 inputGroupContainer mb-4">
                             <div class="input-group">
-                                <input class="form-control" asp-for="CostPerDay" type="number">
+                                <input class="form-control" asp-for="@Model.CreatePost.CostPerDay" type="number">
                             </div>
                             <div class="error-message">
-                                    @Html.ValidationMessageFor(m => m.MaxDaysOfRent)
+                                    @Html.ValidationMessageFor(m => m.CreatePost.CostPerDay)
                             </div>
                         </div>
 

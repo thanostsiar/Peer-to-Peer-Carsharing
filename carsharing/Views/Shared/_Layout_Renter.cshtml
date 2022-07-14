@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model carsharing.ViewModels.HomeViewModel
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,13 +21,13 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid justify-content-between justify-content-md-around">
             <div class="row">
-                <a class="navbar-brand col-4" asp-area="" asp-controller="Home" asp-action="Online">Unipi Cars</a>
+                <a class="navbar-brand col-4" asp-area="" asp-controller="Home" asp-action="Index">Unipi Cars</a>
             </div>
             <div>
                 <div class="d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 gap-3">
                         <div class="dropdown">
-                            <a class="drop-btn">@Model.FirstName</a>
+                            <a class="drop-btn">@Model.Renter.FirstName @Model.Owner.FirstName</a>
                             <div class="dropdown-content">
                                 <a asp-area="" asp-controller="Profile" asp-action="Index">My Profile</a>
                                 <a asp-area="" asp-controller="" asp-action="">Sign Out</a>

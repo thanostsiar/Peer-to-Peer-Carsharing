@@ -1,4 +1,5 @@
 ﻿using carsharing.Models;
+using carsharing.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -18,31 +19,69 @@ namespace carsharing.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
-            var search = new SearchBar();
-            return View(search);
-        }
+            Renter r = new Renter();
+            Owner o = new Owner();
+            bool isOwner = false;
+            bool isOnline = false;
 
-        public async Task<IActionResult> Online()
-        {
-            string email = null;
+            var search = new SearchBar();
+
             var listOfRenters = await _context.Renters.ToListAsync();
+            var listOfOwners = await _context.Owners.ToListAsync();
 
             if (TempData.ContainsKey("Email"))
             {
-                email = TempData["Email"].ToString();
-            }
+                string email = TempData["Email"].ToString();
+                isOnline = true;
 
-            foreach (var renter in listOfRenters)
-            {
-                if (email == renter.Email)
+                foreach (var owner in listOfOwners)
                 {
-                    return View(renter);
+                    if (email == owner.Email)
+                    {
+                        isOwner = true;
+                        o.FirstName = owner.FirstName;
+                        o.LastName = owner.LastName;
+                        o.Email = owner.Email;
+                        o.Age = owner.Age;
+                        o.Phone = owner.Phone;
+                        o.ProfilePicture = owner.ProfilePicture;
+                        break;
+                    }
+                }
+
+                if (isOwner == false)
+                {
+                    foreach (var renter in listOfRenters)
+                    {
+                        if (email == renter.Email)
+                        {
+                            r.FirstName = renter.FirstName;
+                            r.LastName = renter.LastName;
+                            r.Email = renter.Email;
+                            r.Age = renter.Age;
+                            r.Phone = renter.Phone;
+                            r.ProfilePicture = renter.ProfilePicture;
+                            break;
+                        }
+                    }
                 }
             }
-            var search = new SearchBar();
-            return View(search);
+
+            if (isOnline == true)
+            {
+                TempData["Online"] = "Yes";
+            }
+
+            var HomeView = new HomeViewModel
+            {
+                Renter = r,
+                Owner = o,
+                SearchBar = search
+            };
+
+            return View(HomeView);
         }
 
         public IActionResult Privacy()
