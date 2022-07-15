@@ -1,6 +1,7 @@
 ﻿using carsharing.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace carsharing.Controllers
 {
@@ -52,6 +53,38 @@ namespace carsharing.Controllers
             var currentPost = posts.Where(post => post.PostId == id).FirstOrDefault();
 
             return View(currentPost);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> IndexAsync(Post post_com)
+        {
+            string email = "";
+            var listOfRenters = await _context.Renters.ToListAsync();
+            if (TempData.ContainsKey("Email"))
+            {
+                email = TempData["Email"].ToString();
+                foreach(var renter in listOfRenters)
+                {
+                    if (email == renter.Email)
+                    {
+                        PostComment postcomment = new PostComment();
+                        postcomment.PostId = post_com.PostId;
+                        postcomment.RenterId = renter.RenterId;
+                        postcomment.VehicleId = post_com.VehicleId;
+                        DateTime date = DateTime.Now;
+                        DateTime dateOnly = date.Date;
+                        DateTime today = DateTime.ParseExact(dateOnly.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                        postcomment.Created = DateOnly.FromDateTime(today);
+                        postcomment.Rating = post_com.Rating;
+                        postcomment.Body = post_com.Body;
+                        _context.Add(postcomment);
+                        _context.SaveChanges();
+                        break;
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Home");
+
         }
 
     }
