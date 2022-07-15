@@ -49,7 +49,7 @@ namespace carsharing.Controllers
                 renter.FirstName = signUp.FirstName;
                 renter.LastName = signUp.LastName;
                 renter.Age = signUp.Age;
-                renter.ProfilePicture = "~/wwwroot/img/timmy.jpg";
+                renter.ProfilePicture = "http://srnet.ca/wp-content/uploads/2017/01/Default-Profile.png";
                 renter.Experience = 1.2;
                 renter.Password = signUp.Password;
                 renter.Email = signUp.Email;
@@ -64,6 +64,7 @@ namespace carsharing.Controllers
                 TempData["Email"] = renter.Email;
                 TempData["Phone"] = renter.Phone;
                 TempData["ProfilePicture"] = renter.ProfilePicture;
+                TempData["Role"] = "Renter";
 
                 return RedirectToAction("Index", "Profile");
             }
