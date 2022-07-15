@@ -47,7 +47,12 @@ namespace carsharing.Controllers
                     o.Phone = owner.Phone;
                     o.ProfilePicture = owner.ProfilePicture;
                     break;
-                }  
+                }
+                else
+                {
+                    TempData["Error"] = " Wrong Email and/or Password";
+                    return View("Index");
+                }
             }
 
             if (isOwner == true)
@@ -77,6 +82,11 @@ namespace carsharing.Controllers
                         TempData["Role"] = "Renter";
 
                         return RedirectToAction("Index", "Profile");
+                    }
+                    else
+                    {
+                        TempData["Error"] = " Wrong Email and/or Password";
+                        return View("Index");
                     }
                 }
             }
