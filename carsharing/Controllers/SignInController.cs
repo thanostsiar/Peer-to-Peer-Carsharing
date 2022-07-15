@@ -48,11 +48,6 @@ namespace carsharing.Controllers
                     o.ProfilePicture = owner.ProfilePicture;
                     break;
                 }
-                else
-                {
-                    TempData["Error"] = " Wrong Email and/or Password";
-                    return View("Index");
-                }
             }
 
             if (isOwner == true)
