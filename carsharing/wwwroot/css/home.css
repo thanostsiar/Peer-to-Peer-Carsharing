@@ -21,104 +21,26 @@
         z-index: 1
     }
 
-    .map_container a.northamerica,
-    .map_container a.europe,
-    .map_container a.africa,
-    .map_container a.asia,
-    .map_container a.latinamerica,
-    .map_container a.oceania {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 2;
-        color: #fff;
-        text-decoration: none;
-        width: 243px;
-        height: 150px;
-    }
+.bg-img {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../img/pexels-alfonso-escalante-2533090.jpg");
+    /* Full height */
+    height: 50%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-    .map_container a.europe {
-        width: 147px;
-        height: 132px;
-        left: 252px;
-        top: 0px;
-    }
+.btn-p {
+    background-color: var(--p-color);
+    color: var(--s-color);
+}
 
-    .map_container a.africa {
-        width: 147px;
-        height: 132px;
-        left: 252px;
-        top: 132px;
-    }
+.btn-color {
+    background-color: var(--btn-color);
+    color: var(--s-color);
+}
 
-    .map_container a.asia {
-        width: 156px;
-        height: 99px;
-        left: 400px;
-        top: 74px;
-    }
-
-    .map_container a.latinamerica {
-        width: 252px;
-        height: 109px;
-        top: 177px;
-        left: 0;
-    }
-
-    .map_container a.oceania {
-        width: 107px;
-        height: 93px;
-        left: 439px;
-        top: 199px;
-    }
-
-
-        .map_container a.northamerica span,
-        .map_container a.europe span,
-        .map_container a.africa span,
-        .map_container a.asia span,
-        .map_container a.latinamerica span,
-        .map_container a.oceania span {
-            display: none;
-        }
-
-
-        .map_container a.northamerica:hover span,
-        .map_container a.europe:hover span,
-        .map_container a.africa:hover span,
-        .map_container a.asia:hover span,
-        .map_container a.latinamerica:hover span,
-        .map_container a.oceania:hover span {
-            display: block;
-            padding: 5px;
-            background: #000;
-            border-radius: 5px;
-            -moz-border-radius: 5px;
-            box-shadow: 0 1px 2px 1px #fff;
-            float: left;
-            position: absolute;
-            top: 100px;
-            left: 50px;
-        }
-
-
-    .map_container a.europe:hover span {
-        top: 80px;
-    }
-
-    .map_container a.africa:hover span {
-        top: 30px;
-    }
-
-    .map_container a.asia:hover span {
-        top: 30px;
-    }
-
-    .map_container a.latinamerica:hover span {
-        top: 30px;
-    }
-
-    .map_container a.oceania:hover span {
-        top: 20px;
-        left: 20px
-    }
+.FAQ-colors {
+    color: var(--btn-color);
+}
