@@ -1,4 +1,5 @@
 ﻿using carsharing.Models;
+using carsharing.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -46,13 +47,72 @@ namespace carsharing.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
+            Owner o = new Owner();
+            Renter r = new Renter();
+            string email = "";
+            bool isOwner = false;
+            bool isOnline = false;
+
+            var listOfRenters = await _context.Renters.ToListAsync();
+            var listOfOwners = await _context.Owners.ToListAsync();
+
+            if (TempData.ContainsKey("Email"))
+            {
+                email = TempData["Email"].ToString();
+                isOnline = true;
+
+                foreach (var owner in listOfOwners)
+                {
+                    if (email == owner.Email)
+                    {
+                        isOwner = true;
+                        o.FirstName = owner.FirstName;
+                        o.LastName = owner.LastName;
+                        o.Email = owner.Email;
+                        o.Age = owner.Age;
+                        o.Phone = owner.Phone;
+                        o.ProfilePicture = owner.ProfilePicture;
+                        break;
+                    }
+                }
+
+                if (isOwner == false)
+                {
+                    foreach (var renter in listOfRenters)
+                    {
+                        if (email == renter.Email)
+                        {
+                            r.FirstName = renter.FirstName;
+                            r.LastName = renter.LastName;
+                            r.Email = renter.Email;
+                            r.Age = renter.Age;
+                            r.Phone = renter.Phone;
+                            r.ProfilePicture = renter.ProfilePicture;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (isOnline == true)
+            {
+                TempData["Online"] = "Yes";
+            }
+
             var posts = FetchPosts();
 
             var currentPost = posts.Where(post => post.PostId == id).FirstOrDefault();
 
-            return View(currentPost);
+            var Post = new ResultsViewModel(null, 0)
+            {
+                Renter = r,
+                Owner = o,
+                Post = currentPost
+            };
+
+            return View(Post);
         }
 
         [HttpPost]

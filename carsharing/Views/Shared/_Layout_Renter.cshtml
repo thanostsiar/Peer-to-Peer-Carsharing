@@ -1,4 +1,4 @@
-﻿@model carsharing.ViewModels.HomeViewModel
+﻿@model carsharing.ViewModels.ResultsViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@
                             <a class="drop-btn">@Model.Renter.FirstName @Model.Owner.FirstName</a>
                             <div class="dropdown-content">
                                 <a asp-area="" asp-controller="Profile" asp-action="Index">My Profile</a>
-                                <a asp-area="" asp-controller="" asp-action="">Sign Out</a>
+                                <a asp-area="" asp-controller="SignIn" asp-action="SignOut">Sign Out</a>
                             </div>
                         </div>      
                     </ul>

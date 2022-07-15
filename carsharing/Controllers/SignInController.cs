@@ -57,6 +57,8 @@ namespace carsharing.Controllers
                 TempData["Age"] = o.Age;
                 TempData["Email"] =o.Email;
                 TempData["Phone"] = o.Phone;
+                TempData["Phone"] = o.Phone;
+                TempData["ProfilePicture"] = o.ProfilePicture;
                 TempData["Role"] = "Owner";
 
                 return RedirectToAction("Index", "Profile");
@@ -79,6 +81,12 @@ namespace carsharing.Controllers
                 }
             }
             return View("Index");
+        }
+
+        public IActionResult SignOut()
+        {
+            TempData.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         private bool RenterExists(int id)

@@ -74,10 +74,10 @@ namespace carsharing.Controllers
                 TempData["Online"] = "Yes";
             }
 
-            var HomeView = new HomeViewModel
+            var HomeView = new ResultsViewModel(null, 0)
             {
-                Renter = r,
                 Owner = o,
+                Renter = r,
                 SearchBar = search
             };
 

@@ -3,6 +3,27 @@
     ViewData["Title"] = "Search Results";
 }
 
+@{
+    var FirstName = TempData["FirstName"];
+    var LastName = TempData["LastName"];
+    var Age = TempData["Age"];
+    var Email = TempData["Email"];
+    var Phone = TempData["Phone"];
+    var ProfilePic = TempData["ProfilePicture"];
+    var Role = TempData["Role"];
+    TempData.Keep();
+
+    if (TempData.ContainsKey("Online"))
+    {
+        Layout = "_Layout_Renter";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}
+
+
 @* Add the search functionality here too *@
 <section>
     <div class="d-flex flex-column align-items-center mt-5 mb-5">

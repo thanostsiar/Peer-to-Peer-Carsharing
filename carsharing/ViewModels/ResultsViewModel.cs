@@ -11,6 +11,11 @@ namespace carsharing.ViewModels
         public String ErrorMessage;
 
         public double NumberOfDays;
+        public Renter? Renter { get; set; }
+        public Owner? Owner { get; set; }
+        public String? Label { get; set; }
+        public CreatePost? CreatePost { get; set; }
+        public Post? Post { get; set; }
 
         public IQueryable<Post> Posts { get; set; } = null!;
 
