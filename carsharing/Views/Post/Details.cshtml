@@ -5,6 +5,7 @@
 
 @if (Model != null)
 {
+    <form asp-action="Index" asp-controller="Post" method="post">
         <section class="container">
             <div class="row mt-5 justify-content-between mb-2 left-part">
                 @*Left part of page*@
@@ -132,5 +133,28 @@
                     }
                 </div>
             </div>
+             <input type="hidden" asp-for="PostId" value="@Model.PostId">
+             <input type="hidden" asp-for="VehicleId" value="@Model.VehicleId">
+             @{Model.Body = " ";}
+             @{Model.Rating = 1;}
+            <h5>Leave a review:</h5><br>
+                   <div class="rate">
+                       <label for="rating" asp-for="Rating">Select Rating</label>
+                       <input type="number" max="10" min="1" asp-for="Rating" id="rating"/>
+                    </div>
+                    @{Model.Body = " ";}
+                    <div class="inputGroupContainer mb-4">
+                        <div class="input-group">
+                            <textarea rows="10" id="comment-body" class="form-control" asp-for="Body" ></textarea>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <button type="submit" name="comm-btn" class="btn btn-n btn-outline-dark mb-2" data-mdb-ripple-color="dark">
+                            <h4 class="mt-1">Post Review</h4>
+                        </button>
+                     </div>
+           
+               
         </section>
+         </form>
 }
