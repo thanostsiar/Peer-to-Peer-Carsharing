@@ -107,13 +107,11 @@ namespace carsharing.Controllers
                 ErrorMessage = message;
             }
 
-            var OwnerRenter = new HomeViewModel
+            var OwnerRenter = new ResultsViewModel(null, 0, ErrorMessage)
             {
-                Renter = r,
                 Owner = o,
-                Label = label,
+                Renter = r,
                 Posts = ownerPosts,
-                ErrorMessage = ErrorMessage
             };
 
             return View(OwnerRenter);

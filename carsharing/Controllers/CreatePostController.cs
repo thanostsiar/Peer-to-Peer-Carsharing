@@ -23,7 +23,6 @@ namespace carsharing.Controllers
             Owner o = new Owner();
             string email = "";
 
-            var listOfRenters = await _context.Renters.ToListAsync();
             var listOfOwners = await _context.Owners.ToListAsync();
 
             if (TempData.ContainsKey("Email"))
@@ -45,7 +44,7 @@ namespace carsharing.Controllers
                 }
             }
 
-            var OwnerRenter = new HomeViewModel
+            var OwnerRenter = new ResultsViewModel(null, 0)
             {
                 Owner = o,
                 Renter = new Renter()
@@ -64,7 +63,7 @@ namespace carsharing.Controllers
             Owner ownr = new Owner();
             ownr.FirstName = first_name;
 
-            var CreatePost = new HomeViewModel
+            var CreatePost = new ResultsViewModel(null, 0)
             {
                 Renter = new Renter(),
                 Owner = ownr

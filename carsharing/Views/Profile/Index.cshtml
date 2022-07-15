@@ -1,4 +1,4 @@
-@model carsharing.ViewModels.HomeViewModel
+@model carsharing.ViewModels.ResultsViewModel
 
 @{    
     ViewData["Title"] = "Profile";
@@ -23,7 +23,7 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="ProfilePic" alt="avatar"
+            <img src="@ProfilePic" alt="avatar"
               class="rounded-circle img-fluid" style="width: 9em;">
             <h5 class="my-3"></h5>
             <p class="text-muted mb-1">♦️@Role</p>
