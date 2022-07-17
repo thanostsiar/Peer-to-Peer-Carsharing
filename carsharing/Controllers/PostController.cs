@@ -116,20 +116,24 @@ namespace carsharing.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> IndexAsync(Post post_com)
+        public async Task<IActionResult> IndexAsync([Bind(Prefix = "Post")] Post post_com)
         {
             string email = "";
+            bool isOwner = false;
+            bool isOnline = false;
             var listOfRenters = await _context.Renters.ToListAsync();
+            var listOfOwners = await _context.Owners.ToListAsync();
             if (TempData.ContainsKey("Email"))
             {
                 email = TempData["Email"].ToString();
-                foreach(var renter in listOfRenters)
+                isOnline = true;
+                foreach (var owner in listOfOwners)
                 {
-                    if (email == renter.Email)
+                    if (email == owner.Email)
                     {
                         PostComment postcomment = new PostComment();
                         postcomment.PostId = post_com.PostId;
-                        postcomment.RenterId = renter.RenterId;
+                        postcomment.RenterId = owner.OwnerId;
                         postcomment.VehicleId = post_com.VehicleId;
                         DateTime date = DateTime.Now;
                         DateTime dateOnly = date.Date;
@@ -142,8 +146,34 @@ namespace carsharing.Controllers
                         break;
                     }
                 }
+                if (isOwner == false)
+                {
+                    foreach (var renter in listOfRenters)
+                    {
+                        if (email == renter.Email)
+                        {
+                            PostComment postcomment = new PostComment();
+                            postcomment.PostId = post_com.PostId;
+                            postcomment.RenterId = renter.RenterId;
+                            postcomment.VehicleId = post_com.VehicleId;
+                            DateTime date = DateTime.Now;
+                            DateTime dateOnly = date.Date;
+                            DateTime today = DateTime.ParseExact(dateOnly.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                            postcomment.Created = DateOnly.FromDateTime(today);
+                            postcomment.Rating = post_com.Rating;
+                            postcomment.Body = post_com.Body;
+                            _context.Add(postcomment);
+                            _context.SaveChanges();
+                            break;
+                        }
+                    }
+                }
             }
-            return RedirectToAction("Index", "Home");
+            if (isOnline == true)
+            {
+                TempData["Online"] = "Yes";
+            }
+            return RedirectToAction("Details", new { id=post_com.PostId});
 
         }
 

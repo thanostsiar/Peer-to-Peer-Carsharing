@@ -23,8 +23,16 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="@ProfilePic" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 9em;">
+            @if (Role.Equals("Owner"))
+            {
+                <img src="@Model.Owner.ProfilePicture" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 9em;">
+            }
+            else
+            {
+                <img src="@Model.Renter.ProfilePicture" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 9em;">
+            }                      
             <h5 class="my-3"></h5>
             <p class="text-muted mb-1">♦️@Role</p>
             <p class="text-muted mb-4">✩159 Reviews</p>
