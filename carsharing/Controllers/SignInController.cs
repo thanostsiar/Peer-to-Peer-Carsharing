@@ -30,6 +30,7 @@ namespace carsharing.Controllers
             }
 
             bool isOwner = false;
+            bool renterExists = true;
             Owner o = new Owner();
 
             var listOfRenters = await _context.Renters.ToListAsync();
@@ -80,9 +81,13 @@ namespace carsharing.Controllers
                     }
                     else
                     {
-                        TempData["Error"] = " Wrong Email and/or Password";
-                        return View("Index");
+                        renterExists = false;
                     }
+                }
+                if (!renterExists)
+                {
+                    TempData["Error"] = " Wrong Email and/or Password";
+                    return View("Index");
                 }
             }
             return View("Index");
