@@ -30,7 +30,7 @@
             <div class="row mt-5 justify-content-between mb-2 left-part">
                 @*Left part of page*@
                 <div class="col-lg-9 text-blue">
-                    <h2 class="mt-5 text-center mb-4 blue-text">✦@Model.Post.Title</h2>
+                    <h2 class="mt-5 text-center mb-4 blue-text">✦@Model.Post.Title✦</h2>
                     <div class="mb-4 mt-3">
                         <div class="text-center mt-5">
                             <img class="left-part-image" src="@Url.Content(Model.Post.ThumbnailUrl)" alt="avatar" />
@@ -144,18 +144,18 @@
             <input type="hidden" asp-for="@Model.Post.VehicleId" value="@Model.Post.VehicleId">
             @{Model.Post.Body = "";}
             @{Model.Post.Rating = 1;}
-            <h5>Leave a review:</h5><br>
+            <h4 class="text-center blue-text">🔸Leave a review:🔸</h4><br>
                    <div class="rate">
-                       <label for="rating" asp-for="@Model.Post.Rating">Select Rating</label>
-                       <input type="number" max="10" min="1" asp-for="@Model.Post.Rating" id="rating"/>
+                       <label for="rating" asp-for="@Model.Post.Rating">★ Select Rating:</label>
+                       <input class="rating_box mb-3" type="number" max="10" min="1" asp-for="@Model.Post.Rating" id="rating"/>
                     </div>
                     <div class="inputGroupContainer mb-4">
                         <div class="input-group">
-                            <textarea rows="10" class="form-control" asp-for="@Model.Post.Body" ></textarea>
+                            <textarea  rows="10" class="form-control" asp-for="@Model.Post.Body" ></textarea>
                         </div>
                     </div>
-                     <div class="col-md-4">
-                        <button type="submit" name="comm-btn" class="btn btn-n btn-outline-dark mb-2" data-mdb-ripple-color="dark">
+                     <div class="mt-5 mb-3 text-center">
+                        <button type="submit" name="comm-btn" class="btn btn-n btn-outline-dark mb-2 " data-mdb-ripple-color="dark">
                             <h4 class="mt-1">Post Review</h4>
                         </button>
                     </div>

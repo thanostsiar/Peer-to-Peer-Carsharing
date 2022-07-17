@@ -25,3 +25,9 @@
     width: 12em;
     height: 2.5em;
 }
+
+.rating_box {
+    border: solid #098486;
+    border-radius: 0.5em;
+    background-color: white;
+}
