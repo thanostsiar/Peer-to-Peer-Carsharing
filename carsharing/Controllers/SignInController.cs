@@ -93,12 +93,6 @@ namespace carsharing.Controllers
             return View("Index");
         }
 
-        public IActionResult SignOut()
-        {
-            TempData.Clear();
-            return RedirectToAction("Index", "Home");
-        }
-
         private bool RenterExists(int id)
         {
             return (_context.Renters?.Any(e => e.RenterId == id)).GetValueOrDefault();
