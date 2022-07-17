@@ -24,7 +24,7 @@ namespace carsharing.Models
         [EmailAddress]
         public string Email { get; set; } = null!;
 
-        [Required(ErrorMessage = "Please enter phone!")]
+        [Required(ErrorMessage = "Please enter your phone number!")]
         public string Phone { get; set; } = null!;
     }
 }

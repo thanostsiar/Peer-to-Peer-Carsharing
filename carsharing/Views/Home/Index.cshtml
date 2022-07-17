@@ -1,14 +1,21 @@
-﻿@{
+﻿@model carsharing.ViewModels.ResultsViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
+@{
+    var Email = TempData["Email"];
+    TempData.Keep("Email");    
 
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-*@
-
+    if (TempData.ContainsKey("Online"))
+    {
+        Layout = "_Layout_Renter";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}
 
 <section class="hero bg-img text-white">
 <div class="d-flex justify-content-center">
@@ -25,139 +32,41 @@
 
 @* -- Search -- *@
 <div class="d-flex flex-column align-items-center mt-2 margin-bottom-8">
-    <div class="d-inline-flex flex-column align-items-center flex-lg-row bg searchbar-sizing searchbar searchbar-lg p-color">
-        <div class="align-self-center"> <input type="text" class="form-control" placeholder="🔍Search" aria-label="Recipient's username" aria-describedby="basic-addon2"> </div> 
+    <form asp-controller="Search" asp-action="Results" method="get">
+        <div class="d-inline-flex flex-column align-items-center flex-lg-row bg searchbar-sizing searchbar searchbar-lg p-color">
         
-        <div class="d-flex insides">
-
-
-            <div> <input type="date" class="form-control" aria-describedby="basic-addon2">  </div> 
-            <div class="d-flex">
-                @*<label for="cars">Time from:</label>*@
-                <select name="cars" id="cars">
-                    <option value="00:00">00:00</option>
-                    <option value="00:30">00:30</option>
-                    <option value="01:00">01:00</option>
-                    <option value="01:30">01:30</option>
-                    <option value="02:00">02:00</option>
-                    <option value="02:30">02:30</option>
-                    <option value="03:00">03:00</option>
-                    <option value="03:30">03:30</option>
-                    <option value="04:00">04:00</option>
-                    <option value="04:30">04:30</option>
-                    <option value="05:00">05:00</option>
-                    <option value="05:30">05:30</option>
-                    <option value="06:00">06:00</option>
-                    <option value="06:30">06:30</option>
-                    <option value="07:00">07:00</option>
-                    <option value="07:30">07:30</option>
-                    <option value="08:00">08:00</option>
-                    <option value="08:30">08:30</option>
-                    <option value="09:00">09:00</option>
-                    <option value="09:30">09:30</option>
-                    <option value="10:00">10:00</option>
-                    <option value="10:30">10:30</option>
-                    <option value="11:00">11:00</option>
-                    <option value="11:30">11:30</option>
-                    <option value="12:00">12:00</option>
-                    <option value="12:30">12:30</option>
-                    <option value="13:00">13:00</option>
-                    <option value="13:30">13:30</option>
-                    <option value="14:00">14:00</option>
-                    <option value="14:30">14:30</option>
-                    <option value="15:00">15:00</option>
-                    <option value="15:30">15:30</option>
-                    <option value="16:00">16:00</option>
-                    <option value="16:30">16:30</option>
-                    <option value="17:00">17:00</option>
-                    <option value="17:30">17:30</option>
-                    <option value="18:00">18:00</option>
-                    <option value="18:30">18:30</option>
-                    <option value="19:00">19:00</option>
-                    <option value="19:30">19:30</option>
-                    <option value="20:00">20:00</option>
-                    <option value="20:30">20:30</option>
-                    <option value="21:00">21:00</option>
-                    <option value="21:30">21:30</option>
-                    <option value="22:00">22:00</option>
-                    <option value="22:30">22:30</option>
-                    <option value="23:00">23:00</option>
-                    <option value="23:30">23:30</option>
-
-                </select> 
-
-             </div>
-
-
-        </div>
-
-        <div class="d-flex insides">
-
-            <div> <input type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">  </div> 
-            <div class="d-flex">
-                @*<label for="cars">Time from:</label>*@
-                <select name="cars" id="cars">
-             
-                    <option value="00:00">00:00</option>
-                    <option value="00:30">00:30</option>
-                    <option value="01:00">01:00</option>
-                    <option value="01:30">01:30</option>
-                    <option value="02:00">02:00</option>
-                    <option value="02:30">02:30</option>
-                    <option value="03:00">03:00</option>
-                    <option value="03:30">03:30</option>
-                    <option value="04:00">04:00</option>
-                    <option value="04:30">04:30</option>
-                    <option value="05:00">05:00</option>
-                    <option value="05:30">05:30</option>
-                    <option value="06:00">06:00</option>
-                    <option value="06:30">06:30</option>
-                    <option value="07:00">07:00</option>
-                    <option value="07:30">07:30</option>
-                    <option value="08:00">08:00</option>
-                    <option value="08:30">08:30</option>
-                    <option value="09:00">09:00</option>
-                    <option value="09:30">09:30</option>
-                    <option value="10:00">10:00</option>
-                    <option value="10:30">10:30</option>
-                    <option value="11:00">11:00</option>
-                    <option value="11:30">11:30</option>
-                    <option value="12:00">12:00</option>
-                    <option value="12:30">12:30</option>
-                    <option value="13:00">13:00</option>
-                    <option value="13:30">13:30</option>
-                    <option value="14:00">14:00</option>
-                    <option value="14:30">14:30</option>
-                    <option value="15:00">15:00</option>
-                    <option value="15:30">15:30</option>
-                    <option value="16:00">16:00</option>
-                    <option value="16:30">16:30</option>
-                    <option value="17:00">17:00</option>
-                    <option value="17:30">17:30</option>
-                    <option value="18:00">18:00</option>
-                    <option value="18:30">18:30</option>
-                    <option value="19:00">19:00</option>
-                    <option value="19:30">19:30</option>
-                    <option value="20:00">20:00</option>
-                    <option value="20:30">20:30</option>
-                    <option value="21:00">21:00</option>
-                    <option value="21:30">21:30</option>
-                    <option value="22:00">22:00</option>
-                    <option value="22:30">22:30</option>
-                    <option value="23:00">23:00</option>
-                    <option value="23:30">23:30</option>
-
-                </select> 
-
-             </div>
-
-
-        </div>
-
+            <div class="align-self-center"> 
+                <input asp-for="@Model.SearchBar.SearchField" type="text" class="form-control" placeholder="🔍Search" aria-label="Recipient's username" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a city name')" oninput="setCustomValidity('')">
+            </div> 
         
-        <div class="align-self-center"><button class="search-btn" onclick="location.href='@Url.Action("Index", "Vehicles")'">Search</button></div>
+            <div class="d-flex insides">
+                <div>
+                    <input asp-for="@Model.SearchBar.DateFrom" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a date')" oninput="setCustomValidity('')">
+                </div> 
+                <div class="d-flex">
+                    @*<label for="cars">Time from:</label>*@
+                    <select asp-for="@Model.SearchBar.TimeFrom" asp-items="Model.SearchBar.SelectTimeFrom">
+                    </select>
+                 </div>
+            </div>
 
-    </div>
+            <div class="d-flex insides">
+
+                <div>
+                    <input asp-for="@Model.SearchBar.DateTo" type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a date')" oninput="setCustomValidity('')">
+                </div> 
+                <div class="d-flex">
+                    @*<label for="cars">Time from:</label>*@
+                    <select  asp-for="@Model.SearchBar.TimeTo" asp-items="@Model.SearchBar.SelectTimeTo">
+                    </select>
+                 </div>
+            </div>
+        
+            <div class="align-self-center">
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+    </form>
 </div>
 <div  class="d-flex justify-content-evenly">
     @* <br /><br /><br /><br />*@
@@ -169,7 +78,7 @@
   <div class="container">
     <div class="row">
         <div class="col-12 col-lg-10">
-            <h3 class="mb-3"> Top Rated </h3>
+            <h3 class="mb-3"> Top Rated <span class="material-icons">grade</span></h3> 
         </div>
         <div class="col col-lg-2 text-right">
             <a class="btn btn-color mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -307,7 +216,7 @@
 
 @* -- General Info and FAQ -- *@
 
-<section class="container">
+<section class="container mb-5">
     <div class="d-flex justify-content-evenly"> 
         <div class="container">
             <h3>Top tips for renting a car in Greece</h3>
@@ -331,7 +240,7 @@
             </div>
         </div>
 
-         <div class="container">
+         <div class="container col-lg-5">
             <h3>FAQs about renting a car in Greece</h3>
             <div>
                 <p>
@@ -440,5 +349,11 @@
 
 </section>
 
+@* Map *@
+<section>
 
+    <div class="text-center">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3148608.1645006295!2d24.254827536071772!3d39.58637233430788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sel!2sgr!4v1656966050186!5m2!1sel!2sgr" width="1000" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 
+</section>

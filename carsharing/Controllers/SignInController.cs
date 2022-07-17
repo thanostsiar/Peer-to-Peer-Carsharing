@@ -29,24 +29,69 @@ namespace carsharing.Controllers
                 return View("Index");
             }
 
+            bool isOwner = false;
+            Owner o = new Owner();
+
             var listOfRenters = await _context.Renters.ToListAsync();
+            var listOfOwners = await _context.Owners.ToListAsync();
 
-            foreach (var renter in listOfRenters)
+            foreach (var owner in listOfOwners)
             {
-                if (signIn.Email == renter.Email && signIn.Password == renter.Password)
+                if (signIn.Email == owner.Email && signIn.Password == owner.Password)
                 {
-                    // TODO: change the routing to direct you to Profile or index
-                    // redirect to SignIn/SignIn but render the Temp view
-                    return View("Temp", renter);
+                    isOwner = true;
+                    o.FirstName = owner.FirstName;
+                    o.LastName = owner.LastName;
+                    o.Email = owner.Email;
+                    o.Age = owner.Age;
+                    o.Phone = owner.Phone;
+                    o.ProfilePicture = owner.ProfilePicture;
+                    break;
                 }
-                else
-                {
-                    TempData["msg"] = "<script>alert('The Email or Password is incorrect, please try again.');</script>";
-                }
-                
-
             }
-            return RedirectToAction("Index");
+
+            if (isOwner == true)
+            {
+                TempData["FirstName"] = o.FirstName;
+                TempData["LastName"] = o.LastName;
+                TempData["Age"] = o.Age;
+                TempData["Email"] =o.Email;
+                TempData["Phone"] = o.Phone;
+                TempData["Phone"] = o.Phone;
+                TempData["ProfilePicture"] = o.ProfilePicture;
+                TempData["Role"] = "Owner";
+
+                return RedirectToAction("Index", "Profile");
+            }
+            else
+            {
+                foreach (var renter in listOfRenters)
+                {
+                    if (signIn.Email == renter.Email && signIn.Password == renter.Password)
+                    {
+                        TempData["FirstName"] = renter.FirstName;
+                        TempData["LastName"] = renter.LastName;
+                        TempData["Age"] = renter.Age;
+                        TempData["Email"] = renter.Email;
+                        TempData["Phone"] = renter.Phone;
+                        TempData["Role"] = "Renter";
+
+                        return RedirectToAction("Index", "Profile");
+                    }
+                    else
+                    {
+                        TempData["Error"] = " Wrong Email and/or Password";
+                        return View("Index");
+                    }
+                }
+            }
+            return View("Index");
+        }
+
+        public IActionResult SignOut()
+        {
+            TempData.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         private bool RenterExists(int id)

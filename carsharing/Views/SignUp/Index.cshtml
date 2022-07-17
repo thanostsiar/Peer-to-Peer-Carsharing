@@ -3,117 +3,129 @@
     ViewData["Title"] = "Sign Up";
 }
 
-<style>
-body { 
-  background-image: url('/img/sign-up-image.jpg');
-  background-repeat: no-repeat;
-  background-size: cover; 
-  overflow-x:hidden;
-}
-</style>
 
 @* Sign Up forms *@
-
-<div class="container">
+<body class="signup-bg">
+<div class="container"style="width: 100%;overflow:auto;">
 
     <form class="well form-horizontal" asp-action="SignUp" asp-controller="SignUp" method="post"  id="contact_form">
         <fieldset>
 
         <!-- Form Name -->
 
-            <legend style = "position:relative; left:390px;"><center><h2><b>Registration Form</b></h2></center></legend><br>
+            <legend class="d-flex justify-content-center"style = "position:relative;"><h2><b>Registration Form</b></h2></legend><br>
 
         <!-- First Name-->
 
-            <div class="form-group margin-top-1k-5" style="position:relative; left:800px;">
+            <div class="form-group margin-top-1k-5" style="position:relative;">
                 <label class="col-md-4 control-label" asp-for="FirstName">First Name</label>  
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <input class="form-control" asp-for="FirstName" type="text">
                     </div>
-                    @Html.ValidationMessageFor(m => m.FirstName)
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </div>
                 </div>
             </div>
 
         <!-- Last Name-->
 
-            <div class="form-group margin-top-1-5" style="position:relative; left:800px;">
+            <div class="form-group margin-top-1-5" style="position:relative;">
                 <label class="col-md-4 control-label" asp-for="LastName">Last Name</label> 
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <input class="form-control" asp-for="LastName" type="text">
                     </div>
-                    @Html.ValidationMessageFor(m => m.LastName)
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </div>
+                    
                 </div>
             </div>
 
   
         <!-- Age-->
 
-            <div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
+            <div class="form-group margin-top-1-5" style = "position:relative;">
                 <label class="col-md-4 control-label" asp-for="Age">Age</label>  
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <input class="form-control" asp-for="Age" type="number" min="18">
                     </div>
-                    @Html.ValidationMessageFor(m => m.Age)
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.Age)
+                    </div>
                 </div>
             </div>
 
             <!-- Password-->
 
-            <div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
+            <div class="form-group margin-top-1-5" style = "position:relative;">
                 <label class="col-md-4 control-label" asp-for="Password">Password</label> 
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="Password" type="password" />
+                        <input class="form-control" asp-for="Password" type="password" id="passw" />
                     </div>
-                    @Html.ValidationMessageFor(m => m.Password)
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
                 </div>
             </div>
 
         <!-- Confirm Password-->
 
-            <div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
+            <div class="form-group margin-top-1-5" style = "position:relative;">
                 <label class="col-md-4 control-label" asp-for="ConfirmPassword">Confirm Password</label> 
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="ConfirmPassword" type="password">
+                        <input class="form-control" asp-for="ConfirmPassword" type="password" id="pass">
                     </div>
-                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </div>    
                 </div>
             </div>
 
         <!-- Email-->
-            <div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
+            <div class="form-group margin-top-1-5" style = "position:relative;">
                 <label class="col-md-4 control-label" asp-for="Email">E-Mail</label>  
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <input class="form-control" asp-for="Email" type="email">
                     </div>
-                    @Html.ValidationMessageFor(m => m.Email)
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
                 </div>
             </div>
 
 
         <!-- Phone-->
        
-            <div class="form-group margin-top-1-5" style = "position:relative; left:800px;">
+            <div class="form-group margin-top-1-5" style = "position:relative;">
                 <label class="col-md-4 control-label" asp-for="Phone">Phone</label>  
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <input class="form-control" asp-for="Phone" type="tel" pattern="[0-9]{10}">
                     </div>
-                    @Html.ValidationMessageFor(m => m.Phone)
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </div>         
                 </div>
+            </div>
+
+            <div class="mb-3 form-check " style = "position:relative;">
+                    <input type="checkbox" class="form-check-input" onclick="showPassword()" id="showPass">
+                    <label class="form-check-label" for="showPass">Show Password</label>
             </div>
 
         <!-- Button -->
 
-        <div class="form-group" style = "position:relative; left:975px;">
+        <div class="form-group" style = "position:relative;">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn btn-primary" >Submit</button>
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
             </div>
         </div>
 
@@ -121,5 +133,20 @@ body {
         
     </form>
 </div>
+</body>
 <!-- /.container -->
+
+<script>
+function showPassword() {
+  var x = document.getElementById("passw");
+  var y = document.getElementById("pass");
+  if (x.type === "password" || y.type === "password") {
+    x.type = "text";
+    y.type = "text";
+  } else {
+    x.type = "password";
+    y.type = "password";
+  }
+}
+</script>
 

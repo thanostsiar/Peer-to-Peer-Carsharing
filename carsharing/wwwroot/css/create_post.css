@@ -1,0 +1,28 @@
+﻿.add-a-photo {
+    width: 8em;
+    height: 8em;
+    border-radius: 0.5em;
+    border: .2em solid #F5A472;
+}
+
+textarea {
+    resize: none;
+}
+
+.btn-create {
+    background-color: var(--p-color);
+    text-align: center;
+    border-radius: 0.5em;
+    color: var(--b-color);
+    width: 18.5em;
+    height: 3em;
+}
+
+.btn-modal {
+    background-color: var(--p-color);
+    text-align: center;
+    border-radius: 0.5em;
+    color: var(--s-color);
+    width: 7em;
+    height: 3em;
+}

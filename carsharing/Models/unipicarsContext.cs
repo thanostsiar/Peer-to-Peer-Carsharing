@@ -19,6 +19,7 @@ namespace carsharing.Models
         public virtual DbSet<Owner> Owners { get; set; } = null!;
         public virtual DbSet<Post> Posts { get; set; } = null!;
         public virtual DbSet<PostComment> PostComments { get; set; } = null!;
+        public virtual DbSet<PostImage> PostImages { get; set; } = null!;
         public virtual DbSet<RentedVehicle> RentedVehicles { get; set; } = null!;
         public virtual DbSet<Renter> Renters { get; set; } = null!;
         public virtual DbSet<Vehicle> Vehicles { get; set; } = null!;
@@ -32,7 +33,9 @@ namespace carsharing.Models
                 entity.HasIndex(e => e.Email, "owners_email_key")
                     .IsUnique();
 
-                entity.Property(e => e.OwnerId).HasColumnName("owner_id");
+                entity.Property(e => e.OwnerId)
+                    .HasColumnName("owner_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Age).HasColumnName("age");
 
@@ -53,15 +56,30 @@ namespace carsharing.Models
             {
                 entity.ToTable("posts");
 
-                entity.Property(e => e.PostId).HasColumnName("post_id");
+                entity.HasIndex(e => e.VehicleId, "posts_vehicle_id_key")
+                    .IsUnique();
+
+                entity.Property(e => e.PostId)
+                    .HasColumnName("post_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Body).HasColumnName("body");
 
+                entity.Property(e => e.City).HasColumnName("city");
+
+                entity.Property(e => e.CostPerDay)
+                    .HasColumnType("money")
+                    .HasColumnName("cost_per_day");
+
                 entity.Property(e => e.Created).HasColumnName("created");
+
+                entity.Property(e => e.MaxDaysOfRent).HasColumnName("max_days_of_rent");
 
                 entity.Property(e => e.OwnerId).HasColumnName("owner_id");
 
                 entity.Property(e => e.Rating).HasColumnName("rating");
+
+                entity.Property(e => e.ThumbnailUrl).HasColumnName("thumbnail_url");
 
                 entity.Property(e => e.Title).HasColumnName("title");
 
@@ -74,41 +92,68 @@ namespace carsharing.Models
                     .HasConstraintName("posts_owner_id_fkey");
 
                 entity.HasOne(d => d.Vehicle)
-                    .WithMany(p => p.Posts)
-                    .HasForeignKey(d => d.VehicleId)
+                    .WithOne(p => p.Post)
+                    .HasForeignKey<Post>(d => d.VehicleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("posts_vehicle_id_fkey");
             });
 
             modelBuilder.Entity<PostComment>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.CommentId)
+                    .HasName("post-comments_pkey");
 
                 entity.ToTable("post-comments");
 
+                entity.Property(e => e.CommentId)
+                    .HasColumnName("comment_id")
+                    .UseIdentityAlwaysColumn();
+
                 entity.Property(e => e.Body).HasColumnName("body");
 
-                entity.Property(e => e.CommentId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("comment_id");
+                entity.Property(e => e.Created).HasColumnName("created");
 
                 entity.Property(e => e.PostId).HasColumnName("post_id");
+
+                entity.Property(e => e.Rating).HasColumnName("rating");
 
                 entity.Property(e => e.RenterId).HasColumnName("renter_id");
 
                 entity.Property(e => e.VehicleId).HasColumnName("vehicle_id");
 
                 entity.HasOne(d => d.Post)
-                    .WithMany()
+                    .WithMany(p => p.PostComments)
                     .HasForeignKey(d => d.PostId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("post-comments_post_id_fkey");
 
                 entity.HasOne(d => d.Renter)
-                    .WithMany()
+                    .WithMany(p => p.PostComments)
                     .HasForeignKey(d => d.RenterId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("post-comments_renter_id_fkey");
+            });
+
+            modelBuilder.Entity<PostImage>(entity =>
+            {
+                entity.HasKey(e => e.ImageId)
+                    .HasName("post-images_pkey");
+
+                entity.ToTable("post-images");
+
+                entity.Property(e => e.ImageId)
+                    .HasColumnName("image_id")
+                    .UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.ImageUrl).HasColumnName("image_url");
+
+                entity.Property(e => e.PostId).HasColumnName("post_id");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.PostImages)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("post-images_post_id_fkey");
             });
 
             modelBuilder.Entity<RentedVehicle>(entity =>
@@ -152,7 +197,9 @@ namespace carsharing.Models
                 entity.HasIndex(e => e.Email, "renters_email_key")
                     .IsUnique();
 
-                entity.Property(e => e.RenterId).HasColumnName("renter_id");
+                entity.Property(e => e.RenterId)
+                    .HasColumnName("renter_id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Age).HasColumnName("age");
 
@@ -175,13 +222,19 @@ namespace carsharing.Models
             {
                 entity.ToTable("vehicles");
 
-                entity.Property(e => e.VehicleId).HasColumnName("vehicle_id");
+                entity.Property(e => e.VehicleId)
+                    .HasColumnName("vehicle_id")
+                    .UseIdentityAlwaysColumn();
+
+                entity.Property(e => e.Color).HasColumnName("color");
 
                 entity.Property(e => e.Manufacturer).HasColumnName("manufacturer");
 
                 entity.Property(e => e.Model).HasColumnName("model");
 
                 entity.Property(e => e.OwnerId).HasColumnName("owner_id");
+
+                entity.Property(e => e.Type).HasColumnName("type");
 
                 entity.Property(e => e.Year).HasColumnName("year");
 

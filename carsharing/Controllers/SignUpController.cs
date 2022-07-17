@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using carsharing.Models;
 using Microsoft.EntityFrameworkCore;
-
+using System.Linq;
 
 namespace carsharing.Controllers
 {
@@ -18,7 +18,7 @@ namespace carsharing.Controllers
 
         [HttpGet]
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 
@@ -26,7 +26,6 @@ namespace carsharing.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SignUp(SignUp signUp)
         {
-
             if (!ModelState.IsValid)
             {
                 return View("Index");
@@ -35,37 +34,39 @@ namespace carsharing.Controllers
             bool exists = false;
             var listOfRenters = await _context.Renters.ToListAsync();
 
-            foreach (var renter in listOfRenters)
+            foreach (var renter_ in listOfRenters)
             {
-                if (signUp.Email == renter.Email)
+                if (signUp.Email == renter_.Email)
                 {
                     exists = true;
+                    return View("Index");
                 }
-            }
-
-            if (exists == false)
-            {   
+            } 
                 
-                Renter renter = new Renter();
-                renter.FirstName = signUp.FirstName;
-                renter.LastName = signUp.LastName;
-                renter.Age = signUp.Age;
-                renter.ProfilePicture = "Skata.png";
-                renter.Experience = 1.2;
-                renter.Password = signUp.Password;
-                renter.Email = signUp.Email;
-                renter.Phone = signUp.Phone;
+            Renter renter = new Renter();
+            renter.FirstName = signUp.FirstName;
+            renter.LastName = signUp.LastName;
+            renter.Age = signUp.Age;
+            renter.ProfilePicture = "http://srnet.ca/wp-content/uploads/2017/01/Default-Profile.png";
+            renter.Experience = 1.2;
+            renter.Password = signUp.Password;
+            renter.Email = signUp.Email;
+            renter.Phone = signUp.Phone;
 
-                _context.Add(renter);
-                _context.SaveChanges();
+            _context.Add(renter);
+            await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
-            }
-              
+            TempData["FirstName"] = renter.FirstName;
+            TempData["LastName"] = renter.LastName;
+            TempData["Age"] = renter.Age;
+            TempData["Email"] = renter.Email;
+            TempData["Phone"] = renter.Phone;
+            TempData["ProfilePicture"] = renter.ProfilePicture;
+            TempData["Role"] = "Renter";
 
-            return View();
-
+            return RedirectToAction("Index", "Profile");
         }
+
 
         private bool RenterExists(int id)
         {

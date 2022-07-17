@@ -1,0 +1,166 @@
+﻿@model carsharing.ViewModels.ResultsViewModel
+@{
+    ViewData["Title"] = "Post";
+}
+
+@{
+    var FirstName = TempData["FirstName"];
+    var LastName = TempData["LastName"];
+    var Age = TempData["Age"];
+    var Email = TempData["Email"];
+    var Phone = TempData["Phone"];
+    var ProfilePic = TempData["ProfilePicture"];
+    var Role = TempData["Role"];
+    TempData.Keep();
+
+    if (TempData.ContainsKey("Online"))
+    {
+        Layout = "_Layout_Renter";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}
+
+@if (Model.Post != null)
+{
+    <form asp-action="Index" asp-controller="Post" method="post">
+        <section class="container">
+            <div class="row mt-5 justify-content-between mb-2 left-part">
+                @*Left part of page*@
+                <div class="col-lg-9 text-blue">
+                    <h2 class="mt-5 text-center mb-4 blue-text">✦@Model.Post.Title✦</h2>
+                    <div class="mb-4 mt-3">
+                        <div class="text-center mt-5">
+                            <img class="left-part-image" src="@Url.Content(Model.Post.ThumbnailUrl)" alt="avatar" />
+                        </div>
+
+                    </div>
+
+                    <h5 class="col-md-4 mt-5 control-label">🔸Description:</h5>
+                    <div class="">
+                        <p class="text-muted mb-1">@Model.Post.Body</p>
+                    </div>
+
+                </div>
+
+                @*Right part of page*@
+                <div class="col-lg-3 mt-4">
+                    <div class="container">
+                        <h5 class="">🔸Manufacturer:</h5>  
+                        <div class="">
+                            <h6 class="mb-3">→ @Model.Post.Vehicle.Manufacturer</h6>
+                        </div>
+                        <h5 class="">🔸Model:</h5>  
+                        <div class="">
+                            <h6 class="mb-3">→ @Model.Post.Vehicle.Model</h6>
+                        </div>
+                        <h5 class="">🔸Year:</h5>  
+                        <div class="">
+                            <h6 class="mb-3">→ @Model.Post.Vehicle.Year</h6>
+                        </div>
+                        <h5 class="">🔸Type:</h5>  
+                        <div class="">
+                            <h6 class="mb-3">→ @Model.Post.Vehicle.Type</h6>
+                        </div>
+                        <h5 class="">🔸Color:</h5>  
+                        <div class="">
+                            <h6 class="mb-3">→ @Model.Post.Vehicle.Color</h6>
+                        </div>
+                        <h5 class="">🔸City:</h5>  
+                        <div class="">
+                            <h6 class="mb-3">→ @Model.Post.City</h6>
+                        </div>
+                        <h5 class="">🔸Rating:</h5>  
+                        <div class="">
+                            <h6 class="mb-3"> → @Model.Post.Rating</h6>
+                        </div>
+                        <h5 class="">🔸Post created at:</h5>  
+                        <div class="">
+                            <h6 class="mb-3">→ @Model.Post.Created</h6>
+                        </div>
+                        <h5 class="">🔸Cost per day:</h5>  
+                        <div class="">
+                            <h6 class="mb-3">→ @Model.Post.CostPerDay</h6>
+                        </div>
+                        <h5 class="">🔸Max days of rent:</h5>
+                        <div class="">
+                            <h6 class="mb-4">→ @Model.Post.MaxDaysOfRent</h6>
+                        </div>
+                        @*button*@
+                        <div class="">
+                            <button type="button" class="btn-cr btn-outline-dark mb-5" data-mdb-ripple-color="dark">
+                                <h4 class="mb-5">Rent car</h4>
+                            </button>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            @* Comment section *@
+            <div class="d-flex justify-content-center">
+                <div class="mb-5">
+                    <h2 class="mb-5 text-center mt-5">Comment Section</h2>
+                    @if(Model.Post.PostComments.Any())
+                    {
+                        @foreach(var comment in Model.Post.PostComments.ToList())
+                        {
+                            <div class="card comment-part card-size mb-3" style="max-width: 800px; ">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="@comment.Renter.ProfilePicture" class="result-card-images" alt="renter profile picture">
+                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <h5 class="card-title orange-text">★ @comment.Rating/10</h5>
+                                                </div>
+                                                <p class="card-text">@comment.Body</p>              
+                                                    <p class="card-text"><small class="text-muted">@comment.Renter.FirstName @comment.Renter.LastName</small></p>                                                          
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span><small class="text-muted">@comment.Created</small></span>
+                                        </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div>
+                            <h3>There are no comments on this post...</h3>
+                        </div>
+                    }
+                </div>
+            </div>
+            <input type="hidden" asp-for="@Model.Post.PostId" value="@Model.Post.PostId">
+            <input type="hidden" asp-for="@Model.Post.VehicleId" value="@Model.Post.VehicleId">
+            @{Model.Post.Body = "";}
+            @{Model.Post.Rating = 1;}
+            <h4 class="text-center blue-text">🔸Leave a review:🔸</h4><br>
+                   <div class="rate">
+                       <label for="rating" asp-for="@Model.Post.Rating">★ Select Rating:</label>
+                       <input class="rating_box mb-3" type="number" max="10" min="1" asp-for="@Model.Post.Rating" id="rating"/>
+                    </div>
+                    <div class="inputGroupContainer mb-4">
+                        <div class="input-group">
+                            <textarea  rows="10" class="form-control" asp-for="@Model.Post.Body" ></textarea>
+                        </div>
+                    </div>
+                     <div class="mt-5 mb-3 text-center">
+                        <button type="submit" name="comm-btn" class="btn btn-n btn-outline-dark mb-2 " data-mdb-ripple-color="dark">
+                            <h4 class="mt-1">Post Review</h4>
+                        </button>
+                    </div>
+           
+               
+        </section>
+         </form>
+}
