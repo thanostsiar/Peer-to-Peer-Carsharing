@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore;
 using carsharing.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using carsharing.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,14 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<unipicarsContext>(options =>
             options.UseNpgsql(builder.Configuration["ConnectionStrings:unipi-cars-connection"]));
+
+builder.Services.AddDbContext<carsharingIdentityDbContext>(options =>
+            options.UseNpgsql(builder.Configuration["ConnectionStrings:unipi-cars-identity-connection"]));
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<carsharingIdentityDbContext>();
+
+builder.Services.AddRazorPages();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -27,10 +38,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();;
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
