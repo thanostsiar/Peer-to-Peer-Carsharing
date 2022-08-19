@@ -12,6 +12,16 @@
     border-radius: 0.5em;
 }
 
+.btn-c-a {
+    background-color: var(--p-color);
+    padding: .6em;
+    color: var(--b-color);
+    width: 6em;
+    height: 2.5em;
+    text-align: center;
+    border-radius: 0.5em;
+}
+
 .btn-n {
     background-color: var(--p-color);
     color: var(--b-color);
@@ -19,9 +29,9 @@
     border-radius: 0.5em;
 }
 
-    a:hover {
-        color: #455A64;
-    }
+a:hover {
+    color: #455A64;
+}
 
 .rating-box {
     width: 10em;
