@@ -15,7 +15,7 @@ namespace carsharing.Controllers
             this.rm = rm;
         }
 
-        /*[Authorize(Roles = "Admin")]*/
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             System.Diagnostics.Debug.WriteLine("-------------------------------");
@@ -24,7 +24,7 @@ namespace carsharing.Controllers
             return View(roles);
         }
 
-        /*[Authorize(Roles="Admin")]*/
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View(new IdentityRole());

@@ -3,9 +3,11 @@ using carsharing.Models;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using carsharing.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace carsharing.Controllers
 {
+    [Authorize(Roles = "Owner")]
     public class CreatePostController : Controller
     {
         // get the database context

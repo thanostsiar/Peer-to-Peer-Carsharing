@@ -2,9 +2,11 @@
 using carsharing.Models;
 using Microsoft.EntityFrameworkCore;
 using carsharing.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace carsharing.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         // get the database context

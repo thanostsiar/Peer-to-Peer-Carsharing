@@ -1,11 +1,13 @@
 ﻿using carsharing.Models;
 using carsharing.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace carsharing.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         // get the database context
