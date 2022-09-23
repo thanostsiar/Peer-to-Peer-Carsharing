@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using carsharing.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace carsharing.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize(Roles="Owner,Renter")]
     public class IndexModel : PageModel
     {
         private readonly UserManager<User> _userManager;
