@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace carsharing.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Owner,Renter")]
     public class ProfileController : Controller
     {
         // get the database context
