@@ -4,6 +4,8 @@ using carsharing.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using carsharing.Areas.Identity.Data;
+using carsharing.Areas.Identity.Data.Role;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +18,9 @@ builder.Services.AddDbContext<unipicarsContext>(options =>
 builder.Services.AddDbContext<carsharingIdentityDbContext>(options =>
             options.UseNpgsql(builder.Configuration["ConnectionStrings:unipi-cars-identity-connection"]));
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddDefaultUI()
     .AddEntityFrameworkStores<carsharingIdentityDbContext>();
-
-builder.Services.AddRazorPages();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
