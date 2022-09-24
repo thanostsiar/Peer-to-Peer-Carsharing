@@ -1,4 +1,9 @@
 @model carsharing.ViewModels.ResultsViewModel
+@using Microsoft.AspNetCore.Identity
+@using carsharing.Areas.Identity.Data
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @{    
     ViewData["Title"] = "Profile";
@@ -23,7 +28,7 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            @if (Role.Equals("Owner"))
+@*            @if (Role.Equals("Owner"))
             {
                 <img src="@Model.Owner.ProfilePicture" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 9em;">
@@ -32,13 +37,12 @@
             {
                 <img src="@Model.Renter.ProfilePicture" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 9em;">
-            }                      
+            }   *@
             <h5 class="my-3"></h5>
             <p class="text-muted mb-1">♦️@Role</p>
             <p class="text-muted mb-4">✩159 Reviews</p>
-            <button type="button" class="btn-c text-center btn-outline-dark mb-2" data-mdb-ripple-color="dark">
-                Edit profile
-            </button>
+
+            <a id="manage" class="btn-c-a text-center btn-outline-dark mb-2" data-mdb-ripple-color="dark" href="/edit/profile" title="Manage">Edit profile</a>
           </div>
           
         </div>
@@ -154,7 +158,7 @@
                         </div>
                     
                  }
-                 else
+@*                 else
                  {
                     <div class="d-flex justify-content-center">
                     @if (@Role.ToString() == "Owner")
@@ -176,7 +180,7 @@
                     </a>
                 </div>  
                 }
-                
+                *@
             </div>
         </div>
         </section>

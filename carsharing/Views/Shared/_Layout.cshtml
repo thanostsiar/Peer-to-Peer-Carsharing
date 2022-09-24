@@ -24,21 +24,20 @@
                     <a class="navbar-brand col-4" asp-area="" asp-controller="Home" asp-action="Index">Unipi Cars</a>
                 </div>
                 <div>
-                    <div class="d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1 gap-3">
-                            <a class= asp-area="" asp-controller="SignIn" asp-action="Index">Sign in</a>
-                            <a class="sign-up-btn" asp-area="" asp-controller="SignUp" asp-action="Index">Sign up</a>
-                        </ul>
-
-                    </div>
+                    <partial name="_LoginPartial" />
                 </div>
-
             </div>
         </nav>
     </header>
     <div>
         <main role="main" class="pb-3">
-            @RenderBody()
+            @if(ViewData["Title"] == "Home Page")
+            {
+                <partial name="_SearchPartial" />
+            }
+            <div class="container">
+                @RenderBody()
+            </div>
         </main>
     </div>
 

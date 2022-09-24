@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using carsharing.Models;
 using carsharing.ViewModels;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace carsharing.Controllers
 {
+    [Authorize(Roles="Owner, Renter")]
     public class SearchController : Controller
     {
         // get the database context
