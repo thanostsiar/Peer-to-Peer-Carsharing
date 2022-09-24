@@ -18,8 +18,6 @@ namespace carsharing.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
-            System.Diagnostics.Debug.WriteLine("-------------------------------");
-
             var roles = rm.Roles.ToList();
             return View(roles);
         }
