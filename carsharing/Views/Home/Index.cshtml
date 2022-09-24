@@ -17,62 +17,6 @@
     }
 }
 
-<section class="hero bg-img text-white">
-<div class="d-flex justify-content-center">
-   @* <br /><br /><br /><br />*@
-</div>
-<div class="d-flex justify-content-center margin-top-8">
-    <h1 class="justify-content-center">Ενοικίαση αυτοκινήτου - Αναζητήστε, Συγκρίνετε και Εξοικονομήστε</h1>
-</div>
-<div  class="d-flex justify-content-evenly mt-5">
-    <h5>✓Δωρεάν ακυρώσεις στις περισσότερες κρατήσεις</h5>
-    <h5>✓60.000+ τοποθεσίες</h5>
-    <h5>✓Εξυπηρέτηση πελατών σε 40+ γλώσσες</h5>
-</div>
-
-@* -- Search -- *@
-<div class="d-flex flex-column align-items-center mt-2 margin-bottom-8">
-    <form asp-controller="Search" asp-action="Results" method="get">
-        <div class="d-inline-flex flex-column align-items-center flex-lg-row bg searchbar-sizing searchbar searchbar-lg p-color">
-        
-            <div class="align-self-center"> 
-                <input asp-for="@Model.SearchBar.SearchField" type="text" class="form-control" placeholder="🔍Search" aria-label="Recipient's username" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a city name')" oninput="setCustomValidity('')">
-            </div> 
-        
-            <div class="d-flex insides">
-                <div>
-                    <input asp-for="@Model.SearchBar.DateFrom" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a date')" oninput="setCustomValidity('')">
-                </div> 
-                <div class="d-flex">
-                    @*<label for="cars">Time from:</label>*@
-                    <select asp-for="@Model.SearchBar.TimeFrom" asp-items="Model.SearchBar.SelectTimeFrom">
-                    </select>
-                 </div>
-            </div>
-
-            <div class="d-flex insides">
-
-                <div>
-                    <input asp-for="@Model.SearchBar.DateTo" type="date" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" required oninvalid="setCustomValidity('Enter a date')" oninput="setCustomValidity('')">
-                </div> 
-                <div class="d-flex">
-                    @*<label for="cars">Time from:</label>*@
-                    <select  asp-for="@Model.SearchBar.TimeTo" asp-items="@Model.SearchBar.SelectTimeTo">
-                    </select>
-                 </div>
-            </div>
-        
-            <div class="align-self-center">
-                <button class="search-btn">Search</button>
-            </div>
-        </div>
-    </form>
-</div>
-<div  class="d-flex justify-content-evenly">
-    @* <br /><br /><br /><br />*@
-</div>
-</section>
-
 @* -- Top rated cars -- *@
 <section class="pt-5 pb-5">
   <div class="container">
