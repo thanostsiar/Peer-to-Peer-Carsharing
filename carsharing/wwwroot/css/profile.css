@@ -147,3 +147,7 @@ a:hover {
 .vote {
     cursor: pointer;
 }
+
+.spacing-1 div + div {
+    margin-top: .5em !important;
+}
