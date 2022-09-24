@@ -5,25 +5,44 @@
 @inject UserManager<User> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-controller="Profile" asp-action="Index">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <div class="d-sm-inline-flex justify-content-between">
-        <ul class="navbar-nav justify-content-center align-items-center flex-grow-1 gap-3">
-            <a class="nav-link text-dark" id="login" href="/signin">Sign In</a>
-            <a class="sign-up-btn text-center" id="register" href="/signup">Sign Up</a>
-        </ul>
-    </div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item dropdown">
 
-}
+            <span class="material-icons md-36 dropdown mt-2" data-bs-toggle="dropdown" style="cursor: pointer;">account_circle</span>
+
+            <ul class="dropdown-menu position-absolute">
+                @if(User.IsInRole("Admin"))
+                {
+                    <li>
+                        @Html.ActionLink("Roles", "Index", "Role", null, new { @class = "dropdown-item"})
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "dropdown-item"})
+                    </li>
+                }
+
+                <div class="dropdown-divider"></div>
+
+                <li>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="dropdown-item text-dark">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <div class="d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav justify-content-center align-items-center flex-grow-1 gap-3">
+                <a class="nav-link text-dark" id="login" href="/signin">Sign In</a>
+                <a class="sign-up-btn text-center" id="register" href="/signup">Sign Up</a>
+            </ul>
+        </div>
+
+    }
 </ul>
