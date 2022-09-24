@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using carsharing.Areas.Identity.Data;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace carsharing.Areas.Identity.Pages.Account
 {
@@ -30,12 +30,15 @@ namespace carsharing.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private readonly RoleManager<IdentityRole> _roleManager;
+
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +46,7 @@ namespace carsharing.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -129,6 +133,10 @@ namespace carsharing.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+
+            // By default a registered user is a Renter
+            var role = _roleManager.FindByNameAsync("Renter").Result;
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -151,6 +159,10 @@ namespace carsharing.Areas.Identity.Pages.Account
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    // Add the user to the Renter role
+                    await _userManager.AddToRoleAsync(user, role.Name);
+
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
