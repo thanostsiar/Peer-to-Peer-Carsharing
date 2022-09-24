@@ -108,8 +108,23 @@ namespace carsharing.Areas.Identity.Pages.Account
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
+            // find user by email
+            var usr = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+
+            // get his role
+            var current_role = await _signInManager.UserManager.GetRolesAsync(usr);
+
             if (ModelState.IsValid)
             {
+
+
+                if (current_role.First() == "Admin")
+                {
+                    return Page();
+                }
+
+
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
