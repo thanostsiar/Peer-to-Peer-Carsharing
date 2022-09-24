@@ -18,7 +18,8 @@ builder.Services.AddDbContext<carsharingIdentityDbContext>(options =>
 
 builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddDefaultUI()
-    .AddEntityFrameworkStores<carsharingIdentityDbContext>();
+    .AddEntityFrameworkStores<carsharingIdentityDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
