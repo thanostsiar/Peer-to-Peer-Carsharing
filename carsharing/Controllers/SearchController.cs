@@ -73,59 +73,10 @@ namespace carsharing.Controllers
         {
             var message = "";
             string email = "";
-            bool isOwner = false;
-            bool isOnline = false;
-            var listOfRenters = await _context.Renters.ToListAsync();
-            var listOfOwners = await _context.Owners.ToListAsync();
 
-            Owner o = new Owner();
-            Renter r = new Renter();
             ResultsViewModel resultsFilteredViewModel;
 
             var filtered = Enumerable.Empty<Post>().AsQueryable();
-
-            if (TempData.ContainsKey("Email"))
-            {
-                email = TempData["Email"].ToString();
-                isOnline = true;
-
-                foreach (var owner in listOfOwners)
-                {
-                    if (email == owner.Email)
-                    {
-                        isOwner = true;
-                        o.FirstName = owner.FirstName;
-                        o.LastName = owner.LastName;
-                        o.Email = owner.Email;
-                        o.Age = owner.Age;
-                        o.Phone = owner.Phone;
-                        o.ProfilePicture = owner.ProfilePicture;
-                        break;
-                    }
-                }
-
-                if (isOwner == false)
-                {
-                    foreach (var renter in listOfRenters)
-                    {
-                        if (email == renter.Email)
-                        {
-                            r.FirstName = renter.FirstName;
-                            r.LastName = renter.LastName;
-                            r.Email = renter.Email;
-                            r.Age = renter.Age;
-                            r.Phone = renter.Phone;
-                            r.ProfilePicture = renter.ProfilePicture;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (isOnline == true)
-            {
-                TempData["Online"] = "Yes";
-            }
 
             if ((filterPost.CarColor != null || filterPost.CarManufacturer != null || filterPost.CarType != null || filterPost.CreatedAt != null)
                 && (searchBar.DateFrom == null && searchBar.DateTo == null && searchBar.SearchField == null))
@@ -173,11 +124,7 @@ namespace carsharing.Controllers
                     this.ErrorMessage = message;
                 }
 
-                resultsFilteredViewModel = new ResultsViewModel(filterred, this.numberOfDays, ErrorMessage)
-                {
-                    Owner = o,
-                    Renter = r
-                };
+                resultsFilteredViewModel = new ResultsViewModel(filterred, this.numberOfDays, ErrorMessage);
 
                 return View(resultsFilteredViewModel);
             }
@@ -225,13 +172,7 @@ namespace carsharing.Controllers
                 this.ErrorMessage = message;
             }
 
-
-
-            var resultsViewModel = new ResultsViewModel(this.resultPosts, this.numberOfDays, ErrorMessage)
-            {
-                Owner = o,
-                Renter = r
-            };
+            var resultsViewModel = new ResultsViewModel(this.resultPosts, this.numberOfDays, ErrorMessage);
             
             return View(resultsViewModel);
         }

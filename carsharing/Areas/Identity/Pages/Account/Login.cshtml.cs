@@ -108,15 +108,19 @@ namespace carsharing.Areas.Identity.Pages.Account
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            // find user by email
-            var usr = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
-
-            // get his role
-            var current_role = await _signInManager.UserManager.GetRolesAsync(usr);
-
             if (ModelState.IsValid)
             {
+                // find user by email
+                var usr = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
 
+                if(usr == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Email not found");
+                    return Page();
+                }
+
+                // get his role
+                var current_role = await _signInManager.UserManager.GetRolesAsync(usr);
 
                 if (current_role.First() == "Admin")
                 {

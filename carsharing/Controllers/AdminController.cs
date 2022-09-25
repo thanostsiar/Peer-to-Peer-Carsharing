@@ -29,6 +29,12 @@ namespace carsharing.Controllers
                 // find user by email
                 var usr = await _signInManager.UserManager.FindByEmailAsync(admin.Email);
 
+                if (usr == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Email not found");
+                    return View("Index");
+                }
+
                 // get his role
                 var current_role = await _signInManager.UserManager.GetRolesAsync(usr);
 
