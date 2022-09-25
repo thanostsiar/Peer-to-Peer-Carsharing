@@ -83,3 +83,7 @@ body {
     margin: 0;
 }
 
+.footer-style {
+    background-color: var(--s-color);
+    z-index: 20;
+}

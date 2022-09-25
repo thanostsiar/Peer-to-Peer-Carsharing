@@ -11,6 +11,18 @@ a {
     text-decoration: none;
 }
 
+.bg-primary {
+    background-color: var(--p-color);
+}
+
+.bg-secondary {
+    background-color: var(--s-color);
+}
+
+.bg-signup {
+    background-color: var(--signup-color);
+}
+
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
