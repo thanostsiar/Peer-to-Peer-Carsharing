@@ -3,20 +3,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-@{
-    var Email = TempData["Email"];
-    TempData.Keep("Email");    
-
-    if (TempData.ContainsKey("Online"))
-    {
-        Layout = "_Layout_Renter";
-    }
-    else
-    {
-        Layout = "_Layout";
-    }
-}
-
 @* -- Top rated cars -- *@
 <section class="pt-5 pb-5">
   <div class="container">
