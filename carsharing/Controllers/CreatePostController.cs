@@ -22,35 +22,11 @@ namespace carsharing.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            Owner o = new Owner();
-            string email = "";
-
-            var listOfOwners = await _context.Owners.ToListAsync();
-
-            if (TempData.ContainsKey("Email"))
-            {
-                email = TempData["Email"].ToString();
-
-                foreach (var owner in listOfOwners)
-                {
-                    if (email == owner.Email)
-                    {
-                        o.FirstName = owner.FirstName;
-                        o.LastName = owner.LastName;
-                        o.Email = owner.Email;
-                        o.Age = owner.Age;
-                        o.Phone = owner.Phone;
-                        o.ProfilePicture = owner.ProfilePicture;
-                        break;
-                    }
-                }
-            }
 
             var OwnerRenter = new ResultsViewModel(null, 0)
             {
-                Owner = o,
                 Renter = new Renter()
-            };
+            }; 
 
             return View(OwnerRenter);
         }
@@ -59,16 +35,10 @@ namespace carsharing.Controllers
         [HttpPost]
         public async Task <IActionResult> Index(CreatePost createPost)
         {
-            // Saving the first name from the temp view, in order for his name to be visible in the navbar.
-
-            string first_name = TempData["FirstName"].ToString();
-            Owner ownr = new Owner();
-            ownr.FirstName = first_name;
 
             var CreatePost = new ResultsViewModel(null, 0)
             {
-                Renter = new Renter(),
-                Owner = ownr
+                Renter = new Renter()
             };
 
             if (!ModelState.IsValid)
@@ -80,11 +50,6 @@ namespace carsharing.Controllers
             Renter r = new Renter();
 
             var listOfOwners = await _context.Owners.ToListAsync();
-
-            if (TempData.ContainsKey("Email"))
-            {
-                email = TempData["Email"].ToString();
-            }
 
             Post post = new Post();
             Vehicle vehicle = new Vehicle();
