@@ -13,8 +13,15 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Text.Json;
 using carsharing.Areas.Identity.Data;
-
+using MimeKit;
+using MailKit;
+using MailKit.Net.Smtp;
+using MimeKit.Text;
+using System.Net.Mail;
+using MailKit.Security;
+using carsharing.Externals;
 namespace carsharing.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
@@ -61,20 +68,37 @@ namespace carsharing.Areas.Identity.Pages.Account
                     return RedirectToPage("./ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
+
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
                     pageHandler: null,
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                var email = new MimeMessage();
+
+                var emailSender = new EmailSender();
+
+                email.From.Add(MailboxAddress.Parse(emailSender.options.userName));
+                email.To.Add(MailboxAddress.Parse(user.Email));
+
+                email.Subject = "Reset Your Password";
+
+                email.Body = new TextPart(TextFormat.Html) {
+                    Text = $"<p>We have received a password reset request for your Unipi Cars account {user.Email}.</p><p>If you did not ask to change your password, then you can ignore this email and your password will not be changed.<p><br /> Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>" 
+                };
+
+                var smtp = new MailKit.Net.Smtp.SmtpClient();
+
+                smtp.Connect(emailSender.options.host, emailSender.options.port, SecureSocketOptions.StartTls);
+
+                smtp.Authenticate(emailSender.options.userName, emailSender.options.password);
+                smtp.Send(email);
+
+                smtp.Disconnect(true);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
