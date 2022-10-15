@@ -18,6 +18,10 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using carsharing.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using MimeKit;
+using MimeKit.Text;
+using MailKit.Security;
+using carsharing.Externals;
 
 namespace carsharing.Areas.Identity.Pages.Account
 {
@@ -170,8 +174,30 @@ namespace carsharing.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    var email = new MimeMessage();
+
+                    var emailSender = new EmailSender();
+
+                    email.From.Add(MailboxAddress.Parse(emailSender.options.userName));
+                    email.To.Add(MailboxAddress.Parse(user.Email));
+
+                    email.Subject = "Confirm Your Email";
+
+                    email.Body = new TextPart(TextFormat.Html)
+                    {
+                        Text = $"<p>Hi {user.FirstName} {user.LastName},</p><p>Thank you for registering on our service at Unipi Cars. To finish up your registration please confirm your email by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+                    };
+
+                    var smtp = new MailKit.Net.Smtp.SmtpClient();
+
+                    smtp.Connect(emailSender.options.host, emailSender.options.port, SecureSocketOptions.StartTls);
+
+                    smtp.Authenticate(emailSender.options.userName, emailSender.options.password);
+                    smtp.Send(email);
+
+                    smtp.Disconnect(true);
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
