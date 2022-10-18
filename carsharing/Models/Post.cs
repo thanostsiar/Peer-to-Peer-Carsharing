@@ -12,7 +12,7 @@ namespace carsharing.Models
         }
 
         public int PostId { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; } = null!;
         public int VehicleId { get; set; }
         public string Title { get; set; } = null!;
         public string Body { get; set; } = null!;

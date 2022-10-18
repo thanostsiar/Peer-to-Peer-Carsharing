@@ -54,12 +54,12 @@ namespace carsharing.Controllers
             Post post = new Post();
             Vehicle vehicle = new Vehicle();
             var owners = _context.Owners.AsQueryable();
-            var owner = listOfOwners.Where(o => o.Email == email).First();
-            vehicle.OwnerId = owner.OwnerId;
-            post.Owner = owner;
+            //var owner = listOfOwners.Where(o => o.Email == email).First();
+            //vehicle.OwnerId = owner.OwnerId;
+            //post.Owner = owner;
 
-            vehicle.Owner = owner;
-            post.OwnerId = owner.OwnerId;
+            //vehicle.Owner = owner;
+           // post.OwnerId = owner.OwnerId;
             post.Vehicle = vehicle;
             post.Title = createPost.Title;
             post.Vehicle.Manufacturer = createPost.Manufacturer;

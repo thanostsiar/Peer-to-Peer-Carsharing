@@ -22,6 +22,7 @@ using MimeKit;
 using MimeKit.Text;
 using MailKit.Security;
 using carsharing.Externals;
+using carsharing.Models;
 
 namespace carsharing.Areas.Identity.Pages.Account
 {
@@ -32,25 +33,25 @@ namespace carsharing.Areas.Identity.Pages.Account
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
-
         private readonly RoleManager<IdentityRole> _roleManager;
+        
+        private unipicarsContext _context;
 
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            unipicarsContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
             _roleManager = roleManager;
+            _context = context;
         }
 
         /// <summary>
@@ -166,6 +167,14 @@ namespace carsharing.Areas.Identity.Pages.Account
 
                     // Add the user to the Renter role
                     await _userManager.AddToRoleAsync(user, role.Name);
+
+
+                    var renter = new Renter();
+
+                    renter.RenterId = userId;
+
+                    await _context.Renters.AddAsync(renter);
+                    await _context.SaveChangesAsync();
 
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
