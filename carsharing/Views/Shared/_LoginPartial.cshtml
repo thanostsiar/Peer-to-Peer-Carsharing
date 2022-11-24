@@ -7,6 +7,14 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        @if(User.IsInRole("Renter"))
+        {
+            <li>
+                @Html.ActionLink("Rent your car", "Index", "Renter", null, new { @class = "nav-link active mt-1"})
+            </li>
+        }
+
+
         <li class="nav-item dropdown">
 
             <span class="material-icons md-36 dropdown mt-2" data-bs-toggle="dropdown" style="cursor: pointer;">account_circle</span>
