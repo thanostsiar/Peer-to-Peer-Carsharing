@@ -1,0 +1,10 @@
+﻿.background-image {
+    position: relative;
+    background-image: url("../img/become-an-owner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+}
