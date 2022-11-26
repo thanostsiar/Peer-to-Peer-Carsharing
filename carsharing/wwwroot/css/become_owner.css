@@ -1,10 +1,49 @@
 ﻿.background-image {
     position: relative;
-    background-image: url("../img/become-an-owner.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url("../img/become-an-owner.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100%;
-    top: 0;
-    left: 0;
+    /*min-height: 100%;*/
+    padding: 20em;
+}
+
+.hero-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 2em 3em;
+    display: flex;
+    flex-direction: column;
+    transform: translate(-50%, -50%);
+}
+
+.action-link {
+    padding: .5em 2em;
+    background-color: var(--btn-color);
+    border-radius: .2em;
+    color: white;
+    text-align: center;
+
+    flex-basis: 0em;
+}
+
+.action-link:hover {
+    cursor: pointer;
+    background-color: var(--btn-color-hovered); 
+    color: white;
+}
+
+.section-sep-4 > section + section {
+    margin-top: 2.5em;
+}
+
+@media (max-width: 576px) {
+    .hero-card {
+        top: 50%;
+        left: 2em;
+        right: 9em;
+        transform: translate(0,-50%);
+    }
 }
