@@ -28,6 +28,18 @@ a {
     background-color: var(--signup-color);
 }
 
+.clr-primary {
+    color: var(--p-color) !important;
+}
+
+.clr-secondary {
+    color: var(--s-color) !important;
+}
+
+.clr-signup {
+    color: var(--signup-color) !important;
+}
+
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
