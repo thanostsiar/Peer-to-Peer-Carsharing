@@ -3,8 +3,13 @@
     --s-color: white;
     --b-color: black;
     --btn-color: #098486;
+    --btn-color-hovered: #07696b;
     --signup-color: #098486;
     /* #F5A472 #098486 */
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 a {
