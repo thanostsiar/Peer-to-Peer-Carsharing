@@ -16,9 +16,20 @@ namespace carsharing.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult RentYourCar()
         {
             return View();
+        }
+
+        public async Task<IActionResult> BecomeOwner(String id)
+        {
+            var user = await _signInManager.UserManager.FindByIdAsync(id);
+
+            await _signInManager.UserManager.RemoveFromRoleAsync(user, "Renter");
+            await _signInManager.UserManager.AddToRoleAsync(user, "Owner");
+            await _signInManager.RefreshSignInAsync(user);
+
+            return RedirectToAction("Index","Profile");
         }
     }
 }
