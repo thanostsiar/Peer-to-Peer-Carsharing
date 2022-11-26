@@ -19,7 +19,7 @@
     transform: translate(-50%, -50%);
 }
 
-.action-link {
+.action-link-btn {
     padding: .5em 2em;
     background-color: var(--btn-color);
     border-radius: .2em;
@@ -29,9 +29,9 @@
     flex-basis: 0em;
 }
 
-.action-link:hover {
+.action-link-btn:hover {
     cursor: pointer;
-    background-color: var(--btn-color-hovered); 
+    background-color: var(--btn-color-hovered);
     color: white;
 }
 
