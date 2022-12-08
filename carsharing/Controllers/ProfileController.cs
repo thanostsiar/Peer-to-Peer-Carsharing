@@ -3,6 +3,8 @@ using carsharing.Models;
 using Microsoft.EntityFrameworkCore;
 using carsharing.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using carsharing.Areas.Identity.Data;
 
 namespace carsharing.Controllers
 {
@@ -11,9 +13,13 @@ namespace carsharing.Controllers
     {
         // get the database context
         private unipicarsContext _context;
+        private readonly SignInManager<User> _signInManager;
+        private readonly ILogger<Admin> _logger;
 
-        public ProfileController(unipicarsContext context)
+        public ProfileController(SignInManager<User> signInManager, ILogger<Admin> logger, unipicarsContext context)
         {
+            _signInManager = signInManager;
+            _logger = logger;
             _context = context;
         }
 
@@ -49,8 +55,30 @@ namespace carsharing.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var user = await _signInManager.UserManager.GetUserAsync(User);
 
-            return View();
+            UserViewModel userViewModel = new UserViewModel();
+
+
+            // get his role
+            var current_role = await _signInManager.UserManager.GetRolesAsync(user);
+
+            if (current_role.First().Equals("Renter"))
+            {
+                userViewModel.Role = "Renter";
+
+                // get the renter by searching with the user id
+                userViewModel.Renter = _context.Renters.Find(user.Id);
+            }
+            else
+            {
+                userViewModel.Role = "Owner";
+
+                // get the owner by searching with the user id
+                userViewModel.Owner = _context.Owners.Find(user.Id);
+            }
+
+            return View(userViewModel);
         }
     }
 }
