@@ -6,7 +6,7 @@ namespace carsharing.Models
     public partial class RentedVehicle
     {
         public int VehicleId { get; set; }
-        public int RenterId { get; set; }
+        public string RenterId { get; set; } = null!;
         public DateOnly DayRented { get; set; }
         public DateOnly DayOfReturn { get; set; }
         public TimeOnly TimeRented { get; set; }

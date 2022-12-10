@@ -2,16 +2,24 @@
 using carsharing.Models;
 using Microsoft.EntityFrameworkCore;
 using carsharing.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using carsharing.Areas.Identity.Data;
 
 namespace carsharing.Controllers
 {
+    [Authorize(Roles="Owner,Renter")]
     public class ProfileController : Controller
     {
         // get the database context
         private unipicarsContext _context;
+        private readonly SignInManager<User> _signInManager;
+        private readonly ILogger<User> _logger;
 
-        public ProfileController(unipicarsContext context)
+        public ProfileController(SignInManager<User> signInManager, ILogger<User> logger, unipicarsContext context)
         {
+            _signInManager = signInManager;
+            _logger = logger;
             _context = context;
         }
 
@@ -47,74 +55,35 @@ namespace carsharing.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            Renter r = new Renter();
-            Owner o = new Owner();
-            string email = "";
-            bool isOwner = false;
-            string label ="";
-            string ErrorMessage = "";
+            var user = await _signInManager.UserManager.GetUserAsync(User);
 
-            var listOfRenters = await _context.Renters.ToListAsync();
-            var listOfOwners = await _context.Owners.ToListAsync();
+            UserViewModel userViewModel = new UserViewModel();
 
-            if (TempData.ContainsKey("Email"))
+
+            // get his role
+            var current_role = await _signInManager.UserManager.GetRolesAsync(user);
+
+            if (current_role.First().Equals("Renter"))
             {
-                email = TempData["Email"].ToString();
+                userViewModel.Role = "Renter";
 
+                // get the renter by searching with the user id
+                userViewModel.Renter = await _context.Renters.FindAsync(user.Id);
+            }
+            else
+            {
+                userViewModel.Role = "Owner";
 
-                foreach (var owner in listOfOwners)
-                {
-                    if (email == owner.Email)
-                    {
-                        isOwner = true;
-                        o.FirstName = owner.FirstName;
-                        o.LastName = owner.LastName;
-                        o.Email = owner.Email;
-                        o.Age = owner.Age;
-                        o.Phone = owner.Phone;
-                        o.ProfilePicture = owner.ProfilePicture;
-                        label = "'s listings:";
-                        break;
-                    }
-                }
+                // get the owner by searching with the user id
+                userViewModel.Owner = await _context.Owners.FindAsync(user.Id);
 
-                if (isOwner == false)
-                {
-                    foreach (var renter in listOfRenters)
-                    {
-                        if (email == renter.Email)
-                        {
-                            r.FirstName = renter.FirstName;
-                            r.LastName = renter.LastName;
-                            r.Email = renter.Email;
-                            r.Age = renter.Age;
-                            r.Phone = renter.Phone;
-                            r.ProfilePicture = renter.ProfilePicture;
-                            label = "'s previously rented cars:";
-                        }
-                    }
-                }
+                // get the owners listings
+                userViewModel.Owner.Posts = _context.Posts.Where(postOwner => 
+                    postOwner.OwnerId == userViewModel.Owner.OwnerId)
+                    .ToList();
             }
 
-            var posts = FetchPosts();
-
-            var ownerPosts = posts.Where(post => post.Owner.Email == o.Email);
-
-            if (!ownerPosts.Any())
-            {
-                var message = "Oops! Seems like there are no cars found!";
-
-                ErrorMessage = message;
-            }
-
-            var OwnerRenter = new ResultsViewModel(null, 0, ErrorMessage)
-            {
-                Owner = o,
-                Renter = r,
-                Posts = ownerPosts,
-            };
-
-            return View(OwnerRenter);
+            return View(userViewModel);
         }
     }
 }

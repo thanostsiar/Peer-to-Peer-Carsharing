@@ -7,7 +7,7 @@ namespace carsharing.Models
     {
         public int CommentId { get; set; }
         public int PostId { get; set; }
-        public int RenterId { get; set; }
+        public string RenterId { get; set; } = null!;
         public int VehicleId { get; set; }
         public DateOnly Created { get; set; }
         public double Rating { get; set; }

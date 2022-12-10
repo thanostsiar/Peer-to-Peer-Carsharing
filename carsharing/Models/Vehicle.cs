@@ -6,7 +6,7 @@ namespace carsharing.Models
     public partial class Vehicle
     {
         public int VehicleId { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; } = null!;
         public string Manufacturer { get; set; } = null!;
         public string Model { get; set; } = null!;
         public string Type { get; set; } = null!;

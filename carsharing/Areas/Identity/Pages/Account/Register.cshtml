@@ -1,117 +1,109 @@
-﻿@model carsharing.Models.SignUp;
+﻿@page "/signup"
+@model RegisterModel
 @{
     ViewData["Title"] = "Sign Up";
 }
-
 
 @* Sign Up forms *@
 <body class="signup-bg">
 <div class="container"style="width: 100%;overflow:auto;">
 
-    <form class="well form-horizontal" asp-action="SignUp" asp-controller="SignUp" method="post"  id="contact_form">
+    <form class="well form-horizontal mb-4" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
         <fieldset>
 
-        <!-- Form Name -->
+            <!-- Form Name -->
+            <legend class="d-flex justify-content-center" style = "position:relative;"><h2><b>Registration Form</b></h2></legend><br>
 
-            <legend class="d-flex justify-content-center"style = "position:relative;"><h2><b>Registration Form</b></h2></legend><br>
-
-        <!-- First Name-->
-
+            <!-- First Name-->
             <div class="form-group margin-top-1k-5" style="position:relative;">
-                <label class="col-md-4 control-label" asp-for="FirstName">First Name</label>  
+                <label class="col-md-4 control-label text-white" asp-for="Input.FirstName"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="FirstName" type="text">
+                        <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" />
                     </div>
                     <div class="error-message">
-                        @Html.ValidationMessageFor(m => m.FirstName)
+                        <span asp-validation-for="Input.FirstName"></span>
                     </div>
                 </div>
             </div>
 
-        <!-- Last Name-->
-
+            <!-- Last Name-->
             <div class="form-group margin-top-1-5" style="position:relative;">
-                <label class="col-md-4 control-label" asp-for="LastName">Last Name</label> 
+                <label class="col-md-4 control-label text-white" asp-for="Input.LastName"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="LastName" type="text">
+                        <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" />
                     </div>
                     <div class="error-message">
-                        @Html.ValidationMessageFor(m => m.LastName)
+                        <span asp-validation-for="Input.LastName"></span>
                     </div>
-                    
                 </div>
             </div>
 
   
-        <!-- Age-->
-
+            <!-- Age-->
             <div class="form-group margin-top-1-5" style = "position:relative;">
-                <label class="col-md-4 control-label" asp-for="Age">Age</label>  
+                <label class="col-md-4 control-label text-white" asp-for="Input.Age"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="Age" type="number" min="18">
+                        <input asp-for="Input.Age" class="form-control" autocomplete="number" min="18" aria-required="true" />
                     </div>
                     <div class="error-message">
-                        @Html.ValidationMessageFor(m => m.Age)
+                        <span asp-validation-for="Input.Age"></span>
                     </div>
                 </div>
             </div>
 
             <!-- Password-->
-
             <div class="form-group margin-top-1-5" style = "position:relative;">
-                <label class="col-md-4 control-label" asp-for="Password">Password</label> 
+                <label class="col-md-4 control-label text-white" asp-for="Input.Password"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="Password" type="password" id="passw" />
+                        <input id="pass" asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                     </div>
                     <div class="error-message">
-                        @Html.ValidationMessageFor(m => m.Password)
+                        <span asp-validation-for="Input.Password"></span>
                     </div>
                 </div>
             </div>
 
-        <!-- Confirm Password-->
-
+            <!-- Confirm Password-->
             <div class="form-group margin-top-1-5" style = "position:relative;">
-                <label class="col-md-4 control-label" asp-for="ConfirmPassword">Confirm Password</label> 
+                <label class="col-md-4 control-label text-white" asp-for="Input.ConfirmPassword"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="ConfirmPassword" type="password" id="pass">
+                        <input id="passw" asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                     </div>
                     <div class="error-message">
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                    </div>    
-                </div>
-            </div>
-
-        <!-- Email-->
-            <div class="form-group margin-top-1-5" style = "position:relative;">
-                <label class="col-md-4 control-label" asp-for="Email">E-Mail</label>  
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <input class="form-control" asp-for="Email" type="email">
-                    </div>
-                    <div class="error-message">
-                        @Html.ValidationMessageFor(m => m.Email)
+                        <span asp-validation-for="Input.ConfirmPassword"></span>
                     </div>
                 </div>
             </div>
 
-
-        <!-- Phone-->
-       
+             <!-- Email-->
             <div class="form-group margin-top-1-5" style = "position:relative;">
-                <label class="col-md-4 control-label" asp-for="Phone">Phone</label>  
+                <label class="col-md-4 control-label text-white" asp-for="Input.Email"></label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <input class="form-control" asp-for="Phone" type="tel" pattern="[0-9]{10}">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                     </div>
                     <div class="error-message">
-                        @Html.ValidationMessageFor(m => m.Phone)
-                    </div>         
+                        <span asp-validation-for="Input.Email"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Phone-->
+            <div class="form-group margin-top-1-5" style = "position:relative;">
+                <label class="col-md-4 control-label text-white" asp-for="Input.PhoneNumber"></label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="phonenumber" aria-required="true" />
+                    </div>
+                    <div class="error-message">
+                        <span asp-validation-for="Input.PhoneNumber"></span>
+                    </div>
                 </div>
             </div>
 
@@ -121,16 +113,15 @@
             </div>
 
         <!-- Button -->
-
         <div class="form-group" style = "position:relative;">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                <button type="submit" class="btn bg-signup text-white" id="submit">Submit</button>
             </div>
         </div>
 
         </fieldset>
-        
+        <div asp-validation-summary="ModelOnly" class="error-message"></div>
     </form>
 </div>
 </body>
@@ -150,3 +141,6 @@ function showPassword() {
 }
 </script>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

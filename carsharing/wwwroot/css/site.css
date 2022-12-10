@@ -69,3 +69,21 @@ body {
 }
 /* Nice colors to use */
 /* #AAC4AA  #BD5958    #00333D   #0D2C32 #068D9D */
+
+.login-error {
+    background-color: red;
+    color: white;
+    padding: .5rem .7rem;
+    font-size: 1.2rem;
+}
+
+.login-error ul{
+    list-style: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-style {
+    background-color: var(--s-color);
+    z-index: 20;
+}

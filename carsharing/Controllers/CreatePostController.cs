@@ -3,52 +3,36 @@ using carsharing.Models;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using carsharing.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using carsharing.Areas.Identity.Data;
 
 namespace carsharing.Controllers
 {
+    [Authorize(Roles = "Owner")]
     public class CreatePostController : Controller
     {
         // get the database context
         private unipicarsContext _context;
+        private readonly SignInManager<User> _signInManager;
+        private readonly ILogger<User> _logger;
 
         // initialize the context
-        public CreatePostController(unipicarsContext context)
+        public CreatePostController(SignInManager<User> signInManager, ILogger<User> logger, unipicarsContext context)
         {
+            _signInManager = signInManager;
+            _logger = logger;
             _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            Owner o = new Owner();
-            string email = "";
-
-            var listOfOwners = await _context.Owners.ToListAsync();
-
-            if (TempData.ContainsKey("Email"))
-            {
-                email = TempData["Email"].ToString();
-
-                foreach (var owner in listOfOwners)
-                {
-                    if (email == owner.Email)
-                    {
-                        o.FirstName = owner.FirstName;
-                        o.LastName = owner.LastName;
-                        o.Email = owner.Email;
-                        o.Age = owner.Age;
-                        o.Phone = owner.Phone;
-                        o.ProfilePicture = owner.ProfilePicture;
-                        break;
-                    }
-                }
-            }
 
             var OwnerRenter = new ResultsViewModel(null, 0)
             {
-                Owner = o,
                 Renter = new Renter()
-            };
+            }; 
 
             return View(OwnerRenter);
         }
@@ -57,49 +41,28 @@ namespace carsharing.Controllers
         [HttpPost]
         public async Task <IActionResult> Index(CreatePost createPost)
         {
-            // Saving the first name from the temp view, in order for his name to be visible in the navbar.
-
-            string first_name = TempData["FirstName"].ToString();
-            Owner ownr = new Owner();
-            ownr.FirstName = first_name;
-
-            var CreatePost = new ResultsViewModel(null, 0)
-            {
-                Renter = new Renter(),
-                Owner = ownr
-            };
 
             if (!ModelState.IsValid)
             {
-                return View(CreatePost);
+                return View();
             }
 
-            string email = "";
-            Renter r = new Renter();
-
-            var listOfOwners = await _context.Owners.ToListAsync();
-
-            if (TempData.ContainsKey("Email"))
-            {
-                email = TempData["Email"].ToString();
-            }
+            var user = await _signInManager.UserManager.GetUserAsync(User);
 
             Post post = new Post();
             Vehicle vehicle = new Vehicle();
-            var owners = _context.Owners.AsQueryable();
-            var owner = listOfOwners.Where(o => o.Email == email).First();
-            vehicle.OwnerId = owner.OwnerId;
-            post.Owner = owner;
 
-            vehicle.Owner = owner;
-            post.OwnerId = owner.OwnerId;
             post.Vehicle = vehicle;
-            post.Title = createPost.Title;
             post.Vehicle.Manufacturer = createPost.Manufacturer;
             post.Vehicle.Model = createPost.Model;
             post.Vehicle.Year = createPost.Year;
             post.Vehicle.Type = createPost.Type;
             post.Vehicle.Color = createPost.Color;
+
+            post.Owner = await _context.Owners.FindAsync(user.Id);
+            vehicle.Owner = post.Owner;
+
+            post.Title = createPost.Title;
             post.MaxDaysOfRent = createPost.MaxDaysOfRent;
             post.Body = createPost.Body;
             post.City = createPost.City;
@@ -111,9 +74,9 @@ namespace carsharing.Controllers
             DateTime today = DateTime.ParseExact(dateOnly.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
             post.Created = DateOnly.FromDateTime(today);
 
-            _context.Add(vehicle);
-            _context.Add(post);
-            _context.SaveChanges();
+            await _context.AddAsync(vehicle);
+            await _context.AddAsync(post);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index","Profile");
         }

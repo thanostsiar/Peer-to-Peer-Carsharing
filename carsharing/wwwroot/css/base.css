@@ -3,13 +3,90 @@
     --s-color: white;
     --b-color: black;
     --btn-color: #098486;
+    --btn-color-hovered: #07696b;
     --signup-color: #098486;
+    --darker-signup-color: #06686A;
     /* #F5A472 #098486 */
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 a {
     text-decoration: none;
 }
+
+.bg-primary {
+    background-color: var(--p-color);
+}
+
+.bg-secondary {
+    background-color: var(--s-color);
+}
+
+.bg-signup {
+    background-color: var(--signup-color);
+}
+
+.clr-primary {
+    color: var(--p-color) !important;
+}
+
+.clr-secondary {
+    color: var(--s-color) !important;
+}
+
+.clr-signup {
+    color: var(--signup-color) !important;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/* For positioning the dropdown menu 
+    of the profile logo at the navbar */
+.drop-profile {
+    position: absolute !important;
+    right: 150px;
+    top: 14px;
+}
+
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
 
 .margin-0-5 {
     margin: 0.5em;

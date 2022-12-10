@@ -1,0 +1,52 @@
+﻿@model carsharing.Models.Admin
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="container">
+    <h1>Admin sign in</h1>
+    <hr />
+
+     <div class="row">
+         <div class="justify-content-center justify-content-lg-start col-lg-4">
+            <form asp-action="SignIn" asp-controller="Admin" method="post">
+                <div asp-validation-summary="ModelOnly" class="mt-2 mb-3 login-error"></div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label" asp-for="Email">Email address</label>
+                    <input type="email" class="form-control" asp-for="Email">
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+
+                <div class="mb-1">
+                    <label for="exampleInputPassword1" class="form-label" asp-for="Password">Password</label>
+                    <input type="password" class="form-control" id="pass" asp-for="Password">
+                    
+                    <div class="error-message">
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <input type="checkbox" class="form-check-input" onclick="showPassword()" id="showPass">
+                    <label class="form-check-label" for="showPass">Show Password</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+         </div>
+     </div>
+</div>
+
+<script>
+function showPassword() {
+  var x = document.getElementById("pass");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>

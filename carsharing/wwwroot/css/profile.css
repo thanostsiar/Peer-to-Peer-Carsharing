@@ -3,8 +3,30 @@
     height: 10em;
 }
 
+.create-post-btn {
+    background-color: var(--signup-color);
+    color: white;
+    padding: 0.5em 1.2em;
+    border-radius: 0.5em;
+}
+
+.create-post-btn:hover {
+    background-color: var(--darker-signup-color);
+    color: white;
+}
+
 .btn-c {
     background-color: var(--p-color);
+    color: var(--b-color);
+    width: 6em;
+    height: 2.5em;
+    text-align: center;
+    border-radius: 0.5em;
+}
+
+.btn-c-a {
+    background-color: var(--p-color);
+    padding: .6em;
     color: var(--b-color);
     width: 6em;
     height: 2.5em;
@@ -19,9 +41,9 @@
     border-radius: 0.5em;
 }
 
-    a:hover {
-        color: #455A64;
-    }
+a:hover {
+    color: #455A64;
+}
 
 .rating-box {
     width: 10em;
@@ -136,4 +158,8 @@
 
 .vote {
     cursor: pointer;
+}
+
+.spacing-1 div + div {
+    margin-top: .5em !important;
 }

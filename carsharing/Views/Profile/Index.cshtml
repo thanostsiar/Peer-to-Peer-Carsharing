@@ -1,20 +1,19 @@
-@model carsharing.ViewModels.ResultsViewModel
+@model carsharing.ViewModels.UserViewModel
+@using Microsoft.AspNetCore.Identity
+@using carsharing.Areas.Identity.Data
+@using carsharing.Models
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @{    
     ViewData["Title"] = "Profile";
-    Layout = "_Layout_Renter";
 }
 
 @{
-    var FirstName = TempData["FirstName"];
-    var LastName = TempData["LastName"];
-    var Age = TempData["Age"];
-    var Email = TempData["Email"];
-    var Phone = TempData["Phone"];
-    var ProfilePic = TempData["ProfilePicture"];
-    var Role = TempData["Role"];
-    TempData.Keep();
+    var user = await UserManager.GetUserAsync(User);
 }
+
 
 <section class="container">
   <div class="container py-5">
@@ -23,7 +22,7 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            @if (Role.Equals("Owner"))
+@*            @if (Role.Equals("Owner"))
             {
                 <img src="@Model.Owner.ProfilePicture" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 9em;">
@@ -32,19 +31,18 @@
             {
                 <img src="@Model.Renter.ProfilePicture" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 9em;">
-            }                      
+            }   *@
             <h5 class="my-3"></h5>
-            <p class="text-muted mb-1">♦️@Role</p>
+            <p class="text-muted mb-1">♦️@Model.Role</p>
             <p class="text-muted mb-4">✩159 Reviews</p>
-            <button type="button" class="btn-c text-center btn-outline-dark mb-2" data-mdb-ripple-color="dark">
-                Edit profile
-            </button>
+
+            <a id="manage" class="btn-c-a text-center btn-outline-dark mb-2" data-mdb-ripple-color="dark" href="/edit/profile" title="Manage">Edit profile</a>
           </div>
           
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body text-center">
-            <h5 class="my-3">@FirstName is confirmed!</h5>
+            <h5 class="my-3">@user.FirstName is confirmed!</h5>
             <h6 class="my-3">✓Identity</h6>
             <h6 class="my-3">✓E-mail address</h6>
             <h6 class="my-3">✓Phone number</h6>
@@ -53,26 +51,36 @@
         <div class="card mb-4 mb-lg-0 mt-4">
           <div class="card-body text-center">
             <h5 class="mt-3 mb-4">Awards:</h5>
-                  <div>
-                    <span class="material-icons">military_tech</span>
-                    <p class="mb-3">@Role of the month</p>
-                  </div>
-                   <div>
-                    <span class="material-icons">workspace_premium</span>
-                    <p class="mb-0">Kindness and cooperation</p>
-                  </div>
+            <div>
+                <span class="material-icons">military_tech</span>
+                <p class="mb-3">@Model.Role of the month</p>
+            </div>
+            <div>
+                <span class="material-icons">workspace_premium</span>
+                <p class="mb-0">Kindness and cooperation</p>
+            </div>
           </div>
         </div>
       </div>
-      @*Rght part of page*@
+
+      @* Rght part of page *@
       <div class="col-lg-8">
-        <div class="card-body">
-            <h3>Hi, I'm @FirstName!</h3>
-            <p class="text-muted mb-1">Joined since 2016</p>
+        <div class="card-body d-flex">
+            <div class="flex-grow-1">
+                <h3>Hi, I'm @user.FirstName @user.LastName!</h3>
+                <p class="text-muted mb-1">Joined since 2016</p>
+            </div>
+            @if(Model.Role.Equals("Owner"))
+            {
+                <div>
+                    @Html.ActionLink("New Post", "Index", "CreatePost", null, new { @class = "create-post-btn"})
+                </div>
+            }
+
         </div>
 
         @*Main info*@
-        <section class="container"> 
+        <section> 
             <div class="card mb-4">
               <div class="card-body">
                 <div class="row">
@@ -81,7 +89,7 @@
                     <p class="mb-0">Full Name</p>
                   </div>    
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">@FirstName @LastName</p>
+                    <p class="text-muted mb-0">@user.FirstName @user.LastName</p>
                   </div>
                 </div>
                 <hr>
@@ -91,7 +99,7 @@
                     <p class="mb-0">Email</p>
                   </div>
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">@Email</p>
+                    <p class="text-muted mb-0">@user.Email</p>
                   </div>
                 </div>
                 <hr>
@@ -101,85 +109,85 @@
                     <p class="mb-0">Mobile</p>
                   </div>
                   <div class="col-sm-9">
-                    <p class="text-muted mb-0">+30 @Phone</p>
+                    <p class="text-muted mb-0">+30 @user.PhoneNumber</p>
                   </div>
                 </div>
               </div>
             </div>
         </section>
-        
-        <div class="card-body">
-            <h5>🔸@FirstName' Listings: </h5>
-        </div>
 
-        @*User's listings*@
-        <section>
-          <div class="container">
-            <div class="row">
-                <div class="col col-lg-2 text-right">
-                    <a class="btn btn-color mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                        <img src="/img/chevron_left_white_24dp.svg"  />
-                    </a>
-                    <a class="btn btn-color mb-3 " href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                        <img src="/img/navigate_next_white_24dp.svg"  />
-                    </a>
-                </div>
+        @if (Model.Role.Equals("Owner") &&
+             Model.Owner.Posts.Count != 0)
+        {
+            <div class="card-body">
+                <h5>🔸@user.FirstName's Listings: </h5>
+            </div>
+            @*User's listings*@
+            <section>
+              <div class="container">
+                <div class="row">
+                    <div class="col col-lg-2 text-right">
+                        <a class="btn btn-color mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <img src="/img/chevron_left_white_24dp.svg"  />
+                        </a>
+                        <a class="btn btn-color mb-3 " href="#carouselExampleIndicators2" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <img src="/img/navigate_next_white_24dp.svg"  />
+                        </a>
+                    </div>
                 
-                 @if (@Model.ErrorMessage.Equals(""))
-                 {
                     
-                        <div class="col-12">
-                            <div id="carouselExampleControls" class="carousel slide pr_card-imgs" data-bs-ride="carousel">
+                    <div class="col-12">
+                        <div id="carouselExampleControls" class="carousel slide pr_card-imgs" data-bs-ride="carousel">
 
-                                <div class="carousel-inner">
+                            <div class="carousel-inner">
                                      
-                                        <div class="carousel-item active">
-                                            <div class="row">
-                                                @foreach (var post in Model.Posts.ToList())
-                                                {
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="card">
-                                                            <img class="img-fluid" alt="100%x280" src="@post.ThumbnailUrl" max-width="500">
-                                                            <div class="card-body">
-                                                                <h4 class="card-title">@post.Title</h4>
-                                                                @Html.ActionLink("View more", "Details", "Post", new { id = post.PostId }, new { @class = "btn-create-results view-more-btn ms-1 mt-4" })
-                                                            </div>
-                                                        </div>
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        @foreach (var post in Model.Owner.Posts)
+                                        {
+                                            <div class="col-md-4 mb-3">
+                                                <div class="card">
+                                                    <img class="img-fluid" alt="100%x280" src="@post.ThumbnailUrl" max-width="500">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">@post.Title</h4>
+                                                        @Html.ActionLink("View more", "Details", "Post", new { id = post.PostId }, new { @class = "btn-create-results view-more-btn ms-1 mt-4" })
                                                     </div>
-                                                }
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    
-                 }
-                 else
-                 {
-                    <div class="d-flex justify-content-center">
-                    @if (@Role.ToString() == "Owner")
-                        {
-                        <h2>@Model.ErrorMessage</h2>
-                        }
-                        else
-                        {
-                            <h3 class="mt-5 blue-text text-center">Seems like you do not have permission to rent your own cars. Upgrade to an owner now!</h3>
-                        }
                     </div>
-                }
+                    
+                     @*else
+                     {
+                        <div class="d-flex justify-content-center">
+                        @if (@Role.ToString() == "Owner")
+                            {
+                            <h2>@Model.ErrorMessage</h2>
+                            }
+                            else
+                            {
+                                <h3 class="mt-5 blue-text text-center">Seems like you do not have permission to rent your own cars. Upgrade to an owner now!</h3>
+                            }
+                        </div>
+                    }
 
-                @if (@Role.ToString() == "Owner")
-                {
-                <div class="text-center mt-4">
-                    <a asp-area="" asp-controller="CreatePost" asp-action="Index" class="btn btn-n btn-outline-dark mb-2" data-mdb-ripple-color="dark">
-                        <h4>+ Create new post</h4> 
-                    </a>
-                </div>  
-                }
-                
-            </div>
-        </div>
-        </section>
+                    @if (@Role.ToString() == "Owner")
+                    {
+                    <div class="text-center mt-4">
+                        <a asp-area="" asp-controller="CreatePost" asp-action="Index" class="btn btn-n btn-outline-dark mb-2" data-mdb-ripple-color="dark">
+                            <h4>+ Create new post</h4> 
+                        </a>
+                    </div>  
+                    }
+                    *@
+                </div>
+              </div>
+            </section>      
+        }
       </div>
       
         @*Reviews and Comments*@

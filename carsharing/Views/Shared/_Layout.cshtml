@@ -15,34 +15,35 @@
     <link rel="stylesheet" href="~/css/post_details.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/carsharing.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/sign_up.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/become_owner.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container-fluid justify-content-between justify-content-md-around">
                 <div class="row">
                     <a class="navbar-brand col-4" asp-area="" asp-controller="Home" asp-action="Index">Unipi Cars</a>
                 </div>
                 <div>
-                    <div class="d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1 gap-3">
-                            <a class= asp-area="" asp-controller="SignIn" asp-action="Index">Sign in</a>
-                            <a class="sign-up-btn" asp-area="" asp-controller="SignUp" asp-action="Index">Sign up</a>
-                        </ul>
-
-                    </div>
+                    <partial name="_LoginPartial" />
                 </div>
-
             </div>
         </nav>
     </header>
     <div>
         <main role="main" class="pb-3">
-            @RenderBody()
+            @if(ViewData["Title"] == "Home Page")
+            {
+                <partial name="_SearchPartial" />
+            }
+            <div>
+                @RenderBody()
+            </div>
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted footer-style">
         <div class="container">
             &copy; 2022 - Unipi Cars - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

@@ -30,26 +30,7 @@ namespace carsharing.Models
             {
                 entity.ToTable("owners");
 
-                entity.HasIndex(e => e.Email, "owners_email_key")
-                    .IsUnique();
-
-                entity.Property(e => e.OwnerId)
-                    .HasColumnName("owner_id")
-                    .UseIdentityAlwaysColumn();
-
-                entity.Property(e => e.Age).HasColumnName("age");
-
-                entity.Property(e => e.Email).HasColumnName("email");
-
-                entity.Property(e => e.FirstName).HasColumnName("first_name");
-
-                entity.Property(e => e.LastName).HasColumnName("last_name");
-
-                entity.Property(e => e.Password).HasColumnName("password");
-
-                entity.Property(e => e.Phone).HasColumnName("phone");
-
-                entity.Property(e => e.ProfilePicture).HasColumnName("profile_picture");
+                entity.Property(e => e.OwnerId).HasColumnName("owner_id");
             });
 
             modelBuilder.Entity<Post>(entity =>
@@ -194,28 +175,7 @@ namespace carsharing.Models
             {
                 entity.ToTable("renters");
 
-                entity.HasIndex(e => e.Email, "renters_email_key")
-                    .IsUnique();
-
-                entity.Property(e => e.RenterId)
-                    .HasColumnName("renter_id")
-                    .UseIdentityAlwaysColumn();
-
-                entity.Property(e => e.Age).HasColumnName("age");
-
-                entity.Property(e => e.Email).HasColumnName("email");
-
-                entity.Property(e => e.Experience).HasColumnName("experience");
-
-                entity.Property(e => e.FirstName).HasColumnName("first_name");
-
-                entity.Property(e => e.LastName).HasColumnName("last_name");
-
-                entity.Property(e => e.Password).HasColumnName("password");
-
-                entity.Property(e => e.Phone).HasColumnName("phone");
-
-                entity.Property(e => e.ProfilePicture).HasColumnName("profile_picture");
+                entity.Property(e => e.RenterId).HasColumnName("renter_id");
             });
 
             modelBuilder.Entity<Vehicle>(entity =>
