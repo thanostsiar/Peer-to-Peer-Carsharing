@@ -70,9 +70,13 @@
                 <h3>Hi, I'm @user.FirstName @user.LastName!</h3>
                 <p class="text-muted mb-1">Joined since 2016</p>
             </div>
-            <div>
-                @Html.ActionLink("New Post", "Index", "CreatePost", null, new { @class = "create-post-btn"})
-            </div>
+            @if(Model.Role.Equals("Owner"))
+            {
+                <div>
+                    @Html.ActionLink("New Post", "Index", "CreatePost", null, new { @class = "create-post-btn"})
+                </div>
+            }
+
         </div>
 
         @*Main info*@
@@ -131,35 +135,32 @@
                         </a>
                     </div>
                 
-                    @*@if (@Model.ErrorMessage.Equals(""))
-                     {
                     
-                            <div class="col-12">
-                                <div id="carouselExampleControls" class="carousel slide pr_card-imgs" data-bs-ride="carousel">
+                    <div class="col-12">
+                        <div id="carouselExampleControls" class="carousel slide pr_card-imgs" data-bs-ride="carousel">
 
-                                    <div class="carousel-inner">
+                            <div class="carousel-inner">
                                      
-                                            <div class="carousel-item active">
-                                                <div class="row">
-                                                    @foreach (var post in Model.Posts.ToList())
-                                                    {
-                                                        <div class="col-md-4 mb-3">
-                                                            <div class="card">
-                                                                <img class="img-fluid" alt="100%x280" src="@post.ThumbnailUrl" max-width="500">
-                                                                <div class="card-body">
-                                                                    <h4 class="card-title">@post.Title</h4>
-                                                                    @Html.ActionLink("View more", "Details", "Post", new { id = post.PostId }, new { @class = "btn-create-results view-more-btn ms-1 mt-4" })
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    }
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        @foreach (var post in Model.Owner.Posts)
+                                        {
+                                            <div class="col-md-4 mb-3">
+                                                <div class="card">
+                                                    <img class="img-fluid" alt="100%x280" src="@post.ThumbnailUrl" max-width="500">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">@post.Title</h4>
+                                                        @Html.ActionLink("View more", "Details", "Post", new { id = post.PostId }, new { @class = "btn-create-results view-more-btn ms-1 mt-4" })
+                                                    </div>
                                                 </div>
                                             </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                     
-                     }*@
                      @*else
                      {
                         <div class="d-flex justify-content-center">
