@@ -14,9 +14,9 @@ namespace carsharing.Controllers
         // get the database context
         private unipicarsContext _context;
         private readonly SignInManager<User> _signInManager;
-        private readonly ILogger<Admin> _logger;
+        private readonly ILogger<User> _logger;
 
-        public ProfileController(SignInManager<User> signInManager, ILogger<Admin> logger, unipicarsContext context)
+        public ProfileController(SignInManager<User> signInManager, ILogger<User> logger, unipicarsContext context)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -68,14 +68,19 @@ namespace carsharing.Controllers
                 userViewModel.Role = "Renter";
 
                 // get the renter by searching with the user id
-                userViewModel.Renter = _context.Renters.Find(user.Id);
+                userViewModel.Renter = await _context.Renters.FindAsync(user.Id);
             }
             else
             {
                 userViewModel.Role = "Owner";
 
                 // get the owner by searching with the user id
-                userViewModel.Owner = _context.Owners.Find(user.Id);
+                userViewModel.Owner = await _context.Owners.FindAsync(user.Id);
+
+                // get the owners listings
+                userViewModel.Owner.Posts = _context.Posts.Where(postOwner => 
+                    postOwner.OwnerId == userViewModel.Owner.OwnerId)
+                    .ToList();
             }
 
             return View(userViewModel);
