@@ -3,6 +3,18 @@
     height: 10em;
 }
 
+.create-post-btn {
+    background-color: var(--signup-color);
+    color: white;
+    padding: 0.5em 1.2em;
+    border-radius: 0.5em;
+}
+
+.create-post-btn:hover {
+    background-color: var(--darker-signup-color);
+    color: white;
+}
+
 .btn-c {
     background-color: var(--p-color);
     color: var(--b-color);
