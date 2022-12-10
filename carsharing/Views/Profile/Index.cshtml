@@ -65,13 +65,18 @@
 
       @* Rght part of page *@
       <div class="col-lg-8">
-        <div class="card-body">
-            <h3>Hi, I'm @user.FirstName @user.LastName!</h3>
-            <p class="text-muted mb-1">Joined since 2016</p>
+        <div class="card-body d-flex">
+            <div class="flex-grow-1">
+                <h3>Hi, I'm @user.FirstName @user.LastName!</h3>
+                <p class="text-muted mb-1">Joined since 2016</p>
+            </div>
+            <div>
+                @Html.ActionLink("New Post", "Index", "CreatePost", null, new { @class = "create-post-btn"})
+            </div>
         </div>
 
         @*Main info*@
-        <section class="container"> 
+        <section> 
             <div class="card mb-4">
               <div class="card-body">
                 <div class="row">
